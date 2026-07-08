@@ -1,0 +1,59 @@
+<nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+                <a href="<?php echo SITE_URL; ?>index.php" class="flex items-center space-x-2">
+                    <i class="fas fa-hotel text-blue-600 text-2xl"></i>
+                    <span class="font-[Playfair_Display] text-xl font-bold text-gray-800">Luxury Motel</span>
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="<?php echo SITE_URL; ?>index.php" class="text-gray-600 hover:text-blue-600 transition font-medium">Home</a>
+                <a href="<?php echo SITE_URL; ?>rooms.php" class="text-gray-600 hover:text-blue-600 transition font-medium">Rooms</a>
+                <a href="<?php echo SITE_URL; ?>about.php" class="text-gray-600 hover:text-blue-600 transition font-medium">About</a>
+                <?php if (isLoggedIn()): ?>
+                    <a href="<?php echo SITE_URL; ?>profile.php" class="text-gray-600 hover:text-blue-600 transition" title="Settings"><i class="fas fa-cog text-lg"></i></a>
+                    <div class="relative group">
+                        <button class="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition font-medium">
+                            <i class="fas fa-user-circle text-lg"></i>
+                            <span><?php echo htmlspecialchars($_SESSION['first_name'] ?? ''); ?></span>
+                            <i class="fas fa-chevron-down text-xs"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                            <a href="<?php echo SITE_URL; ?>profile.php" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-user mr-2"></i>My Profile</a>
+                            <a href="<?php echo SITE_URL; ?>booking-history.php" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-calendar-check mr-2"></i>My Bookings</a>
+                            <?php if (isAdmin()): ?>
+                                <hr class="my-1">
+                                <a href="<?php echo SITE_URL; ?>admin/dashboard.php" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-tachometer-alt mr-2"></i>Admin Panel</a>
+                            <?php endif; ?>
+                            <hr class="my-1">
+                            <a href="<?php echo SITE_URL; ?>logout.php" class="block px-4 py-2 text-red-600 hover:bg-red-50"><i class="fas fa-sign-out-alt mr-2"></i>Logout</a>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <a href="<?php echo SITE_URL; ?>login.php" class="text-gray-600 hover:text-blue-600 transition font-medium">Login</a>
+                    <a href="<?php echo SITE_URL; ?>register.php" class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition font-medium">Register</a>
+                <?php endif; ?>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+        <a href="<?php echo SITE_URL; ?>index.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">Home</a>
+        <a href="<?php echo SITE_URL; ?>rooms.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">Rooms</a>
+        <a href="<?php echo SITE_URL; ?>about.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">About</a>
+        <?php if (isLoggedIn()): ?>
+            <a href="<?php echo SITE_URL; ?>profile.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">Profile</a>
+            <a href="<?php echo SITE_URL; ?>booking-history.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">My Bookings</a>
+            <?php if (isAdmin()): ?>
+                <a href="<?php echo SITE_URL; ?>admin/dashboard.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">Admin Panel</a>
+            <?php endif; ?>
+            <a href="<?php echo SITE_URL; ?>logout.php" class="block px-4 py-2 text-red-600">Logout</a>
+        <?php else: ?>
+            <a href="<?php echo SITE_URL; ?>login.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">Login</a>
+            <a href="<?php echo SITE_URL; ?>register.php" class="block px-4 py-2 text-blue-600 font-semibold">Register</a>
+        <?php endif; ?>
+    </div>
+</nav>
