@@ -28,11 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 logActivity($pdo, $user['user_id'], 'Login', 'User logged in');
 
-                // Check for redirect after login
                 if (isset($_SESSION['redirect_after_login'])) {
                     $redirect = $_SESSION['redirect_after_login'];
                     unset($_SESSION['redirect_after_login']);
                     redirect($redirect);
+                }
+
+                if (isset($_SESSION['pending_reservation'])) {
+                    redirect('reservation.php');
                 }
 
                 if ($user['role_id'] == 1) {
