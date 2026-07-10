@@ -179,9 +179,9 @@ $featuredRooms = $stmt->fetchAll();
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <?php
             $testimonials = [
-                ['John D.', 'Business Traveler', 'fa-solid fa-user-tie', 'Extremely clean room, lightning-fast Wi-Fi, and a seamless check-in process. Perfect for a productive stay.'],
-                ['Sarah M.', 'Family Vacation', 'fa-solid fa-user', 'The Family Executive room was spacious, beautifully arranged, and the kids loved being close to the pool!'],
-                ['Michael R.', 'Solo Traveler', 'fa-solid fa-user-graduate', 'Excellent value for money. Very quiet floor, comfortable bedding, and friendly staff. Will definitely book again.']
+                ['John D.', 'Business Traveler', 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face', 'Extremely clean room, lightning-fast Wi-Fi, and a seamless check-in process. Perfect for a productive stay.'],
+                ['Sarah M.', 'Family Vacation', 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face', 'The Family Executive room was spacious, beautifully arranged, and the kids loved being close to the pool!'],
+                ['Michael R.', 'Solo Traveler', 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face', 'Excellent value for money. Very quiet floor, comfortable bedding, and friendly staff. Will definitely book again.']
             ];
             foreach($testimonials as $t): ?>
             <div class="testimonial-card bg-gray-50 p-8 shadow-sm">
@@ -190,7 +190,7 @@ $featuredRooms = $stmt->fetchAll();
                 </div>
                 <p class="text-gray-600 mb-6 italic">"<?php echo $t[3]; ?>"</p>
                 <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><i class="<?php echo $t[2]; ?> text-blue-600 text-xl"></i></div>
+                    <img src="<?php echo $t[2]; ?>" alt="<?php echo $t[0]; ?>" class="w-12 h-12 rounded-full object-cover">
                     <div><h4 class="font-semibold"><?php echo $t[0]; ?></h4><p class="text-sm text-gray-500"><?php echo $t[1]; ?></p></div>
                 </div>
             </div>

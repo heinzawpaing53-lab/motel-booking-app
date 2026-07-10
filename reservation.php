@@ -45,9 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_GET['ajax'])) {
     elseif (!$room) { $error = 'Invalid room selected.'; }
     elseif ($room && $totalGuests > $room['max_capacity']) { $error = 'Total guests exceed room capacity of '.$room['max_capacity'].'.'; }
     else {
-        $stmt = $pdo->prepare("SELECT COUNT(*) FROM reservations WHERE room_id = ? AND booking_status NOT IN ('Cancelled','Rejected') AND ((check_in_date <= ? AND check_out_date > ?) OR (check_in_date < ? AND check_out_date >= ?))");
-        $stmt->execute([$roomId, $checkOut, $checkIn, $checkOut, $checkIn]);
-        if ($stmt->fetchColumn() > 0) { $error = 'Room is not available for the selected dates.'; }
+        $stmt = $pdo->prepare("SELECT COUNT(*) FROM reservations WHERE room_id = ? AND booking_status IN ('Pending','Approved','Checked In') AND ? < check_out_date AND ? > check_in_date");
+        $stmt->execute([$roomId, $checkIn, $checkOut]);
+        if ($stmt->fetchColumn() > 0) { $error = 'This room is already reserved or awaiting approval for the selected dates. Please choose a different date range or room.'; }
         else {
             $totalNights = ceil((strtotime($checkOut) - strtotime($checkIn)) / (60 * 60 * 24));
             $totalPrice = $room['price_per_night'] * $totalNights;
@@ -83,6 +83,10 @@ include 'includes/header.php';
 
         <?php if ($error): ?>
         <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-lg"><?php echo $error; ?></div>
+        <?php endif; ?>
+
+        <?php if (isset($_SESSION['booking_error'])): ?>
+        <div class="bg-rose-100 border-l-4 border-rose-500 text-rose-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $_SESSION['booking_error']; unset($_SESSION['booking_error']); ?></div>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['pending_reservation']) && !$_POST): ?>

@@ -105,7 +105,6 @@ include 'includes/header.php';
                 <div class="relative overflow-hidden">
                     <img src="<?php echo $room['image'] ?: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600'; ?>" alt="<?php echo $room['room_name']; ?>" class="w-full">
                     <span class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold"><?php echo formatCurrency($room['price_per_night']); ?>/night</span>
-                    <span class="badge-status badge-<?php echo badgeClass($room['status']); ?> absolute top-4 left-4"><?php echo $room['status']; ?></span>
                 </div>
                 <div class="p-6">
                     <h3 class="font-[Playfair_Display] text-xl font-bold mb-2"><?php echo $room['room_name'] ?: 'Room '.$room['room_number']; ?></h3>
