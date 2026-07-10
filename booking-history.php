@@ -15,7 +15,7 @@ if (isset($_GET['cancel'])) {
     redirect('booking-history.php');
 }
 
-$stmt = $pdo->prepare("SELECT r.*, rm.room_number, rm.room_name, rt.type_name, rt.price_per_night, (SELECT COUNT(*) FROM payments p WHERE p.reservation_id = r.reservation_id AND p.payment_status = 'Pending') as pending_payment_count FROM reservations r JOIN rooms rm ON r.room_id = rm.room_id JOIN room_types rt ON rm.type_id = rt.type_id WHERE r.user_id = ? ORDER BY r.created_at DESC");
+$stmt = $pdo->prepare("SELECT r.*, rm.room_number, rm.room_name, rt.type_name, rt.price_per_night, (SELECT COUNT(*) FROM payments p WHERE p.reservation_id = r.reservation_id AND p.payment_status = 'Pending') as pending_payment_count FROM reservations r JOIN rooms rm ON r.room_id = rm.room_id JOIN room_types rt ON rm.type_id = rt.type_id WHERE r.user_id = ? AND r.customer_hidden = 0 ORDER BY r.created_at DESC");
 $stmt->execute([$userId]);
 $bookings = $stmt->fetchAll();
 
@@ -76,6 +76,14 @@ include 'includes/header.php';
                         <a href="booking-details.php?id=<?php echo $b['reservation_id']; ?>" class="text-blue-600 hover:underline text-sm block mb-1"><i class="fas fa-eye"></i> View</a>
                         <?php if ($b['booking_status'] == 'Pending'): ?>
                         <a href="?cancel=<?php echo $b['reservation_id']; ?>" class="text-red-600 hover:underline text-sm" onclick="var _t=this;event.preventDefault();showSystemModal('Cancel Booking','Cancel this booking?','info',function(){location.href=_t.href;})"><i class="fas fa-times"></i> Cancel</a>
+                        <?php endif; ?>
+                        <?php if (in_array($b['booking_status'], ['Checked Out', 'Rejected'])): ?>
+                        <form method="post" action="process_customer_action.php" class="inline-block">
+                            <input type="hidden" name="action" value="delete_history">
+                            <input type="hidden" name="reservation_id" value="<?php echo $b['reservation_id']; ?>">
+                            <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
+                            <button type="submit" class="text-red-600 hover:underline text-sm" onclick="var _f=this.form;event.preventDefault();showSystemModal('Remove from View','Hide this booking from your history? It will remain in our records.','warning',function(){_f.submit();})"><i class="fas fa-trash-alt"></i> Delete History</button>
+                        </form>
                         <?php endif; ?>
                     </div>
                 </div>

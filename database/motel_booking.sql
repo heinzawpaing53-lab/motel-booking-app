@@ -108,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `reservations` (
     `early_check_in_time` TIME NULL,
     `late_check_out_time` TIME NULL,
     `special_notes` TEXT NULL,
+    `customer_hidden` TINYINT(1) NOT NULL DEFAULT 0,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
     FOREIGN KEY (`room_id`) REFERENCES `rooms`(`room_id`) ON DELETE RESTRICT ON UPDATE CASCADE,
