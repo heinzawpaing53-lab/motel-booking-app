@@ -18,6 +18,7 @@ define('PAGE_TITLE', 'Bookings');
 </head>
 <body class="font-[Inter] bg-gray-50">
 <?php include '../../includes/sidebar.php'; ?>
+<?php include '../../includes/admin-topbar.php'; ?>
 
 <div class="ml-64 p-8">
     <div class="flex items-center justify-between mb-6">
@@ -83,6 +84,13 @@ define('PAGE_TITLE', 'Bookings');
                         $params[] = $_GET['status'];
                     }
 
+                    $filter = $_GET['filter'] ?? '';
+                    if ($filter === 'checkins_today') {
+                        $conditions[] = "DATE(r.check_in_date) = CURDATE()";
+                    } elseif ($filter === 'checkouts_today') {
+                        $conditions[] = "DATE(r.check_out_date) = CURDATE()";
+                    }
+
                     $where = '';
                     if (!empty($conditions)) {
                         $where = 'WHERE ' . implode(' AND ', $conditions);
@@ -123,13 +131,25 @@ define('PAGE_TITLE', 'Bookings');
                             <div class="flex items-center space-x-2">
                                 <a href="view.php?id=<?php echo $b['reservation_id']; ?>" class="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition text-xs font-semibold"><i class="fas fa-eye mr-1"></i>View</a>
                                 <?php if ($b['booking_status'] === 'Pending'): ?>
-                                    <a href="action.php?action=approve&id=<?php echo $b['reservation_id']; ?>" class="px-3 py-1.5 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition text-xs font-semibold" onclick="return confirm('Approve this booking?')"><i class="fas fa-check mr-1"></i>Approve</a>
-                                    <a href="action.php?action=reject&id=<?php echo $b['reservation_id']; ?>" class="px-3 py-1.5 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-xs font-semibold" onclick="return confirm('Reject this booking?')"><i class="fas fa-times mr-1"></i>Reject</a>
+                                    <form method="POST" action="../process_action.php" class="inline" id="approveForm_<?php echo $b['reservation_id']; ?>">
+                                        <input type="hidden" name="action" value="approve">
+                                        <input type="hidden" name="reservation_id" value="<?php echo $b['reservation_id']; ?>">
+                                        <button type="button" onclick="showSystemModal('Approve','Approve this booking?','info',function(){document.getElementById('approveForm_<?php echo $b['reservation_id']; ?>').submit();})" class="px-3 py-1.5 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition text-xs font-semibold"><i class="fas fa-check mr-1"></i>Approve</button>
+                                    </form>
+                                    <form method="POST" action="../process_action.php" class="inline" id="rejectForm_<?php echo $b['reservation_id']; ?>">
+                                        <input type="hidden" name="action" value="reject">
+                                        <input type="hidden" name="reservation_id" value="<?php echo $b['reservation_id']; ?>">
+                                        <button type="button" onclick="showSystemModal('Reject','Reject this booking?','error',function(){document.getElementById('rejectForm_<?php echo $b['reservation_id']; ?>').submit();})" class="px-3 py-1.5 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-xs font-semibold"><i class="fas fa-times mr-1"></i>Reject</button>
+                                    </form>
                                 <?php elseif ($b['booking_status'] === 'Approved'): ?>
-                                    <a href="action.php?action=checkin&id=<?php echo $b['reservation_id']; ?>" class="px-3 py-1.5 bg-teal-100 text-teal-700 rounded-lg hover:bg-teal-200 transition text-xs font-semibold" onclick="return confirm('Mark as checked in?')"><i class="fas fa-sign-in-alt mr-1"></i>Check In</a>
-                                    <a href="action.php?action=cancel&id=<?php echo $b['reservation_id']; ?>" class="px-3 py-1.5 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-xs font-semibold" onclick="return confirm('Cancel this booking?')"><i class="fas fa-ban mr-1"></i>Cancel</a>
+                                    <a href="action.php?action=checkin&id=<?php echo $b['reservation_id']; ?>" class="px-3 py-1.5 bg-teal-100 text-teal-700 rounded-lg hover:bg-teal-200 transition text-xs font-semibold" onclick="var _t=this;event.preventDefault();showSystemModal('Check In','Mark as checked in?','info',function(){location.href=_t.href;})"><i class="fas fa-sign-in-alt mr-1"></i>Check In</a>
+                                    <a href="action.php?action=cancel&id=<?php echo $b['reservation_id']; ?>" class="px-3 py-1.5 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-xs font-semibold" onclick="var _t=this;event.preventDefault();showSystemModal('Cancel','Cancel this booking?','error',function(){location.href=_t.href;})"><i class="fas fa-ban mr-1"></i>Cancel</a>
                                 <?php elseif ($b['booking_status'] === 'Checked In'): ?>
-                                    <a href="action.php?action=checkout&id=<?php echo $b['reservation_id']; ?>" class="px-3 py-1.5 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 transition text-xs font-semibold" onclick="return confirm('Mark as checked out?')"><i class="fas fa-sign-out-alt mr-1"></i>Check Out</a>
+                                    <form method="POST" action="../process_action.php" class="inline" id="checkoutForm_<?php echo $b['reservation_id']; ?>">
+                                        <input type="hidden" name="action" value="checkout">
+                                        <input type="hidden" name="reservation_id" value="<?php echo $b['reservation_id']; ?>">
+                                        <button type="button" onclick="showSystemModal('Check Out','Mark as checked out?','info',function(){document.getElementById('checkoutForm_<?php echo $b['reservation_id']; ?>').submit();})" class="px-3 py-1.5 bg-indigo-100 text-indigo-700 rounded-lg hover:bg-indigo-200 transition text-xs font-semibold"><i class="fas fa-sign-out-alt mr-1"></i>Check Out</button>
+                                    </form>
                                 <?php endif; ?>
                             </div>
                         </td>
@@ -144,5 +164,4 @@ define('PAGE_TITLE', 'Bookings');
     </div>
 </div>
 
-</body>
-</html>
+<?php include '../../includes/admin-footer.php'; ?>

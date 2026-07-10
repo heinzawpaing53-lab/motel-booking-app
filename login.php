@@ -25,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['first_name'] = $user['first_name'];
                 $_SESSION['last_name'] = $user['last_name'];
                 $_SESSION['email'] = $user['email'];
+                $_SESSION['profile_image'] = $user['profile_image'] ?? 'default_user.png';
+                $_SESSION['role_name'] = $user['role_name'] ?? 'User';
 
                 logActivity($pdo, $user['user_id'], 'Login', 'User logged in');
 

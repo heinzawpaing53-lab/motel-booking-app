@@ -6,13 +6,19 @@ if (!isLoggedIn() || !isAdmin()) {
 define('PAGE_TITLE', 'Manage Rooms');
 include '../header.php';
 
-$stmt = $pdo->query("
-    SELECT r.*, rt.type_name, rt.price_per_night, f.floor_name
-    FROM rooms r
-    JOIN room_types rt ON r.type_id = rt.type_id
-    JOIN floors f ON r.floor_id = f.floor_id
-    ORDER BY r.room_number
-");
+$statusFilter = $_GET['status'] ?? '';
+$sql = "SELECT r.*, rt.type_name, rt.price_per_night, f.floor_name
+        FROM rooms r
+        JOIN room_types rt ON r.type_id = rt.type_id
+        JOIN floors f ON r.floor_id = f.floor_id";
+$params = [];
+if (in_array($statusFilter, ['Available', 'Occupied', 'Reserved', 'Maintenance'])) {
+    $sql .= " WHERE r.status = ?";
+    $params[] = $statusFilter;
+}
+$sql .= " ORDER BY r.room_number";
+$stmt = $pdo->prepare($sql);
+$stmt->execute($params);
 $rooms = $stmt->fetchAll();
 
 $messages = [];
@@ -59,7 +65,7 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
                             <td class="p-4">
                                 <div class="flex items-center space-x-2">
                                     <a href="edit.php?id=<?php echo $room['room_id']; ?>" class="text-blue-600 hover:text-blue-800 bg-blue-50 px-3 py-1.5 rounded-lg text-xs font-medium"><i class="fas fa-edit mr-1"></i>Edit</a>
-                                    <a href="delete.php?id=<?php echo $room['room_id']; ?>" class="text-red-600 hover:text-red-800 bg-red-50 px-3 py-1.5 rounded-lg text-xs font-medium" onclick="return confirm('Are you sure you want to delete this room?')"><i class="fas fa-trash mr-1"></i>Delete</a>
+                                    <a href="delete.php?id=<?php echo $room['room_id']; ?>" class="text-red-600 hover:text-red-800 bg-red-50 px-3 py-1.5 rounded-lg text-xs font-medium" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Room','Are you sure you want to delete this room?','error',function(){location.href=_t.href;})"><i class="fas fa-trash mr-1"></i>Delete</a>
                                 </div>
                             </td>
                         </tr>
@@ -73,5 +79,4 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
         </div>
     </div>
 </div>
-</body>
-</html>
+<?php include '../../includes/admin-footer.php'; ?>

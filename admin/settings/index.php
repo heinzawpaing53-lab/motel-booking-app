@@ -84,6 +84,7 @@ $settingTypes = [
 </head>
 <body class="bg-gray-100">
 <?php include '../../includes/sidebar.php'; ?>
+<?php include '../../includes/admin-topbar.php'; ?>
 <div class="ml-64 p-8">
     <div class="max-w-4xl mx-auto">
         <div class="flex items-center justify-between mb-8">

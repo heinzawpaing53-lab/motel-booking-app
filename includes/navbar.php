@@ -12,7 +12,6 @@
                 <a href="<?php echo SITE_URL; ?>rooms.php" class="text-gray-600 hover:text-blue-600 transition font-medium">Rooms</a>
                 <a href="<?php echo SITE_URL; ?>about.php" class="text-gray-600 hover:text-blue-600 transition font-medium">About</a>
                 <?php if (isLoggedIn()): ?>
-                    <a href="<?php echo SITE_URL; ?>profile.php" class="text-gray-600 hover:text-blue-600 transition" title="Settings"><i class="fas fa-cog text-lg"></i></a>
                     <div class="relative group">
                         <button class="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition font-medium">
                             <i class="fas fa-user-circle text-lg"></i>
@@ -22,6 +21,7 @@
                         <div class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                             <a href="<?php echo SITE_URL; ?>profile.php" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-user mr-2"></i>My Profile</a>
                             <a href="<?php echo SITE_URL; ?>booking-history.php" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-calendar-check mr-2"></i>My Bookings</a>
+                            <a href="<?php echo SITE_URL; ?>profile.php" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-cog mr-2"></i>Settings</a>
                             <?php if (isAdmin()): ?>
                                 <hr class="my-1">
                                 <a href="<?php echo SITE_URL; ?>admin/dashboard.php" class="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600"><i class="fas fa-tachometer-alt mr-2"></i>Admin Panel</a>
@@ -47,6 +47,7 @@
         <?php if (isLoggedIn()): ?>
             <a href="<?php echo SITE_URL; ?>profile.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">Profile</a>
             <a href="<?php echo SITE_URL; ?>booking-history.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">My Bookings</a>
+            <a href="<?php echo SITE_URL; ?>profile.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50"><i class="fas fa-cog mr-2"></i>Settings</a>
             <?php if (isAdmin()): ?>
                 <a href="<?php echo SITE_URL; ?>admin/dashboard.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">Admin Panel</a>
             <?php endif; ?>

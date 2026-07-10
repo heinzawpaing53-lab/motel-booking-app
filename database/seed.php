@@ -40,6 +40,26 @@ try {
         // Column already exists — ignore
     }
 
+    // Migrate payments table columns to match PHP code expectations
+    try {
+        $pdo->exec("ALTER TABLE `payments` CHANGE COLUMN `amount` `amount_paid` DECIMAL(10,2) NOT NULL");
+        $messages[] = "<span class='text-green-600'><i class='fas fa-check-circle mr-1'></i></span> Renamed `payments.amount` → `amount_paid`";
+    } catch (PDOException $e) {
+        // Column may already be renamed
+    }
+    try {
+        $pdo->exec("ALTER TABLE `payments` CHANGE COLUMN `status` `payment_status` ENUM('Completed','Pending','Failed','Refunded') DEFAULT 'Completed'");
+        $messages[] = "<span class='text-green-600'><i class='fas fa-check-circle mr-1'></i></span> Renamed `payments.status` → `payment_status`";
+    } catch (PDOException $e) {
+        // Column may already be renamed
+    }
+    try {
+        $pdo->exec("ALTER TABLE `payments` ADD COLUMN `transaction_reference` VARCHAR(100) DEFAULT NULL AFTER `payment_method`");
+        $messages[] = "<span class='text-green-600'><i class='fas fa-check-circle mr-1'></i></span> Added `transaction_reference` column to `payments`";
+    } catch (PDOException $e) {
+        // Column already exists
+    }
+
     // Disable foreign key checks for truncation
     $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
 
@@ -48,6 +68,7 @@ try {
     $tables = [
         'activity_logs',
         'reservation_requests',
+        'payments',
         'reservations',
         'room_amenities',
         'room_images',

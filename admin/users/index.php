@@ -18,6 +18,7 @@ define('PAGE_TITLE', 'Customers');
 </head>
 <body class="font-[Inter] bg-gray-50">
 <?php include '../../includes/sidebar.php'; ?>
+<?php include '../../includes/admin-topbar.php'; ?>
 
 <div class="ml-64 p-8">
     <?php if (isset($messages['success'])): ?>
@@ -75,7 +76,7 @@ define('PAGE_TITLE', 'Customers');
                             <div class="flex items-center space-x-2">
                                 <a href="view.php?id=<?php echo $u['user_id']; ?>" class="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition text-xs font-semibold"><i class="fas fa-eye mr-1"></i>View</a>
                                 <a href="edit.php?id=<?php echo $u['user_id']; ?>" class="px-3 py-1.5 bg-yellow-100 text-yellow-700 rounded-lg hover:bg-yellow-200 transition text-xs font-semibold"><i class="fas fa-edit mr-1"></i>Edit</a>
-                                <a href="delete.php?id=<?php echo $u['user_id']; ?>" class="px-3 py-1.5 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-xs font-semibold" onclick="return confirm('Delete this customer? This cannot be undone.')"><i class="fas fa-trash mr-1"></i>Delete</a>
+                                <a href="delete.php?id=<?php echo $u['user_id']; ?>" class="px-3 py-1.5 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-xs font-semibold" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Customer','Delete this customer? This cannot be undone.','error',function(){location.href=_t.href;})"><i class="fas fa-trash mr-1"></i>Delete</a>
                             </div>
                         </td>
                     </tr>
@@ -89,5 +90,4 @@ define('PAGE_TITLE', 'Customers');
     </div>
 </div>
 
-</body>
-</html>
+<?php include '../../includes/admin-footer.php'; ?>

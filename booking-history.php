@@ -15,7 +15,7 @@ if (isset($_GET['cancel'])) {
     redirect('booking-history.php');
 }
 
-$stmt = $pdo->prepare("SELECT r.*, rm.room_number, rm.room_name, rt.type_name, rt.price_per_night FROM reservations r JOIN rooms rm ON r.room_id = rm.room_id JOIN room_types rt ON rm.type_id = rt.type_id WHERE r.user_id = ? ORDER BY r.created_at DESC");
+$stmt = $pdo->prepare("SELECT r.*, rm.room_number, rm.room_name, rt.type_name, rt.price_per_night, (SELECT COUNT(*) FROM payments p WHERE p.reservation_id = r.reservation_id AND p.payment_status = 'Pending') as pending_payment_count FROM reservations r JOIN rooms rm ON r.room_id = rm.room_id JOIN room_types rt ON rm.type_id = rt.type_id WHERE r.user_id = ? ORDER BY r.created_at DESC");
 $stmt->execute([$userId]);
 $bookings = $stmt->fetchAll();
 
@@ -60,13 +60,22 @@ include 'includes/header.php';
                     </div>
                     <div>
                         <p class="text-sm text-gray-500"><i class="fas fa-user text-blue-600 mr-1"></i><?php echo $b['total_guests']; ?> Guest<?php echo $b['total_guests']>1?'s':''; ?></p>
-                        <p class="text-sm text-gray-500"><i class="fas fa-credit-card text-blue-600 mr-1"></i><?php echo $b['payment_status']; ?></p>
-                        <p class="text-lg font-bold text-blue-600"><?php echo formatCurrency($b['total_price']); ?></p>
+                        <p class="text-lg font-bold text-blue-600 flex items-center flex-wrap"><i class="fas fa-credit-card text-blue-600 mr-1"></i><?php echo formatCurrency($b['total_price']); ?>
+                            <?php
+                            $ps = $b['payment_status'];
+                            $hasPending = isset($b['pending_payment_count']) && $b['pending_payment_count'] > 0;
+                            if ($ps === 'Paid') { $bc = 'bg-emerald-50 text-emerald-700 border border-emerald-200'; $label = 'Paid'; }
+                            elseif ($ps === 'Refunded') { $bc = 'bg-slate-100 text-slate-700 border border-slate-300'; $label = 'Refunded'; }
+                            elseif ($ps === 'Unpaid' && !$hasPending) { $bc = 'bg-rose-50 text-rose-700 border border-rose-200'; $label = 'Unpaid'; }
+                            else { $bc = 'bg-amber-50 text-amber-700 border border-amber-200'; $label = 'Awaiting Verification'; }
+                            ?>
+                            <span class="<?php echo $bc; ?> text-xs font-medium px-2.5 py-0.5 rounded-full inline-flex items-center ml-2"><?php echo $label; ?></span>
+                        </p>
                     </div>
                     <div class="text-right">
                         <a href="booking-details.php?id=<?php echo $b['reservation_id']; ?>" class="text-blue-600 hover:underline text-sm block mb-1"><i class="fas fa-eye"></i> View</a>
                         <?php if ($b['booking_status'] == 'Pending'): ?>
-                        <a href="?cancel=<?php echo $b['reservation_id']; ?>" class="text-red-600 hover:underline text-sm" onclick="return confirm('Cancel this booking?')"><i class="fas fa-times"></i> Cancel</a>
+                        <a href="?cancel=<?php echo $b['reservation_id']; ?>" class="text-red-600 hover:underline text-sm" onclick="var _t=this;event.preventDefault();showSystemModal('Cancel Booking','Cancel this booking?','info',function(){location.href=_t.href;})"><i class="fas fa-times"></i> Cancel</a>
                         <?php endif; ?>
                     </div>
                 </div>

@@ -59,7 +59,7 @@ if (isset($_GET['export']) && isset($_GET['tab'])) {
     } elseif ($expTab === 'occupancy') {
         $occDate = $_GET['occ_date'] ?? date('Y-m-d');
         fputcsv($output, ['Room Type', 'Total Rooms', 'Occupied', 'Available', 'Occupancy %']);
-        $stmt = $pdo->prepare("SELECT rt.type_name, COUNT(DISTINCT rm.room_id) as total, COALESCE(occupied.cnt, 0) as occupied FROM rooms rm JOIN room_types rt ON rm.type_id = rt.type_id LEFT JOIN (SELECT r.room_id, COUNT(*) as cnt FROM reservations r WHERE r.booking_status IN ('Checked In','Reserved','Pending') AND r.check_in_date <= ? AND r.check_out_date > ? GROUP BY r.room_id) occupied ON rm.room_id = occupied.room_id GROUP BY rt.type_id, rt.type_name ORDER BY rt.type_name");
+        $stmt = $pdo->prepare("SELECT rt.type_name, COUNT(DISTINCT rm.room_id) as total, COUNT(DISTINCT CASE WHEN occupied.room_id IS NOT NULL OR rm.status = 'Occupied' THEN rm.room_id END) as occupied FROM rooms rm JOIN room_types rt ON rm.type_id = rt.type_id LEFT JOIN (SELECT DISTINCT r.room_id FROM reservations r WHERE r.booking_status = 'Checked In' AND r.check_in_date <= ? AND r.check_out_date > ?) occupied ON rm.room_id = occupied.room_id GROUP BY rt.type_id, rt.type_name ORDER BY rt.type_name");
         $stmt->execute([$occDate, $occDate]);
         while ($row = $stmt->fetch()) {
             $pct = $row['total'] > 0 ? round(($row['occupied'] / $row['total']) * 100, 1) : 0;
@@ -91,6 +91,7 @@ if (isset($_GET['export']) && isset($_GET['tab'])) {
 </head>
 <body class="bg-gray-100">
 <?php include '../../includes/sidebar.php'; ?>
+<?php include '../../includes/admin-topbar.php'; ?>
 <div class="ml-64 p-8">
     <div class="max-w-7xl mx-auto">
         <div class="flex items-center justify-between mb-8">
@@ -512,12 +513,12 @@ $maxRev = $revenueData ? max(array_column($revenueData, 'revenue')) : 0;
 <?php if ($tab === 'occupancy'): ?>
 <?php
 $occDate = $_GET['occ_date'] ?? date('Y-m-d');
-$stmt = $pdo->prepare("SELECT rt.type_id, rt.type_name, COUNT(DISTINCT rm.room_id) as total_rooms, COALESCE(occupied.cnt, 0) as occupied_rooms FROM rooms rm JOIN room_types rt ON rm.type_id = rt.type_id LEFT JOIN (SELECT r.room_id, COUNT(*) as cnt FROM reservations r WHERE r.booking_status IN ('Checked In','Reserved','Pending') AND r.check_in_date <= ? AND r.check_out_date > ? GROUP BY r.room_id) occupied ON rm.room_id = occupied.room_id GROUP BY rt.type_id, rt.type_name ORDER BY rt.type_name");
+$stmt = $pdo->prepare("SELECT rt.type_id, rt.type_name, COUNT(DISTINCT rm.room_id) as total_rooms, COUNT(DISTINCT CASE WHEN occupied.room_id IS NOT NULL OR rm.status = 'Occupied' THEN rm.room_id END) as occupied_rooms FROM rooms rm JOIN room_types rt ON rm.type_id = rt.type_id LEFT JOIN (SELECT DISTINCT r.room_id FROM reservations r WHERE r.booking_status = 'Checked In' AND r.check_in_date <= ? AND r.check_out_date > ?) occupied ON rm.room_id = occupied.room_id GROUP BY rt.type_id, rt.type_name ORDER BY rt.type_name");
 $stmt->execute([$occDate, $occDate]);
 $occData = $stmt->fetchAll();
 
 $stmtTotal = $pdo->query("SELECT COUNT(*) FROM rooms")->fetchColumn();
-$stmtOcc = $pdo->prepare("SELECT COUNT(DISTINCT r.room_id) FROM reservations r WHERE r.booking_status IN ('Checked In','Reserved','Pending') AND r.check_in_date <= ? AND r.check_out_date > ?");
+$stmtOcc = $pdo->prepare("SELECT COUNT(DISTINCT rm.room_id) FROM rooms rm LEFT JOIN (SELECT DISTINCT r.room_id FROM reservations r WHERE r.booking_status = 'Checked In' AND r.check_in_date <= ? AND r.check_out_date > ?) occupied ON rm.room_id = occupied.room_id WHERE occupied.room_id IS NOT NULL OR rm.status = 'Occupied'");
 $stmtOcc->execute([$occDate, $occDate]);
 $totalOccupied = $stmtOcc->fetchColumn();
 $overallPct = $stmtTotal > 0 ? round(($totalOccupied / $stmtTotal) * 100, 1) : 0;

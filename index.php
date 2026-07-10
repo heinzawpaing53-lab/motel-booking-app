@@ -179,18 +179,18 @@ $featuredRooms = $stmt->fetchAll();
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <?php
             $testimonials = [
-                ['John D.', 'Business Traveler', 'fa-user-tie', 'An amazing experience! The room was immaculate and the service was top-notch.'],
-                ['Sarah M.', 'Family Vacation', 'fa-user', 'Perfect for our family vacation. The kids loved the pool and the staff was incredibly friendly.'],
-                ['Michael R.', 'Solo Traveler', 'fa-user-graduate', 'Outstanding value for money. The luxury amenities exceeded my expectations.']
+                ['John D.', 'Business Traveler', 'fa-solid fa-user-tie', 'Extremely clean room, lightning-fast Wi-Fi, and a seamless check-in process. Perfect for a productive stay.'],
+                ['Sarah M.', 'Family Vacation', 'fa-solid fa-user', 'The Family Executive room was spacious, beautifully arranged, and the kids loved being close to the pool!'],
+                ['Michael R.', 'Solo Traveler', 'fa-solid fa-user-graduate', 'Excellent value for money. Very quiet floor, comfortable bedding, and friendly staff. Will definitely book again.']
             ];
             foreach($testimonials as $t): ?>
             <div class="testimonial-card bg-gray-50 p-8 shadow-sm">
                 <div class="flex items-center space-x-1 text-yellow-400 mb-4">
-                    <?php for($i=0;$i<5;$i++): ?><i class="fas fa-star"></i><?php endfor; ?>
+                    <?php for($i=0;$i<5;$i++): ?><i class="fa-solid fa-star"></i><?php endfor; ?>
                 </div>
-                <p class="text-gray-600 mb-6 italic">"<?php echo $t[2]; ?>"</p>
+                <p class="text-gray-600 mb-6 italic">"<?php echo $t[3]; ?>"</p>
                 <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><i class="fas <?php echo $t[0]; ?> text-blue-600"></i></div>
+                    <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center"><i class="<?php echo $t[2]; ?> text-blue-600 text-xl"></i></div>
                     <div><h4 class="font-semibold"><?php echo $t[0]; ?></h4><p class="text-sm text-gray-500"><?php echo $t[1]; ?></p></div>
                 </div>
             </div>

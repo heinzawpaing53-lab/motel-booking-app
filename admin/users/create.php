@@ -51,6 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="font-[Inter] bg-gray-50">
 <?php include '../../includes/sidebar.php'; ?>
+<?php include '../../includes/admin-topbar.php'; ?>
 
 <div class="ml-64 p-8">
     <div class="flex items-center justify-between mb-6">

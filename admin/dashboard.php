@@ -18,8 +18,8 @@ include 'header.php';
 
         <?php
         $totalRooms = $pdo->query("SELECT COUNT(*) FROM rooms")->fetchColumn();
-$availableRooms = $pdo->query("SELECT COUNT(*) FROM rooms WHERE status = 'Available'")->fetchColumn();
-$occupiedRooms = $pdo->query("SELECT COUNT(*) FROM rooms WHERE status = 'Occupied'")->fetchColumn();
+$availableRooms = $pdo->query("SELECT COUNT(*) FROM rooms WHERE status = 'Available' AND room_id NOT IN (SELECT room_id FROM reservations WHERE booking_status = 'Checked In' AND check_in_date <= CURDATE() AND check_out_date > CURDATE())")->fetchColumn();
+$occupiedRooms = $pdo->query("SELECT COUNT(*) FROM rooms WHERE status = 'Occupied' OR room_id IN (SELECT room_id FROM reservations WHERE booking_status = 'Checked In' AND check_in_date <= CURDATE() AND check_out_date > CURDATE())")->fetchColumn();
 $reservedRooms = $pdo->query("SELECT COUNT(*) FROM rooms WHERE status = 'Reserved'")->fetchColumn();
         $totalCustomers = $pdo->query("SELECT COUNT(*) FROM users WHERE role_id = 2")->fetchColumn();
         $totalBookings = $pdo->query("SELECT COUNT(*) FROM reservations")->fetchColumn();
@@ -33,7 +33,7 @@ $totalRevenue = $pdo->query("SELECT COALESCE(SUM(total_price), 0) FROM reservati
         ?>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500">
+            <a href="rooms/index.php" class="block bg-white rounded-xl shadow-sm p-6 border-l-4 border-blue-500 hover:shadow-md transition">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 text-sm">Total Rooms</p>
@@ -41,8 +41,8 @@ $totalRevenue = $pdo->query("SELECT COALESCE(SUM(total_price), 0) FROM reservati
                     </div>
                     <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center"><i class="fas fa-bed text-blue-600 text-xl"></i></div>
                 </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-green-500">
+            </a>
+            <a href="rooms/index.php?status=Available" class="block bg-white rounded-xl shadow-sm p-6 border-l-4 border-green-500 hover:shadow-md transition">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 text-sm">Available Rooms</p>
@@ -50,8 +50,8 @@ $totalRevenue = $pdo->query("SELECT COALESCE(SUM(total_price), 0) FROM reservati
                     </div>
                     <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center"><i class="fas fa-check-circle text-green-600 text-xl"></i></div>
                 </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-yellow-500">
+            </a>
+            <a href="rooms/index.php?status=Reserved" class="block bg-white rounded-xl shadow-sm p-6 border-l-4 border-yellow-500 hover:shadow-md transition">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 text-sm">Reserved Rooms</p>
@@ -59,8 +59,8 @@ $totalRevenue = $pdo->query("SELECT COALESCE(SUM(total_price), 0) FROM reservati
                     </div>
                     <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center"><i class="fas fa-clock text-yellow-600 text-xl"></i></div>
                 </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-red-500">
+            </a>
+            <a href="rooms/index.php?status=Occupied" class="block bg-white rounded-xl shadow-sm p-6 border-l-4 border-red-500 hover:shadow-md transition">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 text-sm">Occupied Rooms</p>
@@ -68,8 +68,8 @@ $totalRevenue = $pdo->query("SELECT COALESCE(SUM(total_price), 0) FROM reservati
                     </div>
                     <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center"><i class="fas fa-user-check text-red-600 text-xl"></i></div>
                 </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-purple-500">
+            </a>
+            <a href="users/index.php" class="block bg-white rounded-xl shadow-sm p-6 border-l-4 border-purple-500 hover:shadow-md transition">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 text-sm">Total Customers</p>
@@ -77,8 +77,8 @@ $totalRevenue = $pdo->query("SELECT COALESCE(SUM(total_price), 0) FROM reservati
                     </div>
                     <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center"><i class="fas fa-users text-purple-600 text-xl"></i></div>
                 </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-indigo-500">
+            </a>
+            <a href="bookings/index.php" class="block bg-white rounded-xl shadow-sm p-6 border-l-4 border-indigo-500 hover:shadow-md transition">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 text-sm">Total Bookings</p>
@@ -86,8 +86,8 @@ $totalRevenue = $pdo->query("SELECT COALESCE(SUM(total_price), 0) FROM reservati
                     </div>
                     <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center"><i class="fas fa-calendar-check text-indigo-600 text-xl"></i></div>
                 </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-teal-500">
+            </a>
+            <a href="bookings/index.php?filter=checkins_today" class="block bg-white rounded-xl shadow-sm p-6 border-l-4 border-teal-500 hover:shadow-md transition">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 text-sm">Today's Check-ins</p>
@@ -95,8 +95,8 @@ $totalRevenue = $pdo->query("SELECT COALESCE(SUM(total_price), 0) FROM reservati
                     </div>
                     <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center"><i class="fas fa-sign-in-alt text-teal-600 text-xl"></i></div>
                 </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-cyan-500">
+            </a>
+            <a href="bookings/index.php?filter=checkouts_today" class="block bg-white rounded-xl shadow-sm p-6 border-l-4 border-cyan-500 hover:shadow-md transition">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 text-sm">Today's Check-outs</p>
@@ -104,8 +104,8 @@ $totalRevenue = $pdo->query("SELECT COALESCE(SUM(total_price), 0) FROM reservati
                     </div>
                     <div class="w-12 h-12 bg-cyan-100 rounded-lg flex items-center justify-center"><i class="fas fa-sign-out-alt text-cyan-600 text-xl"></i></div>
                 </div>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-6 border-l-4 border-emerald-500 lg:col-span-1">
+            </a>
+            <a href="bookings/payments.php" class="block bg-white rounded-xl shadow-sm p-6 border-l-4 border-emerald-500 lg:col-span-1 hover:shadow-md transition">
                 <div class="flex items-center justify-between">
                     <div>
                         <p class="text-gray-500 text-sm">Total Revenue</p>
@@ -113,7 +113,7 @@ $totalRevenue = $pdo->query("SELECT COALESCE(SUM(total_price), 0) FROM reservati
                     </div>
                     <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center"><i class="fas fa-dollar-sign text-emerald-600 text-xl"></i></div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">

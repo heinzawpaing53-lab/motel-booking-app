@@ -8,16 +8,21 @@ $guests = isset($_GET['guests']) ? (int)$_GET['guests'] : 0;
 $typeId = isset($_GET['type']) ? (int)$_GET['type'] : 0;
 $floorId = isset($_GET['floor']) ? (int)$_GET['floor'] : 0;
 
+$conditions = [];
+$params = [];
+
 $sql = "SELECT r.*, rt.type_name, rt.price_per_night, rt.bed_type, rt.room_size, rt.max_capacity, f.floor_name,
     (SELECT image_path FROM room_images WHERE room_id = r.room_id LIMIT 1) AS image
     FROM rooms r
     JOIN room_types rt ON r.type_id = rt.type_id
-    JOIN floors f ON r.floor_id = f.floor_id
-    WHERE r.status = 'Available'";
-$params = [];
+    JOIN floors f ON r.floor_id = f.floor_id";
+
+if (isset($_SESSION['user_id'])) {
+    $conditions[] = "r.status = 'Available'";
+}
 
 if ($checkIn && $checkOut) {
-    $sql .= " AND NOT EXISTS (
+    $conditions[] = "NOT EXISTS (
         SELECT 1 FROM reservations
         WHERE room_id = r.room_id
         AND booking_status NOT IN ('Cancelled', 'Checked Out', 'Completed', 'Rejected')
@@ -26,9 +31,13 @@ if ($checkIn && $checkOut) {
     $params[] = $checkOut;
     $params[] = $checkIn;
 }
-if ($typeId > 0) { $sql .= " AND r.type_id = ?"; $params[] = $typeId; }
-if ($floorId > 0) { $sql .= " AND r.floor_id = ?"; $params[] = $floorId; }
-if ($guests > 0) { $sql .= " AND rt.max_capacity >= ?"; $params[] = $guests; }
+if ($typeId > 0) { $conditions[] = "r.type_id = ?"; $params[] = $typeId; }
+if ($floorId > 0) { $conditions[] = "r.floor_id = ?"; $params[] = $floorId; }
+if ($guests > 0) { $conditions[] = "rt.max_capacity >= ?"; $params[] = $guests; }
+
+if (!empty($conditions)) {
+    $sql .= ' WHERE ' . implode(' AND ', $conditions);
+}
 
 $stmt = $pdo->prepare($sql . " ORDER BY rt.price_per_night ASC");
 $stmt->execute($params);

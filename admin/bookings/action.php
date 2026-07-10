@@ -66,7 +66,7 @@ try {
             throw new Exception('Room is not available for the selected dates. There are overlapping bookings.');
         }
 
-        $updateStmt = $pdo->prepare("UPDATE reservations SET booking_status = 'Approved' WHERE reservation_id = ?");
+        $updateStmt = $pdo->prepare("UPDATE reservations SET booking_status = 'Approved', payment_status = 'Unpaid' WHERE reservation_id = ?");
         $updateStmt->execute([$id]);
         logActivity($pdo, $_SESSION['user_id'], 'Booking Approved', "Booking #$id for {$booking['first_name']} {$booking['last_name']} approved.");
         $_SESSION['success'] = 'Booking has been approved successfully.';

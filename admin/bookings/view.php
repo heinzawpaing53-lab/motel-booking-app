@@ -54,6 +54,7 @@ if (isset($_SESSION['error'])) {
 </head>
 <body class="font-[Inter] bg-gray-50">
 <?php include '../../includes/sidebar.php'; ?>
+<?php include '../../includes/admin-topbar.php'; ?>
 
 <div class="ml-64 p-8">
     <div class="flex items-center justify-between mb-6">
@@ -237,33 +238,33 @@ if (isset($_SESSION['error'])) {
                             <input type="hidden" name="action" value="approve">
                             <input type="hidden" name="id" value="<?php echo $booking['reservation_id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
-                            <button type="submit" class="w-full px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold" onclick="return confirm('Approve this booking?')"><i class="fas fa-check mr-2"></i>Approve Booking</button>
+                            <button type="submit" class="w-full px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold" onclick="var _f=this.form;event.preventDefault();showSystemModal('Approve Booking','Approve this booking?','info',function(){_f.submit();})"><i class="fas fa-check mr-2"></i>Approve Booking</button>
                         </form>
                         <form method="POST" action="action.php" class="space-y-2">
                             <input type="hidden" name="action" value="reject">
                             <input type="hidden" name="id" value="<?php echo $booking['reservation_id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
-                            <button type="submit" class="w-full px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold" onclick="return confirm('Reject this booking?')"><i class="fas fa-times mr-2"></i>Reject Booking</button>
+                            <button type="submit" class="w-full px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold" onclick="var _f=this.form;event.preventDefault();showSystemModal('Reject Booking','Reject this booking?','error',function(){_f.submit();})"><i class="fas fa-times mr-2"></i>Reject Booking</button>
                         </form>
                     <?php elseif ($booking['booking_status'] === 'Approved'): ?>
                         <form method="POST" action="action.php" class="space-y-2">
                             <input type="hidden" name="action" value="checkin">
                             <input type="hidden" name="id" value="<?php echo $booking['reservation_id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
-                            <button type="submit" class="w-full px-4 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-semibold" onclick="return confirm('Mark as checked in?')"><i class="fas fa-sign-in-alt mr-2"></i>Check In</button>
+                            <button type="submit" class="w-full px-4 py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition font-semibold" onclick="var _f=this.form;event.preventDefault();showSystemModal('Check In','Mark as checked in?','info',function(){_f.submit();})"><i class="fas fa-sign-in-alt mr-2"></i>Check In</button>
                         </form>
                         <form method="POST" action="action.php" class="space-y-2">
                             <input type="hidden" name="action" value="cancel">
                             <input type="hidden" name="id" value="<?php echo $booking['reservation_id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
-                            <button type="submit" class="w-full px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold" onclick="return confirm('Cancel this booking?')"><i class="fas fa-ban mr-2"></i>Cancel Booking</button>
+                            <button type="submit" class="w-full px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition font-semibold" onclick="var _f=this.form;event.preventDefault();showSystemModal('Cancel Booking','Cancel this booking?','error',function(){_f.submit();})"><i class="fas fa-ban mr-2"></i>Cancel Booking</button>
                         </form>
                     <?php elseif ($booking['booking_status'] === 'Checked In'): ?>
                         <form method="POST" action="action.php" class="space-y-2">
                             <input type="hidden" name="action" value="checkout">
                             <input type="hidden" name="id" value="<?php echo $booking['reservation_id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
-                            <button type="submit" class="w-full px-4 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-semibold" onclick="return confirm('Mark as checked out?')"><i class="fas fa-sign-out-alt mr-2"></i>Check Out</button>
+                            <button type="submit" class="w-full px-4 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition font-semibold" onclick="var _f=this.form;event.preventDefault();showSystemModal('Check Out','Mark as checked out?','info',function(){_f.submit();})"><i class="fas fa-sign-out-alt mr-2"></i>Check Out</button>
                         </form>
                     <?php endif; ?>
                     <div class="mt-4 pt-4 border-t border-gray-200">
@@ -275,5 +276,4 @@ if (isset($_SESSION['error'])) {
     </div>
 </div>
 
-</body>
-</html>
+<?php include '../../includes/admin-footer.php'; ?>
