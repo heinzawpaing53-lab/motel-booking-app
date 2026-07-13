@@ -12,7 +12,7 @@ $request = $stmt->fetch();
 
 if (!$request) {
     $_SESSION['error'] = 'Special request not found.';
-    redirect('admin/requests/index.php');
+    redirect('admin/amenities/index.php?tab=requests');
 }
 
 try {
@@ -30,4 +30,4 @@ try {
     $_SESSION['error'] = 'Cannot delete this special request. It may be referenced by existing reservations.';
 }
 
-redirect('admin/requests/index.php');
+redirect('admin/amenities/index.php?tab=requests');

@@ -16,7 +16,7 @@ if ($id > 0) {
         $check->execute([$id]);
         if ($check->fetchColumn() > 0) {
             $_SESSION['error'] = 'Cannot delete room type with associated rooms.';
-            redirect('admin/room-types/index.php');
+            redirect('admin/rooms/index.php?tab=types');
         }
         $stmt = $pdo->prepare("DELETE FROM room_types WHERE type_id = ?");
         $stmt->execute([$id]);
@@ -24,4 +24,4 @@ if ($id > 0) {
     }
 }
 
-redirect('admin/room-types/index.php');
+redirect('admin/rooms/index.php?tab=types');

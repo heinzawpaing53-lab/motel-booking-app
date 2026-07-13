@@ -16,7 +16,7 @@ if ($id > 0) {
         $check->execute([$id]);
         if ($check->fetchColumn() > 0) {
             $_SESSION['error'] = 'Cannot delete floor with associated rooms.';
-            redirect('admin/floors/index.php');
+            redirect('admin/rooms/index.php?tab=floors');
         }
         $stmt = $pdo->prepare("DELETE FROM floors WHERE floor_id = ?");
         $stmt->execute([$id]);
@@ -24,4 +24,4 @@ if ($id > 0) {
     }
 }
 
-redirect('admin/floors/index.php');
+redirect('admin/rooms/index.php?tab=floors');

@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$floor_name, $description, $sort_order]);
             logActivity($pdo, $_SESSION['user_id'], 'Create Floor', "Created floor {$floor_name}");
             $success = 'Floor created successfully.';
-            echo '<script>setTimeout(function(){ window.location.href = "index.php"; }, 1500);</script>';
+            echo '<script>setTimeout(function(){ window.location.href = "../rooms/index.php?tab=floors"; }, 1500);</script>';
         }
     }
 }
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1 class="text-2xl font-bold text-gray-800">Add Floor</h1>
                 <p class="text-gray-500 text-sm">Create a new floor</p>
             </div>
-            <a href="index.php" class="text-gray-600 hover:text-gray-800 bg-white px-4 py-2 rounded-lg border text-sm"><i class="fas fa-arrow-left mr-2"></i>Back</a>
+            <a href="../rooms/index.php?tab=floors" class="text-gray-600 hover:text-gray-800 bg-white px-4 py-2 rounded-lg border text-sm"><i class="fas fa-arrow-left mr-2"></i>Back</a>
         </div>
 
         <?php if ($error): ?>

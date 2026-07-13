@@ -15,16 +15,10 @@
         <a href="<?php echo SITE_URL; ?>admin/dashboard.php" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition <?php echo basename($_SERVER['PHP_SELF']) == 'dashboard.php' ? 'bg-gray-800 text-blue-400' : 'text-gray-300'; ?>">
             <i class="fas fa-tachometer-alt w-5"></i><span>Dashboard</span>
         </a>
-        <a href="<?php echo SITE_URL; ?>admin/rooms/index.php" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition <?php echo strpos($_SERVER['PHP_SELF'], 'rooms') !== false ? 'bg-gray-800 text-blue-400' : 'text-gray-300'; ?>">
+        <a href="<?php echo SITE_URL; ?>admin/rooms/index.php" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition <?php echo (strpos($_SERVER['PHP_SELF'], '/rooms/') !== false || strpos($_SERVER['PHP_SELF'], '/room-types/') !== false || strpos($_SERVER['PHP_SELF'], '/floors/') !== false) ? 'bg-gray-800 text-blue-400' : 'text-gray-300'; ?>">
             <i class="fas fa-bed w-5"></i><span>Rooms</span>
         </a>
-        <a href="<?php echo SITE_URL; ?>admin/room-types/index.php" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition <?php echo strpos($_SERVER['PHP_SELF'], 'room-types') !== false ? 'bg-gray-800 text-blue-400' : 'text-gray-300'; ?>">
-            <i class="fas fa-tags w-5"></i><span>Room Types</span>
-        </a>
-        <a href="<?php echo SITE_URL; ?>admin/floors/index.php" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition <?php echo strpos($_SERVER['PHP_SELF'], 'floors') !== false ? 'bg-gray-800 text-blue-400' : 'text-gray-300'; ?>">
-            <i class="fas fa-layer-group w-5"></i><span>Floors</span>
-        </a>
-        <a href="<?php echo SITE_URL; ?>admin/amenities/index.php" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition <?php echo strpos($_SERVER['PHP_SELF'], 'amenities') !== false ? 'bg-gray-800 text-blue-400' : 'text-gray-300'; ?>">
+        <a href="<?php echo SITE_URL; ?>admin/amenities/index.php" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition <?php echo (strpos($_SERVER['PHP_SELF'], '/amenities/') !== false || strpos($_SERVER['PHP_SELF'], '/requests/') !== false) ? 'bg-gray-800 text-blue-400' : 'text-gray-300'; ?>">
             <i class="fas fa-concierge-bell w-5"></i><span>Amenities</span>
         </a>
         <a href="<?php echo SITE_URL; ?>admin/bookings/index.php" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition <?php echo strpos($_SERVER['PHP_SELF'], 'bookings') !== false && basename($_SERVER['PHP_SELF']) !== 'payments.php' ? 'bg-gray-800 text-blue-400' : 'text-gray-300'; ?>">
@@ -35,9 +29,6 @@
         </a>
         <a href="<?php echo SITE_URL; ?>admin/users/index.php" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition <?php echo strpos($_SERVER['PHP_SELF'], 'users') !== false ? 'bg-gray-800 text-blue-400' : 'text-gray-300'; ?>">
             <i class="fas fa-users w-5"></i><span>Customers</span>
-        </a>
-        <a href="<?php echo SITE_URL; ?>admin/requests/index.php" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition <?php echo strpos($_SERVER['PHP_SELF'], 'requests') !== false ? 'bg-gray-800 text-blue-400' : 'text-gray-300'; ?>">
-            <i class="fas fa-clipboard-list w-5"></i><span>Special Requests</span>
         </a>
         <a href="<?php echo SITE_URL; ?>admin/reports/index.php" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 transition <?php echo strpos($_SERVER['PHP_SELF'], 'reports') !== false ? 'bg-gray-800 text-blue-400' : 'text-gray-300'; ?>">
             <i class="fas fa-chart-bar w-5"></i><span>Reports</span>

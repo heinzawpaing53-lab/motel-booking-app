@@ -11,7 +11,7 @@ $stmt->execute([$id]);
 $request = $stmt->fetch();
 
 if (!$request) {
-    redirect('admin/requests/index.php');
+    redirect('admin/amenities/index.php?tab=requests');
 }
 
 $error = '';
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute([$requestName, $description, $active, $id]);
         logActivity($pdo, $_SESSION['user_id'], 'Special Request Updated', "Special request '$requestName' updated.");
         $_SESSION['success'] = 'Special request updated successfully.';
-        redirect('admin/requests/index.php');
+        redirect('admin/amenities/index.php?tab=requests');
     }
 }
 ?>
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="ml-64 p-8">
     <div class="flex items-center justify-between mb-6">
         <div>
-            <a href="index.php" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-arrow-left mr-1"></i>Back to Special Requests</a>
+            <a href="../amenities/index.php?tab=requests" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-arrow-left mr-1"></i>Back to Special Requests</a>
             <h1 class="text-2xl font-bold text-gray-800 mt-1">Edit Special Request</h1>
         </div>
     </div>

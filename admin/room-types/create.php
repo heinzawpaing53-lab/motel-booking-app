@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$type_name, $description, $price_per_night, $max_capacity, $bed_type, $room_size]);
             logActivity($pdo, $_SESSION['user_id'], 'Create Room Type', "Created room type {$type_name}");
             $success = 'Room type created successfully.';
-            echo '<script>setTimeout(function(){ window.location.href = "index.php"; }, 1500);</script>';
+            echo '<script>setTimeout(function(){ window.location.href = "../rooms/index.php?tab=types"; }, 1500);</script>';
         }
     }
 }
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <h1 class="text-2xl font-bold text-gray-800">Add Room Type</h1>
                 <p class="text-gray-500 text-sm">Create a new room type</p>
             </div>
-            <a href="index.php" class="text-gray-600 hover:text-gray-800 bg-white px-4 py-2 rounded-lg border text-sm"><i class="fas fa-arrow-left mr-2"></i>Back</a>
+            <a href="../rooms/index.php?tab=types" class="text-gray-600 hover:text-gray-800 bg-white px-4 py-2 rounded-lg border text-sm"><i class="fas fa-arrow-left mr-2"></i>Back</a>
         </div>
 
         <?php if ($error): ?>
