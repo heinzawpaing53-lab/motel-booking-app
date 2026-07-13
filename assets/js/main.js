@@ -123,7 +123,7 @@ function showSystemModal(title, message, type, callback) {
 
     var config = {
         info: { bg: 'bg-blue-100', icon: 'fa-solid fa-circle-info text-blue-600', btn: 'bg-blue-600 hover:bg-blue-700' },
-        success: { bg: 'bg-green-100', icon: 'fa-solid fa-check-circle text-green-600', btn: 'bg-green-600 hover:bg-green-700' },
+        success: { bg: 'bg-emerald-100', icon: 'fa-solid fa-check-circle text-emerald-600', btn: 'bg-emerald-600 hover:bg-emerald-700' },
         error: { bg: 'bg-rose-100', icon: 'fa-solid fa-exclamation-triangle text-rose-600', btn: 'bg-rose-600 hover:bg-rose-700' }
     };
     var c = config[type] || config.info;
@@ -139,13 +139,13 @@ function showSystemModal(title, message, type, callback) {
     if (callback) {
         var cancelBtn = document.createElement('button');
         cancelBtn.textContent = 'Cancel';
-        cancelBtn.className = 'px-6 py-2.5 rounded-xl font-semibold transition border border-gray-200 text-gray-600 hover:bg-gray-50';
+        cancelBtn.className = 'px-6 py-2.5 rounded-lg font-medium transition border border-slate-200 text-slate-600 hover:bg-slate-50';
         cancelBtn.onclick = closeSystemModal;
         actions.appendChild(cancelBtn);
 
         var confirmBtn = document.createElement('button');
         confirmBtn.textContent = 'Confirm';
-        confirmBtn.className = 'px-6 py-2.5 rounded-xl font-semibold transition text-white ' + c.btn;
+        confirmBtn.className = 'px-6 py-2.5 rounded-lg font-medium transition text-white ' + c.btn;
         confirmBtn.onclick = function() {
             if (systemModalCallback) systemModalCallback();
             closeSystemModal();
@@ -154,7 +154,7 @@ function showSystemModal(title, message, type, callback) {
     } else {
         var closeBtn = document.createElement('button');
         closeBtn.textContent = 'Close';
-        closeBtn.className = 'px-6 py-2.5 rounded-xl font-semibold transition ' + c.btn + ' text-white';
+        closeBtn.className = 'px-6 py-2.5 rounded-lg font-medium transition ' + c.btn + ' text-white';
         closeBtn.onclick = closeSystemModal;
         actions.appendChild(closeBtn);
     }

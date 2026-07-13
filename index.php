@@ -112,10 +112,20 @@ $featuredRooms = $stmt->fetchAll();
             <p class="text-gray-500 mt-2">Choose from our selection of premium rooms</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <?php
+            $roomTypeImages = [
+                'Standard Room' => 'https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=600',
+                'Deluxe Room'   => 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600',
+                'Superior Room' => 'https://images.unsplash.com/photo-1584132967334-10e028bd69f7?w=600',
+                'Family Room'   => 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600',
+                'Suite Room'    => 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600',
+                'VIP Room'      => 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600'
+            ];
+            ?>
             <?php foreach($featuredRooms as $room): ?>
             <div class="room-card bg-white shadow-md">
                 <div class="relative overflow-hidden">
-                    <img src="<?php echo $room['image'] ?: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600'; ?>" alt="<?php echo $room['room_name']; ?>" class="w-full">
+                    <img src="<?php echo $room['image'] ?: ($roomTypeImages[$room['type_name']] ?? 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600'); ?>" alt="<?php echo $room['room_name']; ?>" class="w-full">
                     <span class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold"><?php echo formatCurrency($room['price_per_night']); ?>/night</span>
                 </div>
                 <div class="p-6">

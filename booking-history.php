@@ -33,7 +33,7 @@ include 'includes/header.php';
         </div>
 
         <?php if (isset($_SESSION['success'])): ?>
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-lg"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
+        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['booking_success'])): ?>

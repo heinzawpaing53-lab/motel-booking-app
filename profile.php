@@ -59,10 +59,10 @@ include 'includes/header.php';
         </div>
 
         <?php if ($success): ?>
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-lg"><?php echo $success; ?></div>
+        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $success; ?></div>
         <?php endif; ?>
         <?php if ($error): ?>
-        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-lg"><?php echo $error; ?></div>
+        <div class="bg-rose-50 border-l-4 border-rose-500 text-rose-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $error; ?></div>
         <?php endif; ?>
 
         <div class="bg-white rounded-2xl shadow-sm p-8">

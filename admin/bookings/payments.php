@@ -93,10 +93,10 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
     </div>
 
     <?php if (isset($messages['success'])): ?>
-    <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-lg text-sm"><?php echo $messages['success']; ?></div>
+    <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $messages['success']; ?></div>
     <?php endif; ?>
     <?php if (isset($messages['error'])): ?>
-    <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-lg text-sm"><?php echo $messages['error']; ?></div>
+    <div class="bg-rose-50 border-l-4 border-rose-500 text-rose-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $messages['error']; ?></div>
     <?php endif; ?>
 
     <?php if ($tab === 'ledger'): ?>
@@ -244,7 +244,6 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
                                     <option value="Credit Card">Credit Card</option>
                                     <option value="Debit Card">Debit Card</option>
                                     <option value="Bank Transfer">Bank Transfer</option>
-                                    <option value="GCash">GCash</option>
                                     <option value="PayPal">PayPal</option>
                                 </select>
                                 <button type="submit" name="action" value="mark_paid" class="px-3 py-1.5 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition text-xs font-semibold whitespace-nowrap"><i class="fas fa-check mr-1"></i>Mark as Paid</button>
@@ -266,27 +265,27 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
     <?php endif; ?>
 </div>
 
-<div id="paymentModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4">
+<div id="paymentModal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-6 relative">
-        <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl">&times;</button>
+        <button onclick="closePaymentModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 text-xl">&times;</button>
         <div class="text-center mb-6">
-            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <i class="fas fa-check-circle text-green-600 text-2xl"></i>
+            <div class="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fas fa-check-circle text-emerald-600 text-2xl"></i>
             </div>
-            <h3 class="text-xl font-bold text-gray-800">Record Payment</h3>
-            <p class="text-gray-500 text-sm mt-1">Mark this reservation as paid</p>
+            <h3 class="text-xl font-bold text-slate-900">Record Payment</h3>
+            <p class="text-slate-500 text-sm mt-1">Mark this reservation as paid</p>
         </div>
-        <div id="modalBookingInfo" class="bg-gray-50 rounded-lg p-4 mb-6 text-sm space-y-1">
-            <div class="flex justify-between"><span class="text-gray-500">Customer:</span><span class="font-semibold text-gray-800" id="modalCustomer">-</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">Room:</span><span class="font-semibold text-gray-800" id="modalRoom">-</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">Amount Due:</span><span class="font-semibold text-gray-800" id="modalAmount">-</span></div>
+        <div id="modalBookingInfo" class="bg-slate-50 rounded-lg p-4 mb-6 text-sm space-y-1">
+            <div class="flex justify-between"><span class="text-slate-500">Customer:</span><span class="font-semibold text-slate-800" id="modalCustomer">-</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Room:</span><span class="font-semibold text-slate-800" id="modalRoom">-</span></div>
+            <div class="flex justify-between"><span class="text-slate-500">Amount Due:</span><span class="font-semibold text-slate-800" id="modalAmount">-</span></div>
         </div>
         <form method="POST">
             <input type="hidden" name="action" value="mark_paid">
             <input type="hidden" name="reservation_id" id="modalReservationId" value="0">
             <div class="mb-4">
-                <label class="block text-sm font-semibold text-gray-600 mb-1">Payment Method</label>
-                <select name="payment_method" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                <label class="block text-sm font-semibold text-slate-600 mb-1">Payment Method</label>
+                <select name="payment_method" class="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
                     <option value="Cash">Cash</option>
                     <option value="Credit Card">Credit Card</option>
                     <option value="Debit Card">Debit Card</option>
@@ -296,10 +295,10 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
                 </select>
             </div>
             <div class="mb-6">
-                <label class="block text-sm font-semibold text-gray-600 mb-1">Amount <span class="text-gray-400 font-normal">(leave blank for full amount)</span></label>
-                <input type="number" step="0.01" min="0" name="custom_amount" id="modalCustomAmount" placeholder="Full amount" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                <label class="block text-sm font-semibold text-slate-600 mb-1">Amount <span class="text-slate-400 font-normal">(leave blank for full amount)</span></label>
+                <input type="number" step="0.01" min="0" name="custom_amount" id="modalCustomAmount" placeholder="Full amount" class="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
             </div>
-            <button type="submit" class="w-full px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition font-semibold"><i class="fas fa-check mr-2"></i>Confirm Payment</button>
+            <button type="submit" class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition"><i class="fas fa-check mr-2"></i>Confirm Payment</button>
         </form>
     </div>
 </div>

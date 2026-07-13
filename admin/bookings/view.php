@@ -66,10 +66,10 @@ if (isset($_SESSION['error'])) {
     </div>
 
     <?php if (isset($messages['success'])): ?>
-    <div class="bg-green-100 border-l-4 border-green-500 text-green-800 p-4 mb-6 rounded-lg"><?php echo $messages['success']; ?></div>
+    <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $messages['success']; ?></div>
     <?php endif; ?>
     <?php if (isset($messages['error'])): ?>
-    <div class="bg-red-100 border-l-4 border-red-500 text-red-800 p-4 mb-6 rounded-lg"><?php echo $messages['error']; ?></div>
+    <div class="bg-rose-50 border-l-4 border-rose-500 text-rose-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $messages['error']; ?></div>
     <?php endif; ?>
 
     <div class="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">

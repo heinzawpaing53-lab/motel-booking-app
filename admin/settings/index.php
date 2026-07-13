@@ -95,7 +95,7 @@ $settingTypes = [
         </div>
 
         <?php if ($message): ?>
-        <div class="mb-6 p-4 rounded-lg border-l-4 text-sm font-medium <?php echo $messageType === 'success' ? 'bg-green-100 border-green-500 text-green-700' : 'bg-red-100 border-red-500 text-red-700'; ?>">
+        <div class="mb-6 p-4 rounded-r shadow-sm border-l-4 text-sm font-medium <?php echo $messageType === 'success' ? 'bg-emerald-50 border-emerald-500 text-emerald-700' : 'bg-rose-50 border-rose-500 text-rose-700'; ?>">
             <i class="fas <?php echo $messageType === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?> mr-2"></i>
             <?php echo $message; ?>
         </div>

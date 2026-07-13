@@ -82,15 +82,15 @@ include 'includes/header.php';
         </div>
 
         <?php if ($error): ?>
-        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-lg"><?php echo $error; ?></div>
+        <div class="bg-rose-50 border-l-4 border-rose-500 text-rose-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $error; ?></div>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['booking_error'])): ?>
-        <div class="bg-rose-100 border-l-4 border-rose-500 text-rose-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $_SESSION['booking_error']; unset($_SESSION['booking_error']); ?></div>
+        <div class="bg-rose-50 border-l-4 border-rose-500 text-rose-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $_SESSION['booking_error']; unset($_SESSION['booking_error']); ?></div>
         <?php endif; ?>
 
         <?php if (isset($_SESSION['pending_reservation']) && !$_POST): ?>
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded-lg">
+        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6">
             You are now signed in! Your booking details have been restored. Please review and confirm your reservation.
         </div>
         <?php endif; ?>
@@ -198,19 +198,19 @@ include 'includes/header.php';
 
 <?php if (isset($_SESSION['pending_reservation'])): unset($_SESSION['pending_reservation']); endif; ?>
 
-<div id="authModal" class="fixed inset-0 z-50 hidden bg-black/50 flex items-center justify-center p-4">
+<div id="authModal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center relative animate-modal">
         <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <i class="fas fa-shield-halved text-blue-600 text-3xl"></i>
         </div>
-        <h3 class="font-[Playfair_Display] text-2xl font-bold text-gray-800 mb-3">Authentication Required</h3>
-        <p class="text-gray-600 mb-2">Please sign in or register an account to secure your booking.</p>
-        <p class="text-gray-500 text-sm mb-8">Your reservation details have been saved.</p>
+        <h3 class="text-2xl font-bold text-slate-900 mb-3">Authentication Required</h3>
+        <p class="text-slate-600 mb-2">Please sign in or register an account to secure your booking.</p>
+        <p class="text-slate-400 text-sm mb-8">Your reservation details have been saved.</p>
         <div class="flex flex-col sm:flex-row gap-3 justify-center">
-            <a href="login.php" class="px-8 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition font-semibold"><i class="fas fa-sign-in-alt mr-2"></i>Log In</a>
-            <a href="register.php" class="px-8 py-3 bg-gray-100 text-gray-800 rounded-xl hover:bg-gray-200 transition font-semibold"><i class="fas fa-user-plus mr-2"></i>Register</a>
+            <a href="login.php" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition"><i class="fas fa-sign-in-alt mr-2"></i>Log In</a>
+            <a href="register.php" class="px-5 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium rounded-lg transition"><i class="fas fa-user-plus mr-2"></i>Register</a>
         </div>
-        <button onclick="closeModal()" class="mt-6 text-sm text-gray-400 hover:text-gray-600 transition">Continue Browsing</button>
+        <button onclick="closeModal()" class="mt-6 text-sm text-slate-400 hover:text-slate-600 transition">Continue Browsing</button>
     </div>
 </div>
 

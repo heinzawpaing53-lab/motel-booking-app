@@ -42,10 +42,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <?php if ($error): ?>
-        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded mb-6 text-sm"><?php echo $error; ?></div>
+        <div class="bg-rose-50 border-l-4 border-rose-500 text-rose-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $error; ?></div>
         <?php endif; ?>
         <?php if ($success): ?>
-        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded mb-6 text-sm"><?php echo $success; ?></div>
+        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $success; ?></div>
         <?php endif; ?>
 
         <div class="bg-white rounded-xl shadow-sm p-6 max-w-2xl">
