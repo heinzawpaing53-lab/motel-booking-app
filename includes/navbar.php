@@ -1,17 +1,20 @@
 <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
 <nav class="bg-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
+        <div class="relative flex items-center justify-between h-16">
             <div class="flex items-center">
                 <a href="<?php echo SITE_URL; ?>index.php" class="flex items-center space-x-2">
                     <i class="fas fa-hotel text-blue-600 text-2xl"></i>
                     <span class="font-[Playfair_Display] text-xl font-bold text-gray-800">Luxury Motel</span>
                 </a>
             </div>
-            <div class="hidden md:flex items-center space-x-6">
+            <div class="hidden md:flex absolute left-1/2 transform -translate-x-1/2 items-center space-x-10">
                 <a href="<?php echo SITE_URL; ?>index.php" class="<?php echo $currentPage === 'index.php' ? 'text-blue-600 font-semibold' : 'text-gray-600'; ?> hover:text-blue-600 transition font-medium">Home</a>
                 <a href="<?php echo SITE_URL; ?>rooms.php" class="<?php echo $currentPage === 'rooms.php' ? 'text-blue-600 font-semibold' : 'text-gray-600'; ?> hover:text-blue-600 transition font-medium">Rooms</a>
                 <a href="<?php echo SITE_URL; ?>about.php" class="<?php echo $currentPage === 'about.php' ? 'text-blue-600 font-semibold' : 'text-gray-600'; ?> hover:text-blue-600 transition font-medium">About</a>
+                <a href="<?php echo SITE_URL; ?>contact.php" class="<?php echo $currentPage === 'contact.php' ? 'text-blue-600 font-semibold' : 'text-gray-600'; ?> hover:text-blue-600 transition font-medium">Contact Us</a>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
                 <?php if (isLoggedIn()): ?>
                     <div class="relative group">
                         <button class="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition font-medium">
@@ -45,6 +48,7 @@
         <a href="<?php echo SITE_URL; ?>index.php" class="block px-4 py-2 <?php echo $currentPage === 'index.php' ? 'text-blue-600 font-semibold bg-blue-50' : 'text-gray-600'; ?> hover:bg-blue-50">Home</a>
         <a href="<?php echo SITE_URL; ?>rooms.php" class="block px-4 py-2 <?php echo $currentPage === 'rooms.php' ? 'text-blue-600 font-semibold bg-blue-50' : 'text-gray-600'; ?> hover:bg-blue-50">Rooms</a>
         <a href="<?php echo SITE_URL; ?>about.php" class="block px-4 py-2 <?php echo $currentPage === 'about.php' ? 'text-blue-600 font-semibold bg-blue-50' : 'text-gray-600'; ?> hover:bg-blue-50">About</a>
+        <a href="<?php echo SITE_URL; ?>contact.php" class="block px-4 py-2 <?php echo $currentPage === 'contact.php' ? 'text-blue-600 font-semibold bg-blue-50' : 'text-gray-600'; ?> hover:bg-blue-50">Contact Us</a>
         <?php if (isLoggedIn()): ?>
             <a href="<?php echo SITE_URL; ?>profile.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">Profile</a>
             <a href="<?php echo SITE_URL; ?>booking-history.php" class="block px-4 py-2 text-gray-600 hover:bg-blue-50">My Bookings</a>

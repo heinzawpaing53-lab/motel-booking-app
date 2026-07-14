@@ -77,12 +77,12 @@ include 'includes/header.php';
         </div>
 
         <!-- Google Map -->
-        <div class="mb-8">
+        <!-- <div class="mb-8">
             <h2 class="font-[Playfair_Display] text-3xl font-bold mb-6 text-center">Find Us</h2>
             <div class="rounded-xl overflow-hidden shadow-lg">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095919367!2d-73.985428!3d40.748817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDQ0JzU1LjciTiA3M8KwNTknMDcuNSJX!5e0!3m2!1sen!2sus!4v1" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
-        </div>
+        </div> -->
     </div>
 </section>
 
