@@ -1,47 +1,47 @@
-<footer class="bg-gray-900 text-gray-300 pt-16 pb-8">
+<footer class="bg-stone-900 text-gray-300 pt-12 pb-6">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
             <div>
-                <div class="flex items-center space-x-2 mb-4">
-                    <i class="fas fa-hotel text-blue-400 text-2xl"></i>
-                    <span class="font-[Playfair_Display] text-xl font-bold text-white">Luxury Motel</span>
+                <div class="flex items-center space-x-2 mb-3">
+                    <i class="fas fa-hotel text-amber-400 text-lg"></i>
+                    <span class="font-[Playfair_Display] text-lg font-bold text-white">Luxury Motel</span>
                 </div>
-                <p class="text-gray-400 text-sm leading-relaxed">Experience luxury and comfort at its finest. Your perfect getaway awaits at Luxury Motel.</p>
-                <div class="flex space-x-4 mt-4">
-                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-blue-600 transition"><i class="fab fa-instagram"></i></a>
+                <p class="text-gray-400 text-xs leading-relaxed mb-3">Experience luxury and comfort at its finest. Your perfect getaway awaits at Luxury Motel.</p>
+                <div class="flex space-x-3">
+                    <a href="#" class="w-8 h-8 bg-stone-800 rounded-full flex items-center justify-center hover:bg-amber-500 transition text-sm"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-8 h-8 bg-stone-800 rounded-full flex items-center justify-center hover:bg-amber-500 transition text-sm"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="w-8 h-8 bg-stone-800 rounded-full flex items-center justify-center hover:bg-amber-500 transition text-sm"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             <div>
-                <h4 class="text-white font-semibold mb-4">Quick Links</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="<?php echo SITE_URL; ?>index.php" class="hover:text-blue-400 transition">Home</a></li>
-                    <li><a href="<?php echo SITE_URL; ?>rooms.php" class="hover:text-blue-400 transition">Rooms</a></li>
-                    <li><a href="<?php echo SITE_URL; ?>about.php" class="hover:text-blue-400 transition">About Us</a></li>
-                    <li><a href="<?php echo SITE_URL; ?>register.php" class="hover:text-blue-400 transition">Register</a></li>
+                <h4 class="text-white font-semibold mb-3 text-sm">Quick Links</h4>
+                <ul class="space-y-1.5 text-xs">
+                    <li><a href="<?php echo SITE_URL; ?>index.php" class="hover:text-amber-400 transition">Home</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>rooms.php" class="hover:text-amber-400 transition">Rooms</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>about.php" class="hover:text-amber-400 transition">About Us</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>register.php" class="hover:text-amber-400 transition">Register</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-white font-semibold mb-4">Services</h4>
-                <ul class="space-y-2 text-sm">
-                    <li><span class="hover:text-blue-400 transition cursor-pointer">Room Booking</span></li>
-                    <li><span class="hover:text-blue-400 transition cursor-pointer">Restaurant</span></li>
-                    <li><span class="hover:text-blue-400 transition cursor-pointer">Spa & Wellness</span></li>
-                    <li><span class="hover:text-blue-400 transition cursor-pointer">Event Hall</span></li>
+                <h4 class="text-white font-semibold mb-3 text-sm">Services</h4>
+                <ul class="space-y-1.5 text-xs">
+                    <li><span class="hover:text-amber-400 transition cursor-pointer">Room Booking</span></li>
+                    <li><span class="hover:text-amber-400 transition cursor-pointer">Restaurant</span></li>
+                    <li><span class="hover:text-amber-400 transition cursor-pointer">Spa & Wellness</span></li>
+                    <li><span class="hover:text-amber-400 transition cursor-pointer">Event Hall</span></li>
                 </ul>
             </div>
             <div>
-                <h4 class="text-white font-semibold mb-4">Contact</h4>
-                <ul class="space-y-2 text-sm">
-                    <li class="flex items-start space-x-2"><i class="fas fa-map-marker-alt mt-1 text-blue-400"></i><span>123 Luxury Street, City</span></li>
-                    <li class="flex items-center space-x-2"><i class="fas fa-phone text-blue-400"></i><span>+1234567890</span></li>
-                    <li class="flex items-center space-x-2"><i class="fas fa-envelope text-blue-400"></i><span>info@luxurymotel.com</span></li>
+                <h4 class="text-white font-semibold mb-3 text-sm">Contact</h4>
+                <ul class="space-y-1.5 text-xs">
+                    <li class="flex items-start space-x-2"><i class="fas fa-map-marker-alt mt-0.5 text-amber-400"></i><span>123 Luxury Street, City</span></li>
+                    <li class="flex items-center space-x-2"><i class="fas fa-phone text-amber-400"></i><span>+1234567890</span></li>
+                    <li class="flex items-center space-x-2"><i class="fas fa-envelope text-amber-400"></i><span>info@luxurymotel.com</span></li>
                 </ul>
             </div>
         </div>
-        <hr class="border-gray-800 mb-8">
-        <div class="text-center text-sm text-gray-500">
+        <hr class="border-stone-800 mb-4">
+        <div class="text-center text-xs text-stone-500 pb-2">
             &copy; <?php echo date('Y'); ?> Luxury Motel. All rights reserved.
         </div>
     </div>

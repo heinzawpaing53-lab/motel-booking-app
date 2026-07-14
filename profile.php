@@ -70,11 +70,11 @@ include 'includes/header.php';
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-600 mb-1">First Name *</label>
-                        <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                        <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none" required>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-600 mb-1">Last Name *</label>
-                        <input type="text" name="last_name" value="<?php echo $user['last_name']; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                        <input type="text" name="last_name" value="<?php echo $user['last_name']; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none" required>
                     </div>
                 </div>
                 <div class="mb-4">
@@ -84,11 +84,11 @@ include 'includes/header.php';
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
                         <label class="block text-sm font-semibold text-gray-600 mb-1">Phone</label>
-                        <input type="text" name="phone" value="<?php echo $user['phone'] ?? ''; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input type="text" name="phone" value="<?php echo $user['phone'] ?? ''; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-600 mb-1">Gender</label>
-                        <select name="gender" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        <select name="gender" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
                             <option value="">Select</option>
                             <option value="Male" <?php echo ($user['gender']??'')=='Male'?'selected':''; ?>>Male</option>
                             <option value="Female" <?php echo ($user['gender']??'')=='Female'?'selected':''; ?>>Female</option>
@@ -98,26 +98,26 @@ include 'includes/header.php';
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Nationality</label>
-                    <input type="text" name="nationality" value="<?php echo $user['nationality'] ?? ''; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                    <input type="text" name="nationality" value="<?php echo $user['nationality'] ?? ''; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
                 </div>
                 <div class="mb-8">
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Address</label>
-                    <textarea name="address" rows="2" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"><?php echo $user['address'] ?? ''; ?></textarea>
+                    <textarea name="address" rows="2" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none"><?php echo $user['address'] ?? ''; ?></textarea>
                 </div>
 
                 <h3 class="font-semibold text-lg mb-4 border-t pt-6">Change Password (optional)</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     <div>
                         <label class="block text-sm font-semibold text-gray-600 mb-1">Current Password</label>
-                        <input type="password" name="current_password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input type="password" name="current_password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-600 mb-1">New Password</label>
-                        <input type="password" name="new_password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input type="password" name="new_password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-600 mb-1">Confirm New</label>
-                        <input type="password" name="confirm_new_password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                        <input type="password" name="confirm_new_password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
                     </div>
                 </div>
 

@@ -21,6 +21,18 @@ $roomAmenities = $amenities->fetchAll();
 
 include 'includes/header.php';
 ?>
+<style>
+    .btn-primary, a.btn-primary, button.btn-primary {
+        background: linear-gradient(135deg, #D4AF37, #B8960F) !important;
+        color: #fff !important;
+        border: none !important;
+    }
+    .btn-primary:hover, a.btn-primary:hover, button.btn-primary:hover {
+        background: linear-gradient(135deg, #B8960F, #9A7D0A) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(212,175,55,0.3) !important;
+    }
+</style>
 
 <section class="py-16 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,16 +50,16 @@ include 'includes/header.php';
                 <?php endif; ?>
             </div>
             <div>
-                <span class="text-blue-600 font-semibold tracking-wider uppercase text-sm"><?php echo $room['type_name']; ?></span>
+                <span class="text-amber-500 font-semibold tracking-wider uppercase text-sm"><?php echo $room['type_name']; ?></span>
                 <h1 class="font-[Playfair_Display] text-4xl font-bold mt-2 mb-4"><?php echo $room['room_name'] ?: 'Room '.$room['room_number']; ?></h1>
                 <div class="flex items-center space-x-6 text-sm text-gray-500 mb-6">
-                    <span><i class="fas fa-bed text-blue-600 mr-1"></i><?php echo $room['bed_type']; ?></span>
-                    <span><i class="fas fa-arrows-alt text-blue-600 mr-1"></i><?php echo $room['room_size']; ?></span>
-                    <span><i class="fas fa-user text-blue-600 mr-1"></i>Max <?php echo $room['max_capacity']; ?> Guests</span>
-                    <span><i class="fas fa-layer-group text-blue-600 mr-1"></i><?php echo $room['floor_name']; ?></span>
+                    <span><i class="fas fa-bed text-amber-500 mr-1"></i><?php echo $room['bed_type']; ?></span>
+                    <span><i class="fas fa-arrows-alt text-amber-500 mr-1"></i><?php echo $room['room_size']; ?></span>
+                    <span><i class="fas fa-user text-amber-500 mr-1"></i>Max <?php echo $room['max_capacity']; ?> Guests</span>
+                    <span><i class="fas fa-layer-group text-amber-500 mr-1"></i><?php echo $room['floor_name']; ?></span>
                 </div>
                 <p class="text-gray-600 leading-relaxed mb-6"><?php echo $room['type_desc'] ?: $room['description']; ?></p>
-                <div class="text-4xl font-bold text-blue-600 mb-8"><?php echo formatCurrency($room['price_per_night']); ?> <span class="text-lg text-gray-500 font-normal">/night</span></div>
+                <div class="text-4xl font-bold text-amber-500 mb-8"><?php echo formatCurrency($room['price_per_night']); ?> <span class="text-lg text-gray-500 font-normal">/night</span></div>
 
                 <?php if($roomAmenities): ?>
                 <h3 class="font-semibold text-lg mb-4">Amenities</h3>

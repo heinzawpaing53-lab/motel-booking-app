@@ -34,7 +34,7 @@ include 'includes/header.php';
         <div class="bg-white rounded-xl shadow-sm p-8 mb-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
-                    <h3 class="font-semibold text-lg mb-4"><i class="fas fa-hotel text-blue-600 mr-2"></i>Room Information</h3>
+                    <h3 class="font-semibold text-lg mb-4"><i class="fas fa-hotel text-amber-500 mr-2"></i>Room Information</h3>
                     <table class="w-full text-sm">
                         <tr class="border-b"><td class="py-2 text-gray-500">Room</td><td class="py-2 font-semibold"><?php echo $booking['room_name'] ?: 'Room '.$booking['room_number']; ?></td></tr>
                         <tr class="border-b"><td class="py-2 text-gray-500">Type</td><td class="py-2 font-semibold"><?php echo $booking['type_name']; ?></td></tr>
@@ -44,7 +44,7 @@ include 'includes/header.php';
                     </table>
                 </div>
                 <div>
-                    <h3 class="font-semibold text-lg mb-4"><i class="fas fa-calendar text-blue-600 mr-2"></i>Booking Details</h3>
+                    <h3 class="font-semibold text-lg mb-4"><i class="fas fa-calendar text-amber-500 mr-2"></i>Booking Details</h3>
                     <table class="w-full text-sm">
                         <tr class="border-b"><td class="py-2 text-gray-500">Check In</td><td class="py-2 font-semibold"><?php echo formatDate($booking['check_in_date']); ?></td></tr>
                         <tr class="border-b"><td class="py-2 text-gray-500">Check Out</td><td class="py-2 font-semibold"><?php echo formatDate($booking['check_out_date']); ?></td></tr>
@@ -58,10 +58,10 @@ include 'includes/header.php';
 
         <?php if ($bookingRequests): ?>
         <div class="bg-white rounded-xl shadow-sm p-8 mb-6">
-            <h3 class="font-semibold text-lg mb-4"><i class="fas fa-clipboard-list text-blue-600 mr-2"></i>Special Requests</h3>
+            <h3 class="font-semibold text-lg mb-4"><i class="fas fa-clipboard-list text-amber-500 mr-2"></i>Special Requests</h3>
             <div class="flex flex-wrap gap-2">
                 <?php foreach($bookingRequests as $req): ?>
-                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm"><?php echo $req['request_name']; ?></span>
+                <span class="bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-sm"><?php echo $req['request_name']; ?></span>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -69,14 +69,14 @@ include 'includes/header.php';
 
         <?php if ($booking['special_notes']): ?>
         <div class="bg-white rounded-xl shadow-sm p-8 mb-6">
-            <h3 class="font-semibold text-lg mb-4"><i class="fas fa-sticky-note text-blue-600 mr-2"></i>Special Notes</h3>
+            <h3 class="font-semibold text-lg mb-4"><i class="fas fa-sticky-note text-amber-500 mr-2"></i>Special Notes</h3>
             <p class="text-gray-600"><?php echo $booking['special_notes']; ?></p>
         </div>
         <?php endif; ?>
 
         <?php if ($booking['early_check_in_time'] || $booking['late_check_out_time']): ?>
         <div class="bg-white rounded-xl shadow-sm p-8 mb-6">
-            <h3 class="font-semibold text-lg mb-4"><i class="fas fa-clock text-blue-600 mr-2"></i>Check-in/out Requests</h3>
+            <h3 class="font-semibold text-lg mb-4"><i class="fas fa-clock text-amber-500 mr-2"></i>Check-in/out Requests</h3>
             <?php if ($booking['early_check_in_time']): ?>
             <p>Early Check-in: Requested at <?php echo $booking['early_check_in_time']; ?></p>
             <?php endif; ?>
@@ -87,11 +87,11 @@ include 'includes/header.php';
         <?php endif; ?>
 
         <div class="bg-white rounded-xl shadow-sm p-8 mb-6">
-            <h3 class="font-semibold text-lg mb-4"><i class="fas fa-receipt text-blue-600 mr-2"></i>Price Summary</h3>
+            <h3 class="font-semibold text-lg mb-4"><i class="fas fa-receipt text-amber-500 mr-2"></i>Price Summary</h3>
             <table class="w-full text-sm">
                 <tr class="border-b"><td class="py-2 text-gray-500">Room Price per Night</td><td class="py-2 font-semibold text-right"><?php echo formatCurrency($booking['room_price']); ?></td></tr>
                 <tr class="border-b"><td class="py-2 text-gray-500">Total Nights</td><td class="py-2 font-semibold text-right"><?php echo $booking['total_nights']; ?></td></tr>
-                <tr><td class="py-3 text-lg font-bold">Total Price</td><td class="py-3 text-lg font-bold text-blue-600 text-right"><?php echo formatCurrency($booking['total_price']); ?></td></tr>
+                <tr><td class="py-3 text-lg font-bold">Total Price</td><td class="py-3 text-lg font-bold text-amber-500 text-right"><?php echo formatCurrency($booking['total_price']); ?></td></tr>
             </table>
         </div>
 

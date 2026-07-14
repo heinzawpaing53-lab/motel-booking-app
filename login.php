@@ -54,11 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 include 'includes/header.php';
 ?>
 
-<section class="py-20 bg-gray-50 min-h-screen flex items-center">
+<section class="py-10 bg-gray-50 min-h-screen flex items-center">
     <div class="max-w-md mx-auto px-4 w-full">
-        <div class="bg-white rounded-2xl shadow-sm p-8">
-            <div class="text-center mb-8">
-                <i class="fas fa-hotel text-blue-600 text-4xl mb-3"></i>
+        <div class="bg-white rounded-2xl shadow-sm p-6">
+            <div class="text-center mb-6">
+                <i class="fas fa-hotel text-amber-500 text-4xl mb-3"></i>
                 <h1 class="font-[Playfair_Display] text-3xl font-bold">Welcome Back</h1>
                 <p class="text-gray-500">Sign in to your account</p>
             </div>
@@ -73,16 +73,16 @@ include 'includes/header.php';
             <form method="POST">
                 <div class="mb-4">
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Email Address</label>
-                    <input type="email" name="email" value="<?php echo sanitize($_POST['email'] ?? ''); ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                    <input type="email" name="email" value="<?php echo sanitize($_POST['email'] ?? ''); ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none" required>
                 </div>
                 <div class="mb-6">
                     <label class="block text-sm font-semibold text-gray-600 mb-1">Password</label>
-                    <input type="password" name="password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" required>
+                    <input type="password" name="password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none" required>
                 </div>
                 <button type="submit" class="btn-primary w-full text-lg py-3"><i class="fas fa-sign-in-alt mr-2"></i>Sign In</button>
             </form>
             <div class="text-center mt-6">
-                <p class="text-gray-500">Don't have an account? <a href="register.php" class="text-blue-600 font-semibold hover:underline">Register</a></p>
+                <p class="text-gray-500">Don't have an account? <a href="register.php" class="text-amber-500 font-semibold hover:underline">Register</a></p>
             </div>
         </div>
     </div>

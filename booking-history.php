@@ -58,13 +58,13 @@ include 'includes/header.php';
                         <p class="text-sm text-gray-500"><?php echo $b['type_name']; ?></p>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500"><i class="fas fa-calendar-check text-blue-600 mr-1"></i><?php echo formatDate($b['check_in_date']); ?></p>
-                        <p class="text-sm text-gray-500"><i class="fas fa-calendar-times text-blue-600 mr-1"></i><?php echo formatDate($b['check_out_date']); ?></p>
-                        <p class="text-sm text-gray-500"><i class="fas fa-moon text-blue-600 mr-1"></i><?php echo $b['total_nights']; ?> Night<?php echo $b['total_nights'] > 1 ? 's' : ''; ?></p>
+                        <p class="text-sm text-gray-500"><i class="fas fa-calendar-check text-amber-500 mr-1"></i><?php echo formatDate($b['check_in_date']); ?></p>
+                        <p class="text-sm text-gray-500"><i class="fas fa-calendar-times text-amber-500 mr-1"></i><?php echo formatDate($b['check_out_date']); ?></p>
+                        <p class="text-sm text-gray-500"><i class="fas fa-moon text-amber-500 mr-1"></i><?php echo $b['total_nights']; ?> Night<?php echo $b['total_nights'] > 1 ? 's' : ''; ?></p>
                     </div>
                     <div>
-                        <p class="text-sm text-gray-500"><i class="fas fa-user text-blue-600 mr-1"></i><?php echo $b['total_guests']; ?> Guest<?php echo $b['total_guests']>1?'s':''; ?></p>
-                        <p class="text-lg font-bold text-blue-600 flex items-center flex-wrap"><i class="fas fa-credit-card text-blue-600 mr-1"></i><?php echo formatCurrency($b['total_price']); ?>
+                        <p class="text-sm text-gray-500"><i class="fas fa-user text-amber-500 mr-1"></i><?php echo $b['total_guests']; ?> Guest<?php echo $b['total_guests']>1?'s':''; ?></p>
+                        <p class="text-lg font-bold text-amber-500 flex items-center flex-wrap"><i class="fas fa-credit-card text-amber-500 mr-1"></i><?php echo formatCurrency($b['total_price']); ?>
                             <?php
                             $ps = $b['payment_status'];
                             $hasPending = isset($b['pending_payment_count']) && $b['pending_payment_count'] > 0;
@@ -77,7 +77,7 @@ include 'includes/header.php';
                         </p>
                     </div>
                     <div class="text-right">
-                        <a href="booking-details.php?id=<?php echo $b['reservation_id']; ?>" class="text-blue-600 hover:underline text-sm block mb-1"><i class="fas fa-eye"></i> View</a>
+                        <a href="booking-details.php?id=<?php echo $b['reservation_id']; ?>" class="text-amber-500 hover:underline text-sm block mb-1"><i class="fas fa-eye"></i> View</a>
                         <?php if ($b['booking_status'] == 'Pending'): ?>
                         <a href="?cancel=<?php echo $b['reservation_id']; ?>" class="text-red-600 hover:underline text-sm" onclick="var _t=this;event.preventDefault();showSystemModal('Cancel Booking','Cancel this booking?','info',function(){location.href=_t.href;})"><i class="fas fa-times"></i> Cancel</a>
                         <?php endif; ?>

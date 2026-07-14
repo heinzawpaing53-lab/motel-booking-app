@@ -68,6 +68,13 @@
     font-size: 1.5rem;
     transition: all 0.3s;
 }
+.feature-card {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+.feature-card:hover {
+    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+}
 .feature-card:hover .feature-icon {
     transform: scale(1.1) rotate(5deg);
 }
@@ -115,7 +122,7 @@
     box-shadow: 0 12px 30px rgba(0,0,0,0.15);
 }
 .btn-primary {
-    background: linear-gradient(135deg, #2563eb, #1d4ed8);
+    background: linear-gradient(135deg, #D4AF37, #B8960F);
     color: #fff;
     padding: 0.75rem 2rem;
     border-radius: 8px;
@@ -125,9 +132,62 @@
     text-align: center;
 }
 .btn-primary:hover {
-    background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    background: linear-gradient(135deg, #B8960F, #9A7D0A);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(37,99,235,0.3);
+    box-shadow: 0 8px 20px rgba(212,175,55,0.3);
+}
+
+/* Luxury Gold Overrides - Replace all blue buttons */
+.bg-blue-600,
+button.bg-blue-600,
+a.bg-blue-600,
+button[class*="bg-blue"],
+a[class*="bg-blue"] {
+    background: linear-gradient(135deg, #D4AF37, #B8960F) !important;
+}
+.bg-blue-700,
+button.bg-blue-700,
+a.bg-blue-700 {
+    background: linear-gradient(135deg, #B8960F, #9A7D0A) !important;
+}
+.hover\:bg-blue-700:hover,
+button:hover.bg-blue-700,
+button[class*="bg-blue"]:hover,
+a[class*="bg-blue"]:hover {
+    background: linear-gradient(135deg, #B8960F, #9A7D0A) !important;
+}
+.text-blue-600 {
+    color: #B8960F !important;
+}
+.text-blue-700 {
+    color: #9A7D0A !important;
+}
+.bg-blue-50 {
+    background-color: #fdf8e8 !important;
+}
+.bg-blue-100 {
+    background-color: #fdf8e8 !important;
+}
+.hover\:bg-blue-50:hover {
+    background-color: #fdf8e8 !important;
+}
+.hover\:bg-blue-200:hover {
+    background-color: #f5ecd0 !important;
+}
+.hover\:text-blue-600:hover {
+    color: #B8960F !important;
+}
+.hover\:text-blue-800:hover {
+    color: #9A7D0A !important;
+}
+.hover\:bg-blue-200:hover {
+    background-color: #f5ecd0 !important;
+}
+.hover\:text-blue-600:hover {
+    color: #B8960F !important;
+}
+.hover\:text-blue-800:hover {
+    color: #9A7D0A !important;
 }
 .badge-status {
     padding: 0.25rem 0.75rem;
@@ -179,4 +239,30 @@
     .hero-slider { height: 60vh; }
     .hero-content h1 { font-size: 2rem !important; }
     .search-box { padding: 1.25rem; }
+}
+
+/* Horizontal Marquee Amenities Slider */
+@keyframes slide-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0%); }
+}
+@keyframes slide-left {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
+.animate-slide-right {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    width: max-content;
+    animation: slide-right 25s linear infinite;
+}
+.animate-slide-left {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    width: max-content;
+    animation: slide-left 25s linear infinite;
 }
