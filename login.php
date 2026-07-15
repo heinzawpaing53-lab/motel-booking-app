@@ -54,35 +54,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 include 'includes/header.php';
 ?>
 
-<section class="py-10 bg-gray-50 min-h-screen flex items-center">
+<section class="py-10 bg-luxury-100 min-h-screen flex items-center">
     <div class="max-w-md mx-auto px-4 w-full">
-        <div class="bg-white rounded-2xl shadow-sm p-6">
+        <div class="bg-luxury-800 rounded-2xl shadow-sm p-6">
             <div class="text-center mb-6">
-                <i class="fas fa-hotel text-amber-500 text-4xl mb-3"></i>
-                <h1 class="font-[Playfair_Display] text-3xl font-bold">Welcome Back</h1>
-                <p class="text-gray-500">Sign in to your account</p>
+                <i class="fas fa-hotel text-luxury-400 text-4xl mb-3"></i>
+                <h1 class="font-[Playfair_Display] text-3xl font-bold text-luxury-100">Welcome Back</h1>
+                <p class="text-luxury-300">Sign in to your account</p>
             </div>
 
             <?php if (isset($_SESSION['success'])): ?>
-            <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
+            <div class="bg-success/20 border-l-4 border-success text-success p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
             <?php endif; ?>
             <?php if ($error): ?>
-            <div class="bg-rose-50 border-l-4 border-rose-500 text-rose-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $error; ?></div>
+            <div class="bg-error/20 border-l-4 border-error text-error p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $error; ?></div>
             <?php endif; ?>
 
             <form method="POST">
                 <div class="mb-4">
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Email Address</label>
-                    <input type="email" name="email" value="<?php echo sanitize($_POST['email'] ?? ''); ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none" required>
+                    <label class="block text-sm font-semibold text-luxury-300 mb-1">Email Address</label>
+                    <input type="email" name="email" value="<?php echo sanitize($_POST['email'] ?? ''); ?>" class="w-full px-4 py-3 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none bg-luxury-700 text-luxury-100" required>
                 </div>
                 <div class="mb-6">
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Password</label>
-                    <input type="password" name="password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none" required>
+                    <label class="block text-sm font-semibold text-luxury-300 mb-1">Password</label>
+                    <input type="password" name="password" class="w-full px-4 py-3 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none bg-luxury-700 text-luxury-100" required>
                 </div>
                 <button type="submit" class="btn-primary w-full text-lg py-3"><i class="fas fa-sign-in-alt mr-2"></i>Sign In</button>
             </form>
             <div class="text-center mt-6">
-                <p class="text-gray-500">Don't have an account? <a href="register.php" class="text-amber-500 font-semibold hover:underline">Register</a></p>
+                <p class="text-luxury-300">Don't have an account? <a href="register.php" class="text-luxury-400 font-semibold hover:underline">Register</a></p>
             </div>
         </div>
     </div>

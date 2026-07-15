@@ -48,27 +48,27 @@ $floors = $pdo->query("SELECT * FROM floors ORDER BY sort_order")->fetchAll();
 include 'includes/header.php';
 ?>
 
-<section class="py-10 bg-gray-50">
+<section class="py-10 bg-luxury-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-8">
-            <span class="text-amber-500 font-semibold tracking-wider uppercase text-sm">Accommodation</span>
-            <h1 class="font-[Playfair_Display] text-5xl font-bold mt-2">Our Rooms</h1>
+            <span class="text-luxury-400 font-semibold tracking-wider uppercase text-sm">Accommodation</span>
+            <h1 class="font-[Playfair_Display] text-5xl font-bold mt-2 text-luxury-900">Our Rooms</h1>
         </div>
 
         <!-- Filter -->
-        <div class="bg-white rounded-xl shadow-sm p-6 mb-10">
+        <div class="bg-luxury-800 rounded-xl shadow-sm p-6 mb-10">
             <form method="GET" class="grid grid-cols-1 md:grid-cols-5 gap-4">
                 <div>
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Check In</label>
-                    <input type="date" name="check_in" value="<?php echo $checkIn; ?>" class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none text-sm">
+                    <label class="block text-sm font-semibold text-luxury-300 mb-1">Check In</label>
+                    <input type="date" name="check_in" value="<?php echo $checkIn; ?>" class="w-full px-3 py-2.5 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none text-sm bg-luxury-700 text-luxury-100">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Check Out</label>
-                    <input type="date" name="check_out" value="<?php echo $checkOut; ?>" class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none text-sm">
+                    <label class="block text-sm font-semibold text-luxury-300 mb-1">Check Out</label>
+                    <input type="date" name="check_out" value="<?php echo $checkOut; ?>" class="w-full px-3 py-2.5 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none text-sm bg-luxury-700 text-luxury-100">
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Guests</label>
-                    <select name="guests" class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none text-sm">
+                    <label class="block text-sm font-semibold text-luxury-300 mb-1">Guests</label>
+                    <select name="guests" class="w-full px-3 py-2.5 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none text-sm bg-luxury-700 text-luxury-100">
                         <option value="">Any</option>
                         <?php for($i=1;$i<=5;$i++): ?>
                         <option value="<?php echo $i; ?>" <?php echo $guests==$i?'selected':''; ?>><?php echo $i; ?> Guest<?php echo $i>1?'s':''; ?></option>
@@ -76,8 +76,8 @@ include 'includes/header.php';
                     </select>
                 </div>
                 <div>
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Room Type</label>
-                    <select name="type" class="w-full px-3 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none text-sm">
+                    <label class="block text-sm font-semibold text-luxury-300 mb-1">Room Type</label>
+                    <select name="type" class="w-full px-3 py-2.5 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none text-sm bg-luxury-700 text-luxury-100">
                         <option value="">All Types</option>
                         <?php foreach($types as $t): ?>
                         <option value="<?php echo $t['type_id']; ?>" <?php echo $typeId==$t['type_id']?'selected':''; ?>><?php echo $t['type_name']; ?></option>
@@ -86,17 +86,17 @@ include 'includes/header.php';
                 </div>
                 <div class="flex items-end space-x-2">
                     <button type="submit" class="btn-primary flex-1"><i class="fas fa-search mr-2"></i>Search</button>
-                    <a href="rooms.php" class="px-4 py-2.5 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50"><i class="fas fa-redo"></i></a>
+                    <a href="rooms.php" class="px-4 py-2.5 border border-luxury-600 rounded-lg text-luxury-300 hover:bg-luxury-700"><i class="fas fa-redo"></i></a>
                 </div>
             </form>
         </div>
 
         <!-- Results -->
         <?php if (empty($rooms)): ?>
-        <div class="text-center py-16 bg-white rounded-xl">
-            <i class="fas fa-bed text-6xl text-gray-300 mb-4"></i>
-            <h3 class="text-2xl font-bold text-gray-400 mb-2">No Rooms Found</h3>
-            <p class="text-gray-500">Try adjusting your search criteria</p>
+        <div class="text-center py-16 bg-luxury-800 rounded-xl">
+            <i class="fas fa-bed text-6xl text-luxury-600 mb-4"></i>
+            <h3 class="text-2xl font-bold text-luxury-400 mb-2">No Rooms Found</h3>
+            <p class="text-luxury-300">Try adjusting your search criteria</p>
         </div>
         <?php else: ?>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -111,24 +111,24 @@ include 'includes/header.php';
             ];
             ?>
             <?php foreach($rooms as $room): ?>
-            <div class="room-card bg-white shadow-md flex flex-col">
+            <div class="room-card bg-luxury-800 shadow-lg flex flex-col">
                 <div class="relative overflow-hidden">
                     <img src="<?php echo $room['image'] ?: ($roomTypeImages[$room['type_name']] ?? 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600'); ?>" alt="<?php echo $room['room_name']; ?>" class="w-full">
                 </div>
                 <div class="p-6 flex flex-col flex-1">
-                    <h3 class="font-[Playfair_Display] text-xl font-bold mb-2"><?php echo $room['room_name'] ?: 'Room '.$room['room_number']; ?></h3>
-                    <div class="flex items-center space-x-4 text-sm text-gray-500 mb-3">
-                        <span><i class="fas fa-bed text-amber-500 mr-1"></i><?php echo $room['bed_type']; ?></span>
-                        <span><i class="fas fa-arrows-alt text-amber-500 mr-1"></i><?php echo $room['room_size']; ?></span>
-                        <span><i class="fas fa-user text-amber-500 mr-1"></i>Max <?php echo $room['max_capacity']; ?></span>
+                    <h3 class="font-[Playfair_Display] text-xl font-bold mb-2 text-luxury-100"><?php echo $room['room_name'] ?: 'Room '.$room['room_number']; ?></h3>
+                    <div class="flex items-center space-x-4 text-sm text-luxury-300 mb-3">
+                        <span><i class="fas fa-bed text-luxury-400 mr-1"></i><?php echo $room['bed_type']; ?></span>
+                        <span><i class="fas fa-arrows-alt text-luxury-400 mr-1"></i><?php echo $room['room_size']; ?></span>
+                        <span><i class="fas fa-user text-luxury-400 mr-1"></i>Max <?php echo $room['max_capacity']; ?></span>
                     </div>
                     <div class="flex items-center justify-between mb-4">
-                        <p class="text-gray-500 text-sm"><?php echo substr($room['type_name'], 0, 60); ?></p>
-                        <span class="text-xl font-bold text-amber-500"><?php echo formatCurrency($room['price_per_night']); ?></span>
+                        <p class="text-luxury-300 text-sm"><?php echo substr($room['type_name'], 0, 60); ?></p>
+                        <span class="text-xl font-bold text-luxury-400"><?php echo formatCurrency($room['price_per_night']); ?></span>
                     </div>
-                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
-                        <a href="room-details.php?id=<?php echo $room['room_id']; ?>" class="border-2 border-amber-500 text-amber-500 px-5 py-2 rounded-lg hover:bg-amber-50 transition text-sm font-semibold">View</a>
-                        <a href="reservation.php?room_id=<?php echo $room['room_id']; ?>" class="bg-amber-500 text-white px-5 py-2 rounded-lg hover:bg-amber-600 transition text-sm font-semibold">Book Now</a>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-luxury-600">
+                        <a href="room-details.php?id=<?php echo $room['room_id']; ?>" class="border-2 border-luxury-400 text-luxury-400 px-5 py-2 rounded-lg hover:bg-luxury-700 transition text-sm font-semibold">View</a>
+                        <a href="reservation.php?room_id=<?php echo $room['room_id']; ?>" class="bg-luxury-400 text-luxury-900 px-5 py-2 rounded-lg hover:bg-luxury-500 transition text-sm font-semibold">Book Now</a>
                     </div>
                 </div>
             </div>

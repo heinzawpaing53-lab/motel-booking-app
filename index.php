@@ -17,7 +17,7 @@ $featuredRooms = $stmt->fetchAll();
         padding: 0.5rem 0;
     }
     .amenities-track.slide-right {
-        animation: amenities-slide-right 45s linear infinite;
+        animation: amenities-slide-left 45s linear infinite;
     }
     .amenities-track.slide-left {
         animation: amenities-slide-left 45s linear infinite;
@@ -26,7 +26,7 @@ $featuredRooms = $stmt->fetchAll();
         animation-play-state: paused;
     }
     .amenity-card {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        background: linear-gradient(135deg, #2C1810 0%, #3B2418 50%, #5A3A22 100%);
     }
     .amenity-card:has(.fa-parking) {
         background: url('https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=600') center/cover no-repeat;
@@ -39,15 +39,16 @@ $featuredRooms = $stmt->fetchAll();
     }
     .btn-primary,
     a.btn-primary {
-        background: linear-gradient(135deg, #D4AF37, #B8960F) !important;
-        color: #fff !important;
+        background: linear-gradient(135deg, #C8A96A, #A68B5B) !important;
+        color: #2C1810 !important;
         border: none !important;
+        font-weight: 600;
     }
     .btn-primary:hover,
     a.btn-primary:hover {
-        background: linear-gradient(135deg, #B8960F, #9A7D0A) !important;
+        background: linear-gradient(135deg, #A68B5B, #8B7548) !important;
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(212,175,55,0.3) !important;
+        box-shadow: 0 8px 20px rgba(200,169,106,0.3) !important;
     }
     @keyframes amenities-slide-right {
         0%   { transform: translateX(-50%); }
@@ -83,20 +84,20 @@ $featuredRooms = $stmt->fetchAll();
     <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1600');"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content px-4">
-        <p class="text-amber-300 font-semibold tracking-widest uppercase text-sm mb-4">Welcome to Luxury</p>
-        <h1 class="font-[Playfair_Display] text-5xl md:text-7xl font-bold mb-6 leading-tight">Experience <span class="text-amber-400">Ultimate</span><br>Comfort & Luxury</h1>
-        <p class="text-lg text-gray-200 max-w-2xl mb-8">Book your perfect stay with us. Enjoy premium rooms, exceptional service, and unforgettable memories.</p>
+        <p class="text-luxury-400 font-semibold tracking-widest uppercase text-sm mb-4">Welcome to Luxury</p>
+        <h1 class="font-[Playfair_Display] text-5xl md:text-7xl font-bold mb-6 leading-tight">Experience <span class="text-luxury-400">Ultimate</span><br>Comfort & Luxury</h1>
+        <p class="text-lg text-luxury-200 max-w-2xl mb-8">Book your perfect stay with us. Enjoy premium rooms, exceptional service, and unforgettable memories.</p>
     </div>
 </section>
 
 
 
 <!-- Facilities -->
-<section class="py-12 bg-gray-50">
+<section class="py-12 bg-luxury-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-8">
-            <span class="text-amber-500 font-semibold tracking-wider uppercase text-sm">Our Facilities</span>
-            <h2 class="font-[Playfair_Display] text-4xl font-bold mt-2">Premium Amenities</h2>
+            <span class="text-luxury-400 font-semibold tracking-wider uppercase text-sm">Our Facilities</span>
+            <h2 class="font-[Playfair_Display] text-4xl font-bold mt-2 text-luxury-900">Premium Amenities</h2>
         </div>
     </div>
 
@@ -115,10 +116,10 @@ $featuredRooms = $stmt->fetchAll();
                 foreach ($row1 as $f): ?>
                     <div class="amenity-card relative w-72 h-48 flex-none rounded-xl overflow-hidden cursor-pointer group">
                         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('<?php echo $f[2]; ?>');"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-luxury-900/80 via-luxury-900/40 to-transparent"></div>
                         <div class="relative h-full flex flex-col items-center justify-end p-4 text-center">
-                            <div class="text-amber-400 text-2xl mb-2"><i class="fas <?php echo $f[0]; ?>"></i></div>
-                            <h4 class="font-semibold text-sm text-white"><?php echo $f[1]; ?></h4>
+                            <div class="text-luxury-400 text-2xl mb-2"><i class="fas <?php echo $f[0]; ?>"></i></div>
+                            <h4 class="font-semibold text-sm text-luxury-100"><?php echo $f[1]; ?></h4>
                         </div>
                     </div>
                 <?php endforeach;
@@ -141,10 +142,10 @@ $featuredRooms = $stmt->fetchAll();
                 foreach ($row2 as $f): ?>
                     <div class="amenity-card relative w-72 h-48 flex-none rounded-xl overflow-hidden cursor-pointer group">
                         <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('<?php echo $f[2]; ?>');"></div>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-luxury-900/80 via-luxury-900/40 to-transparent"></div>
                         <div class="relative h-full flex flex-col items-center justify-end p-4 text-center">
-                            <div class="text-amber-400 text-2xl mb-2"><i class="fas <?php echo $f[0]; ?>"></i></div>
-                            <h4 class="font-semibold text-sm text-white"><?php echo $f[1]; ?></h4>
+                            <div class="text-luxury-400 text-2xl mb-2"><i class="fas <?php echo $f[0]; ?>"></i></div>
+                            <h4 class="font-semibold text-sm text-luxury-100"><?php echo $f[1]; ?></h4>
                         </div>
                     </div>
                 <?php endforeach;
@@ -154,12 +155,12 @@ $featuredRooms = $stmt->fetchAll();
 </section>
 
 <!-- Featured Rooms -->
-<section class="py-12 bg-white">
+<section class="py-12 bg-luxury-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-8">
-            <span class="text-amber-500 font-semibold tracking-wider uppercase text-sm">Our Rooms</span>
-            <h2 class="font-[Playfair_Display] text-4xl font-bold mt-2">Featured Rooms</h2>
-            <p class="text-gray-500 mt-2">Choose from our selection of premium rooms</p>
+            <span class="text-luxury-400 font-semibold tracking-wider uppercase text-sm">Our Rooms</span>
+            <h2 class="font-[Playfair_Display] text-4xl font-bold mt-2 text-luxury-100">Featured Rooms</h2>
+            <p class="text-luxury-300 mt-2">Choose from our selection of premium rooms</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <?php
@@ -173,22 +174,22 @@ $featuredRooms = $stmt->fetchAll();
             ];
             ?>
             <?php foreach ($featuredRooms as $room): ?>
-                <div class="room-card bg-white shadow-md">
+                <div class="room-card bg-luxury-700 shadow-lg">
                     <div class="relative overflow-hidden">
                         <img src="<?php echo $room['image'] ?: ($roomTypeImages[$room['type_name']] ?? 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600'); ?>" alt="<?php echo $room['room_name']; ?>" class="w-full">
-                        <span class="absolute top-4 right-4 bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-semibold"><?php echo formatCurrency($room['price_per_night']); ?>/night</span>
+                        <span class="absolute top-4 right-4 bg-luxury-400 text-luxury-900 px-3 py-1 rounded-full text-sm font-semibold"><?php echo formatCurrency($room['price_per_night']); ?>/night</span>
                     </div>
                     <div class="p-6">
-                        <h3 class="font-[Playfair_Display] text-xl font-bold mb-2"><?php echo $room['room_name'] ?: 'Room ' . $room['room_number']; ?></h3>
-                        <div class="flex items-center space-x-4 text-sm text-gray-500 mb-4">
-                            <span><i class="fas fa-bed text-amber-500 mr-1"></i><?php echo $room['bed_type']; ?></span>
-                            <span><i class="fas fa-arrows-alt text-amber-500 mr-1"></i><?php echo $room['room_size']; ?></span>
-                            <span><i class="fas fa-layer-group text-amber-500 mr-1"></i><?php echo $room['floor_name']; ?></span>
+                        <h3 class="font-[Playfair_Display] text-xl font-bold mb-2 text-luxury-100"><?php echo $room['room_name'] ?: 'Room ' . $room['room_number']; ?></h3>
+                        <div class="flex items-center space-x-4 text-sm text-luxury-300 mb-4">
+                            <span><i class="fas fa-bed text-luxury-400 mr-1"></i><?php echo $room['bed_type']; ?></span>
+                            <span><i class="fas fa-arrows-alt text-luxury-400 mr-1"></i><?php echo $room['room_size']; ?></span>
+                            <span><i class="fas fa-layer-group text-luxury-400 mr-1"></i><?php echo $room['floor_name']; ?></span>
                         </div>
-                        <p class="text-gray-500 text-sm mb-4"><?php echo substr($room['type_name'], 0, 60); ?></p>
+                        <p class="text-luxury-300 text-sm mb-4"><?php echo substr($room['type_name'], 0, 60); ?></p>
                         <div class="flex items-center justify-between">
-                            <span class="text-2xl font-bold text-amber-500"><?php echo formatCurrency($room['price_per_night']); ?></span>
-                            <a href="room-details.php?id=<?php echo $room['room_id']; ?>" class="bg-amber-500 text-white px-4 py-2 rounded-lg hover:bg-amber-600 transition text-sm">View Details</a>
+                            <span class="text-2xl font-bold text-luxury-400"><?php echo formatCurrency($room['price_per_night']); ?></span>
+                            <a href="room-details.php?id=<?php echo $room['room_id']; ?>" class="bg-luxury-400 text-luxury-900 px-4 py-2 rounded-lg hover:bg-luxury-500 transition text-sm font-semibold">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -201,18 +202,18 @@ $featuredRooms = $stmt->fetchAll();
 </section>
 
 <!-- About Section -->
-<section class="py-12 bg-white">
+<section class="py-12 bg-luxury-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-                <span class="text-amber-500 font-semibold tracking-wider uppercase text-sm">About Us</span>
-                <h2 class="font-[Playfair_Display] text-4xl font-bold mt-2 mb-6">A Perfect Blend of <span class="text-amber-500">Luxury</span> & Comfort</h2>
-                <p class="text-gray-600 mb-6 leading-relaxed">Welcome to Luxury Motel, where every stay is crafted to perfection. Our motel combines modern elegance with warm hospitality to create an unforgettable experience for every guest.</p>
+                <span class="text-luxury-400 font-semibold tracking-wider uppercase text-sm">About Us</span>
+                <h2 class="font-[Playfair_Display] text-4xl font-bold mt-2 mb-6 text-luxury-900">A Perfect Blend of <span class="text-luxury-400">Luxury</span> & Comfort</h2>
+                <p class="text-luxury-600 mb-6 leading-relaxed">Welcome to Luxury Motel, where every stay is crafted to perfection. Our motel combines modern elegance with warm hospitality to create an unforgettable experience for every guest.</p>
                 <div class="grid grid-cols-2 gap-4 mb-8">
-                    <div class="flex items-start space-x-3"><i class="fas fa-check-circle text-amber-500 mt-1"></i><span class="text-sm">Premium Rooms</span></div>
-                    <div class="flex items-start space-x-3"><i class="fas fa-check-circle text-amber-500 mt-1"></i><span class="text-sm">24/7 Service</span></div>
-                    <div class="flex items-start space-x-3"><i class="fas fa-check-circle text-amber-500 mt-1"></i><span class="text-sm">Free WiFi</span></div>
-                    <div class="flex items-start space-x-3"><i class="fas fa-check-circle text-amber-500 mt-1"></i><span class="text-sm">Best Rates</span></div>
+                    <div class="flex items-start space-x-3"><i class="fas fa-check-circle text-success mt-1"></i><span class="text-sm text-luxury-800">Premium Rooms</span></div>
+                    <div class="flex items-start space-x-3"><i class="fas fa-check-circle text-success mt-1"></i><span class="text-sm text-luxury-800">24/7 Service</span></div>
+                    <div class="flex items-start space-x-3"><i class="fas fa-check-circle text-success mt-1"></i><span class="text-sm text-luxury-800">Free WiFi</span></div>
+                    <div class="flex items-start space-x-3"><i class="fas fa-check-circle text-success mt-1"></i><span class="text-sm text-luxury-800">Best Rates</span></div>
                 </div>
                 <a href="about.php" class="btn-primary">Learn More <i class="fas fa-arrow-right ml-2"></i></a>
             </div>
@@ -225,11 +226,11 @@ $featuredRooms = $stmt->fetchAll();
 </section>
 
 <!-- Gallery -->
-<section class="py-12 bg-gray-50">
+<section class="py-12 bg-luxury-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-8">
-            <span class="text-amber-500 font-semibold tracking-wider uppercase text-sm">Gallery</span>
-            <h2 class="font-[Playfair_Display] text-4xl font-bold mt-2">Our Gallery</h2>
+            <span class="text-luxury-400 font-semibold tracking-wider uppercase text-sm">Gallery</span>
+            <h2 class="font-[Playfair_Display] text-4xl font-bold mt-2 text-luxury-100">Our Gallery</h2>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
             <?php
@@ -246,7 +247,7 @@ $featuredRooms = $stmt->fetchAll();
             foreach ($galleryImages as $img): ?>
                 <div class="gallery-item">
                     <img src="<?php echo $img; ?>" alt="Gallery">
-                    <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-3xl"></i></div>
+                    <div class="gallery-overlay"><i class="fas fa-search-plus text-luxury-100 text-3xl"></i></div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -255,7 +256,7 @@ $featuredRooms = $stmt->fetchAll();
 
 
 <!-- Stats -->
-<section class="py-12 bg-amber-500 text-white">
+<section class="py-12 bg-luxury-900 text-luxury-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <?php
@@ -267,9 +268,9 @@ $featuredRooms = $stmt->fetchAll();
             ];
             foreach ($stats as $s): ?>
                 <div class="stat-card">
-                    <i class="fas <?php echo $s[0]; ?> text-4xl mb-3"></i>
+                    <i class="fas <?php echo $s[0]; ?> text-4xl mb-3 text-luxury-400"></i>
                     <h3 class="text-4xl font-bold mb-1"><?php echo $s[1]; ?></h3>
-                    <p class="text-amber-200"><?php echo $s[2]; ?></p>
+                    <p class="text-luxury-300"><?php echo $s[2]; ?></p>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -278,11 +279,11 @@ $featuredRooms = $stmt->fetchAll();
 
 
 <!-- Testimonials -->
-<section class="py-12 bg-white overflow-hidden">
+<section class="py-12 bg-luxury-100 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <div class="text-center">
-            <span class="text-amber-500 font-semibold tracking-wider uppercase text-sm">Testimonials</span>
-            <h2 class="font-[Playfair_Display] text-4xl font-bold mt-2">What Our Guests Say</h2>
+            <span class="text-luxury-400 font-semibold tracking-wider uppercase text-sm">Testimonials</span>
+            <h2 class="font-[Playfair_Display] text-4xl font-bold mt-2 text-luxury-900">What Our Guests Say</h2>
         </div>
     </div>
     <div class="w-full overflow-hidden">
@@ -298,16 +299,16 @@ $featuredRooms = $stmt->fetchAll();
             ];
             for ($i = 0; $i < 2; $i++):
                 foreach ($testimonials as $t): ?>
-                    <div class="testimonial-card bg-gray-50 p-8 shadow-sm rounded-xl w-[400px] flex-none">
-                        <div class="flex items-center space-x-1 text-yellow-400 mb-4">
+                    <div class="testimonial-card bg-luxury-800 p-8 shadow-sm rounded-xl w-[400px] flex-none">
+                        <div class="flex items-center space-x-1 text-luxury-400 mb-4">
                             <?php for ($s = 0; $s < 5; $s++): ?><i class="fa-solid fa-star"></i><?php endfor; ?>
                         </div>
-                        <p class="text-gray-600 mb-6 italic">"<?php echo $t[3]; ?>"</p>
+                        <p class="text-luxury-200 mb-6 italic">"<?php echo $t[3]; ?>"</p>
                         <div class="flex items-center space-x-3">
-                            <img src="<?php echo $t[2]; ?>" alt="<?php echo $t[0]; ?>" class="w-12 h-12 rounded-full object-cover">
+                            <img src="<?php echo $t[2]; ?>" alt="<?php echo $t[0]; ?>" class="w-12 h-12 rounded-full object-cover border-2 border-luxury-600">
                             <div>
-                                <h4 class="font-semibold"><?php echo $t[0]; ?></h4>
-                                <p class="text-sm text-gray-500"><?php echo $t[1]; ?></p>
+                                <h4 class="font-semibold text-luxury-100"><?php echo $t[0]; ?></h4>
+                                <p class="text-sm text-luxury-300"><?php echo $t[1]; ?></p>
                             </div>
                         </div>
                     </div>

@@ -52,43 +52,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 include 'includes/header.php';
 ?>
 
-<section class="py-16 bg-gray-50 min-h-screen">
+<section class="py-10 bg-luxury-100 min-h-screen">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10">
-            <h1 class="font-[Playfair_Display] text-4xl font-bold">My Profile</h1>
+            <h1 class="font-[Playfair_Display] text-4xl font-bold text-luxury-900">My Profile</h1>
         </div>
 
         <?php if ($success): ?>
-        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $success; ?></div>
+        <div class="bg-success/20 border-l-4 border-success text-success p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $success; ?></div>
         <?php endif; ?>
         <?php if ($error): ?>
-        <div class="bg-rose-50 border-l-4 border-rose-500 text-rose-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $error; ?></div>
+        <div class="bg-error/20 border-l-4 border-error text-error p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $error; ?></div>
         <?php endif; ?>
 
-        <div class="bg-white rounded-2xl shadow-sm p-8">
+        <div class="bg-luxury-800 rounded-2xl shadow-sm p-8">
             <form method="POST">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">First Name *</label>
-                        <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none" required>
+                        <label class="block text-sm font-semibold text-luxury-300 mb-1">First Name *</label>
+                        <input type="text" name="first_name" value="<?php echo $user['first_name']; ?>" class="w-full px-4 py-3 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none bg-luxury-700 text-luxury-100" required>
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Last Name *</label>
-                        <input type="text" name="last_name" value="<?php echo $user['last_name']; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none" required>
+                        <label class="block text-sm font-semibold text-luxury-300 mb-1">Last Name *</label>
+                        <input type="text" name="last_name" value="<?php echo $user['last_name']; ?>" class="w-full px-4 py-3 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none bg-luxury-700 text-luxury-100" required>
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Email</label>
-                    <input type="email" value="<?php echo $user['email']; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg bg-gray-100" disabled>
+                    <label class="block text-sm font-semibold text-luxury-300 mb-1">Email</label>
+                    <input type="email" value="<?php echo $user['email']; ?>" class="w-full px-4 py-3 border border-luxury-600 rounded-lg bg-luxury-700 text-luxury-300" disabled>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Phone</label>
-                        <input type="text" name="phone" value="<?php echo $user['phone'] ?? ''; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                        <label class="block text-sm font-semibold text-luxury-300 mb-1">Phone</label>
+                        <input type="text" name="phone" value="<?php echo $user['phone'] ?? ''; ?>" class="w-full px-4 py-3 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none bg-luxury-700 text-luxury-100">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Gender</label>
-                        <select name="gender" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                        <label class="block text-sm font-semibold text-luxury-300 mb-1">Gender</label>
+                        <select name="gender" class="w-full px-4 py-3 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none bg-luxury-700 text-luxury-100">
                             <option value="">Select</option>
                             <option value="Male" <?php echo ($user['gender']??'')=='Male'?'selected':''; ?>>Male</option>
                             <option value="Female" <?php echo ($user['gender']??'')=='Female'?'selected':''; ?>>Female</option>
@@ -97,27 +97,27 @@ include 'includes/header.php';
                     </div>
                 </div>
                 <div class="mb-4">
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Nationality</label>
-                    <input type="text" name="nationality" value="<?php echo $user['nationality'] ?? ''; ?>" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                    <label class="block text-sm font-semibold text-luxury-300 mb-1">Nationality</label>
+                    <input type="text" name="nationality" value="<?php echo $user['nationality'] ?? ''; ?>" class="w-full px-4 py-3 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none bg-luxury-700 text-luxury-100">
                 </div>
                 <div class="mb-8">
-                    <label class="block text-sm font-semibold text-gray-600 mb-1">Address</label>
-                    <textarea name="address" rows="2" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none"><?php echo $user['address'] ?? ''; ?></textarea>
+                    <label class="block text-sm font-semibold text-luxury-300 mb-1">Address</label>
+                    <textarea name="address" rows="2" class="w-full px-4 py-3 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none bg-luxury-700 text-luxury-100"><?php echo $user['address'] ?? ''; ?></textarea>
                 </div>
 
-                <h3 class="font-semibold text-lg mb-4 border-t pt-6">Change Password (optional)</h3>
+                <h3 class="font-semibold text-lg mb-4 border-t border-luxury-600 pt-6 text-luxury-100">Change Password (optional)</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                     <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Current Password</label>
-                        <input type="password" name="current_password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                        <label class="block text-sm font-semibold text-luxury-300 mb-1">Current Password</label>
+                        <input type="password" name="current_password" class="w-full px-4 py-3 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none bg-luxury-700 text-luxury-100">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">New Password</label>
-                        <input type="password" name="new_password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                        <label class="block text-sm font-semibold text-luxury-300 mb-1">New Password</label>
+                        <input type="password" name="new_password" class="w-full px-4 py-3 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none bg-luxury-700 text-luxury-100">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-gray-600 mb-1">Confirm New</label>
-                        <input type="password" name="confirm_new_password" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-amber-500 outline-none">
+                        <label class="block text-sm font-semibold text-luxury-300 mb-1">Confirm New</label>
+                        <input type="password" name="confirm_new_password" class="w-full px-4 py-3 border border-luxury-600 rounded-lg focus:ring-2 focus:ring-luxury-400 outline-none bg-luxury-700 text-luxury-100">
                     </div>
                 </div>
 
