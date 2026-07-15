@@ -24,7 +24,7 @@ $bookingRequests = $requests->fetchAll();
 include 'includes/header.php';
 ?>
 
-<section class="py-16 bg-gray-50 min-h-screen">
+<section class="py-16 bg-luxury-50 min-h-screen">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between mb-8">
             <h1 class="font-[Playfair_Display] text-3xl font-bold">Booking #<?php echo $booking['reservation_id']; ?></h1>

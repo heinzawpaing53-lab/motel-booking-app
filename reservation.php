@@ -87,7 +87,7 @@ include 'includes/header.php';
     }
 </style>
 
-<section class="py-10 bg-luxury-100">
+<section class="py-10 bg-luxury-50">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10">
             <span class="text-luxury-400 font-semibold tracking-wider uppercase text-sm">Booking</span>

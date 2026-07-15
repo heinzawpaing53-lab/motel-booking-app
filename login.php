@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 include 'includes/header.php';
 ?>
 
-<section class="py-10 bg-luxury-100 min-h-screen flex items-center">
+<section class="py-10 bg-luxury-50 min-h-screen flex items-center">
     <div class="max-w-md mx-auto px-4 w-full">
         <div class="bg-luxury-800 rounded-2xl shadow-sm p-6">
             <div class="text-center mb-6">
@@ -64,10 +64,28 @@ include 'includes/header.php';
             </div>
 
             <?php if (isset($_SESSION['success'])): ?>
-            <div class="bg-success/20 border-l-4 border-success text-success p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
+            <div class="fixed inset-0 z-[100] flex items-center justify-center bg-neutral-950/60 backdrop-blur-sm modal-backdrop">
+                <div class="relative z-[101] bg-[#FAF7F2] text-[#2C1810] max-w-sm w-full mx-4 p-8 rounded-2xl shadow-2xl text-center modal-card">
+                    <div class="w-14 h-14 mx-auto mb-5 rounded-full bg-[#2E8B57]/10 flex items-center justify-center">
+                        <i class="fas fa-check text-[#2E8B57] text-xl"></i>
+                    </div>
+                    <p class="font-serif text-[#2E8B57] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">Success</p>
+                    <p class="font-sans text-[#2C1810] text-sm font-medium tracking-wide leading-relaxed mb-6"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></p>
+                    <button type="button" onclick="this.closest('.fixed').remove()" class="relative z-[102] pointer-events-auto cursor-pointer font-sans text-xs uppercase tracking-[0.15em] font-semibold text-[#FAF7F2] bg-[#5A3A22] hover:bg-[#3B2418] transition-all duration-300 py-3 px-8 rounded-xl">Continue to Login</button>
+                </div>
+            </div>
             <?php endif; ?>
             <?php if ($error): ?>
-            <div class="bg-error/20 border-l-4 border-error text-error p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $error; ?></div>
+            <div class="fixed inset-0 z-[100] flex items-center justify-center bg-luxury-900/60 backdrop-blur-sm modal-backdrop">
+                <div class="relative z-[101] bg-[#FAF7F2] text-[#2C1810] max-w-md w-full mx-4 p-8 rounded-2xl shadow-2xl text-center modal-card">
+                    <div class="w-14 h-14 mx-auto mb-5 rounded-full bg-[#8B2E2E]/10 flex items-center justify-center">
+                        <i class="fas fa-exclamation-triangle text-[#8B2E2E] text-xl"></i>
+                    </div>
+                    <p class="font-serif text-[#8B2E2E] text-xs font-semibold tracking-[0.2em] uppercase mb-4 block">Attention</p>
+                    <p class="font-sans text-[#2C1810] text-sm font-medium tracking-wide leading-relaxed mb-6"><?php echo $error; ?></p>
+                    <button type="button" onclick="this.closest('.fixed').remove()" class="relative z-[102] pointer-events-auto cursor-pointer font-sans text-xs uppercase tracking-[0.15em] font-semibold text-[#FAF7F2] bg-[#5A3A22] hover:bg-[#3B2418] transition-all duration-300 py-3 px-8 rounded-xl">Dismiss</button>
+                </div>
+            </div>
             <?php endif; ?>
 
             <form method="POST">

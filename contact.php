@@ -17,7 +17,7 @@ include 'includes/header.php';
     }
 </style>
 
-<section class="py-10 bg-luxury-100">
+<section class="py-10 bg-luxury-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-8">
             <span class="text-luxury-400 font-semibold tracking-wider uppercase text-sm">Get In Touch</span>

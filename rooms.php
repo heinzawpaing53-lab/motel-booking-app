@@ -48,7 +48,7 @@ $floors = $pdo->query("SELECT * FROM floors ORDER BY sort_order")->fetchAll();
 include 'includes/header.php';
 ?>
 
-<section class="py-10 bg-luxury-100">
+<section class="bg-luxury-50" style="padding-top: 2rem; padding-bottom: 2.5rem;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-8">
             <span class="text-luxury-400 font-semibold tracking-wider uppercase text-sm">Accommodation</span>

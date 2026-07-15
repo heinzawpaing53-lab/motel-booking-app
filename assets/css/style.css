@@ -1,3 +1,60 @@
+/* === GLOBAL LAYOUT RESET === */
+
+/* Modal Animations */
+@keyframes modalIn {
+    from { opacity: 0; transform: scale(0.92) translateY(12px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes modalOut {
+    from { opacity: 1; transform: scale(1) translateY(0); }
+    to   { opacity: 0; transform: scale(0.92) translateY(12px); }
+}
+@keyframes backdropIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@keyframes backdropOut {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+.modal-backdrop {
+    animation: backdropIn 0.3s ease-out forwards;
+}
+.modal-backdrop.modal-out {
+    animation: backdropOut 0.25s ease-in forwards;
+}
+.modal-card {
+    animation: modalIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.modal-card.modal-out {
+    animation: modalOut 0.25s ease-in forwards;
+}
+
+body {
+    background-color: #2C1810 !important;
+    margin: 0;
+    padding: 0;
+}
+nav {
+    background-color: #2C1810 !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+    clip-path: none !important;
+}
+nav > * {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+/* Kill any gap between navbar and first section */
+nav + section,
+nav + div,
+nav + main {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
 .hero-slider {
     height: 90vh;
     min-height: 500px;
@@ -18,7 +75,7 @@
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(44,24,16,0.8), rgba(44,24,16,0.4));
+    background: linear-gradient(to right, rgba(44,24,16,0.55), rgba(44,24,16,0.30));
 }
 .hero-content {
     position: relative;
@@ -46,9 +103,11 @@
     transition: all 0.3s ease;
     border-radius: 16px;
     overflow: hidden;
+    border: 1px solid rgba(122, 85, 52, 0.25);
 }
 .room-card:hover {
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    transform: translateY(-4px);
+    border-color: rgba(200, 169, 106, 0.3);
 }
 .room-card img {
     height: 240px;
@@ -70,10 +129,10 @@
 }
 .feature-card {
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+    border: 1px solid rgba(122, 85, 52, 0.2);
 }
 .feature-card:hover {
-    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+    border-color: rgba(200, 169, 106, 0.3);
 }
 .feature-card:hover .feature-icon {
     transform: scale(1.1) rotate(5deg);
@@ -81,15 +140,17 @@
 .testimonial-card {
     border-radius: 16px;
     transition: all 0.3s;
+    border: 1px solid rgba(122, 85, 52, 0.25);
 }
 .testimonial-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    border-color: rgba(200, 169, 106, 0.3);
 }
 .gallery-item {
     overflow: hidden;
     border-radius: 12px;
     position: relative;
+    border: 1px solid rgba(122, 85, 52, 0.15);
 }
 .gallery-item img {
     transition: transform 0.5s;
@@ -98,12 +159,12 @@
     width: 100%;
 }
 .gallery-item:hover img {
-    transform: scale(1.15);
+    transform: scale(1.1);
 }
 .gallery-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(44,24,16,0.5);
+    background: rgba(44,24,16,0.45);
     opacity: 0;
     transition: opacity 0.3s;
     display: flex;
@@ -118,23 +179,23 @@
     border-radius: 12px;
 }
 .stat-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
 }
 .btn-primary {
-    background: linear-gradient(135deg, #C8A96A, #A68B5B);
+    background: linear-gradient(135deg, #C8A96A, #A87C4F);
     color: #2C1810;
     padding: 0.75rem 2rem;
-    border-radius: 8px;
+    border-radius: 12px;
     font-weight: 600;
     transition: all 0.3s;
     display: inline-block;
     text-align: center;
+    letter-spacing: 0.025em;
 }
 .btn-primary:hover {
-    background: linear-gradient(135deg, #A68B5B, #8B7548);
+    background: linear-gradient(135deg, #A87C4F, #8B7548);
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(200,169,106,0.3);
+    box-shadow: 0 4px 16px rgba(200,169,106,0.2);
 }
 
 /* Badge Status Colors */

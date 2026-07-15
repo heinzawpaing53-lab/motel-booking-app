@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 include 'includes/header.php';
 ?>
 
-<section class="py-10 bg-luxury-100 min-h-screen">
+<section class="py-10 bg-luxury-50 min-h-screen">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10">
             <h1 class="font-[Playfair_Display] text-4xl font-bold text-luxury-900">My Profile</h1>
