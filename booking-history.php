@@ -26,7 +26,7 @@ include 'includes/header.php';
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between mb-10">
             <div>
-                <h1 class="font-[Playfair_Display] text-4xl font-bold">My Bookings</h1>
+                <h3 class="font-[Playfair_Display] text-4xl">My Bookings</h3>
                 <p class="text-gray-500">Manage your reservations</p>
             </div>
             <a href="rooms.php" class="btn-primary"><i class="fas fa-plus mr-2"></i>Book New Room</a>

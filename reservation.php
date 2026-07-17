@@ -91,7 +91,7 @@ include 'includes/header.php';
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10">
             <span class="text-luxury-400 font-semibold tracking-wider uppercase text-sm">Booking</span>
-            <h1 class="font-[Playfair_Display] text-4xl font-bold mt-2 text-luxury-900">Complete Your Reservation</h1>
+            <h1 class="font-[Playfair_Display] text-4xl mt-2 text-luxury-900">Complete Your Reservation</h1>
         </div>
 
         <?php if ($error): ?>
@@ -102,11 +102,13 @@ include 'includes/header.php';
         <div class="bg-error/20 border-l-4 border-error text-error p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $_SESSION['booking_error']; unset($_SESSION['booking_error']); ?></div>
         <?php endif; ?>
 
-        <?php if (isset($_SESSION['pending_reservation']) && !$_POST): ?>
+        <?php if (isset($_SESSION['pending_reservation']) && !$_POST && isset($_SESSION['user_id'])): ?>
         <div class="bg-success/20 border-l-4 border-success text-success p-4 rounded-r shadow-sm font-medium mb-6">
             You are now signed in! Your booking details have been restored. Please review and confirm your reservation.
         </div>
-        <?php endif; ?>
+        <?php elseif (isset($_SESSION['pending_reservation']) && !isset($_SESSION['user_id'])):
+            unset($_SESSION['pending_reservation']);
+        endif; ?>
 
         <?php if ($room): ?>
         <div class="bg-luxury-800 rounded-xl shadow-sm p-6 mb-8">
@@ -211,7 +213,7 @@ include 'includes/header.php';
 
 <?php if (isset($_SESSION['pending_reservation'])): unset($_SESSION['pending_reservation']); endif; ?>
 
-<div id="authModal" class="fixed inset-0 z-50 hidden bg-luxury-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+<div id="authModal" class="fixed inset-0 z-50 hidden bg-luxury-900/50 backdrop-blur-sm items-center justify-center p-4">
     <div class="bg-luxury-800 rounded-2xl shadow-2xl max-w-md w-full p-8 text-center relative animate-modal border border-luxury-600">
         <div class="w-20 h-20 bg-luxury-700 rounded-full flex items-center justify-center mx-auto mb-6">
             <i class="fas fa-shield-halved text-luxury-400 text-3xl"></i>
