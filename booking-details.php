@@ -26,9 +26,12 @@ include 'includes/header.php';
 
 <section class="py-16 bg-luxury-50 min-h-screen">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-8">
-            <h1 class="font-[Playfair_Display] text-3xl font-bold">Booking #<?php echo $booking['reservation_id']; ?></h1>
-            <span class="badge-status badge-<?php echo badgeClass($booking['booking_status']); ?> text-sm px-4 py-2"><?php echo $booking['booking_status']; ?></span>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+            <h1 class="text-3xl font-bold text-stone-900">Booking #<?php echo $booking['reservation_id']; ?></h1>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-amber-50 text-amber-800 border border-amber-200/70 w-fit self-start sm:self-auto">
+                <span class="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse"></span>
+                <?php echo ucwords(strtolower($booking['booking_status'])); ?>
+            </div>
         </div>
 
         <div class="bg-white rounded-xl shadow-sm p-8 mb-6">

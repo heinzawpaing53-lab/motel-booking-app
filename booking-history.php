@@ -21,6 +21,97 @@ $bookings = $stmt->fetchAll();
 
 include 'includes/header.php';
 ?>
+<style>
+    .btn-primary, a.btn-primary, button.btn-primary {
+        background: linear-gradient(135deg, #C8A96A, #A68B5B) !important;
+        color: #2C1810 !important;
+        border: none !important;
+        font-weight: 600;
+    }
+    .btn-primary:hover, a.btn-primary:hover, button.btn-primary:hover {
+        background: linear-gradient(135deg, #A68B5B, #8B7548) !important;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(200,169,106,0.3) !important;
+    }
+
+    /* --- Premium Modal Overlay Styles --- */
+    .luxury-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(6px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .luxury-modal {
+        background-color: #2b1f1d;
+        border: 1px solid #d4af37;
+        border-radius: 12px;
+        padding: 30px;
+        max-width: 500px;
+        width: 90%;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transform: scale(0.9);
+        transition: transform 0.3s ease;
+    }
+
+    .luxury-modal.show {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+        font-family: serif;
+        color: #d4af37;
+        margin-bottom: 15px;
+    }
+
+    .modal-message {
+        color: #f5ece1;
+        font-size: 1.05rem;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+
+    .btn-modal-close {
+        background-color: #d4af37;
+        color: #1a110f;
+        border: none;
+        padding: 10px 30px;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: background-color 0.2s ease;
+    }
+
+    .btn-modal-close:hover {
+        background-color: #bfa032;
+    }
+
+    /* --- Compact Booking Card Grid --- */
+    .booking-card-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+        .booking-card-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
 
 <section class="py-16 bg-luxury-50 min-h-screen">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,12 +123,49 @@ include 'includes/header.php';
             <a href="rooms.php" class="btn-primary"><i class="fas fa-plus mr-2"></i>Book New Room</a>
         </div>
 
-        <?php if (isset($_SESSION['success'])): ?>
-        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
-        <?php endif; ?>
+        <?php
+        $modalAlertMsg = '';
+        $modalAlertTitle = '';
 
-        <?php if (isset($_SESSION['booking_success'])): ?>
-        <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $_SESSION['booking_success']; unset($_SESSION['booking_success']); ?></div>
+        if (isset($_SESSION['success'])) {
+            $modalAlertMsg = $_SESSION['success'];
+            $modalAlertTitle = 'Success';
+            unset($_SESSION['success']);
+        } elseif (isset($_SESSION['booking_success'])) {
+            $modalAlertMsg = $_SESSION['booking_success'];
+            $modalAlertTitle = 'Success';
+            unset($_SESSION['booking_success']);
+        }
+        ?>
+
+        <?php if ($modalAlertMsg): ?>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var modalHtml = '<div class="luxury-modal-overlay" id="luxuryModal">'
+                + '<div class="luxury-modal">'
+                + '<h3 class="modal-title"><?php echo addslashes($modalAlertTitle); ?></h3>'
+                + '<p class="modal-message"><?php echo addslashes($modalAlertMsg); ?></p>'
+                + '<button class="btn-modal-close" onclick="closeLuxuryModal()">Got It</button>'
+                + '</div></div>';
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            setTimeout(function() {
+                var overlay = document.getElementById('luxuryModal');
+                if (overlay) {
+                    overlay.style.opacity = '1';
+                    overlay.querySelector('.luxury-modal').classList.add('show');
+                }
+            }, 100);
+        });
+
+        function closeLuxuryModal() {
+            var overlay = document.getElementById('luxuryModal');
+            if (overlay) {
+                overlay.style.opacity = '0';
+                overlay.querySelector('.luxury-modal').classList.remove('show');
+                setTimeout(function() { overlay.remove(); }, 300);
+            }
+        }
+        </script>
         <?php endif; ?>
 
         <?php if (empty($bookings)): ?>
