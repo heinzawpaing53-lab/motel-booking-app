@@ -22,8 +22,7 @@ if ($activeTab === 'amenities') {
 }
 ?>
 
-<div class="ml-64 min-h-screen">
-    <div class="p-6">
+<div class="p-6">
         <?php if (isset($messages['success'])): ?>
         <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $messages['success']; ?></div>
         <?php endif; ?>
@@ -46,19 +45,19 @@ if ($activeTab === 'amenities') {
             <a href="create.php" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition text-sm"><i class="fas fa-plus mr-2"></i>Add Amenity</a>
         </div>
 
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div class="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="bg-gray-50 text-left text-gray-500 border-b">
-                            <th class="p-4 font-semibold">Icon</th>
-                            <th class="p-4 font-semibold">Amenity Name</th>
-                            <th class="p-4 font-semibold">Actions</th>
+                        <tr class="bg-[#2A1810] text-amber-100 border-b-2 border-amber-500/30 shadow-sm">
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Icon</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Amenity Name</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-right pr-6">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($amenities as $amenity): ?>
-                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                        <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
                             <td class="p-4"><i class="fas <?php echo sanitize($amenity['icon'] ?? 'fa-tag'); ?> text-blue-600 text-lg w-8"></i></td>
                             <td class="p-4 font-medium"><?php echo sanitize($amenity['amenity_name']); ?></td>
                             <td class="p-4">
@@ -83,21 +82,21 @@ if ($activeTab === 'amenities') {
             <a href="../requests/create.php" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition text-sm"><i class="fas fa-plus mr-2"></i>Add Request</a>
         </div>
 
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div class="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="bg-gray-50 text-left text-gray-500 border-b">
-                            <th class="p-4 font-semibold">#</th>
-                            <th class="p-4 font-semibold">Request Name</th>
-                            <th class="p-4 font-semibold">Description</th>
-                            <th class="p-4 font-semibold">Status</th>
-                            <th class="p-4 font-semibold">Actions</th>
+                        <tr class="bg-[#2A1810] text-amber-100 border-b-2 border-amber-500/30 shadow-sm">
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">#</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Request Name</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Description</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Status</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-right pr-6">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($requests as $i => $r): ?>
-                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                        <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
                             <td class="p-4 text-gray-500"><?php echo $i + 1; ?></td>
                             <td class="p-4 font-semibold text-gray-800"><?php echo sanitize($r['request_name']); ?></td>
                             <td class="p-4 text-gray-600 max-w-xs truncate"><?php echo sanitize($r['description'] ?? 'N/A'); ?></td>
@@ -122,5 +121,4 @@ if ($activeTab === 'amenities') {
         <?php endif; ?>
 
     </div>
-</div>
 <?php include '../../includes/admin-footer.php'; ?>

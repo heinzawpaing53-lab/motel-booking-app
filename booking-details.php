@@ -24,7 +24,7 @@ $bookingRequests = $requests->fetchAll();
 include 'includes/header.php';
 ?>
 
-<section class="py-16 bg-luxury-50 min-h-screen">
+<section class="py-16 bg-stone-50 min-h-screen">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
             <h1 class="text-3xl font-bold text-stone-900">Booking #<?php echo $booking['reservation_id']; ?></h1>
@@ -105,4 +105,9 @@ include 'includes/header.php';
     </div>
 </section>
 
-<?php include 'includes/footer.php'; ?>
+<?php
+// Footer removed for cleaner account layout
+?>
+<script src="<?php echo SITE_URL; ?>assets/js/main.js"></script>
+</body>
+</html>

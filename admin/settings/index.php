@@ -2,17 +2,47 @@
 require_once '../../config/db.php';
 if (!isLoggedIn() || !isAdmin()) { redirect('login.php'); }
 
-define('PAGE_TITLE', 'Settings');
+define('PAGE_TITLE', 'System Settings');
 
 $userId = $_SESSION['user_id'];
 $csrfToken = generateCsrfToken();
 $message = '';
 $messageType = '';
 
+// Fetch user for password change
+$stmt = $pdo->prepare("SELECT * FROM users WHERE user_id = ?");
+$stmt->execute([$userId]);
+$adminUser = $stmt->fetch();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verifyCsrfToken($_POST['csrf_token'] ?? '')) {
         $message = 'Invalid security token. Please try again.';
         $messageType = 'error';
+    } elseif (isset($_POST['action']) && $_POST['action'] === 'change_password') {
+        $currentPassword = $_POST['current_password'] ?? '';
+        $newPassword = $_POST['new_password'] ?? '';
+        $confirmNewPassword = $_POST['confirm_new_password'] ?? '';
+
+        if (empty($currentPassword) || empty($newPassword) || empty($confirmNewPassword)) {
+            $message = 'All password fields are required.';
+            $messageType = 'error';
+        } elseif (!password_verify($currentPassword, $adminUser['password'])) {
+            $message = 'Current password is incorrect.';
+            $messageType = 'error';
+        } elseif (strlen($newPassword) < 6) {
+            $message = 'New password must be at least 6 characters.';
+            $messageType = 'error';
+        } elseif ($newPassword !== $confirmNewPassword) {
+            $message = 'New passwords do not match.';
+            $messageType = 'error';
+        } else {
+            $hashed = password_hash($newPassword, PASSWORD_DEFAULT);
+            $stmt = $pdo->prepare("UPDATE users SET password=? WHERE user_id=?");
+            $stmt->execute([$hashed, $userId]);
+            $message = 'Password updated successfully.';
+            $messageType = 'success';
+            logActivity($pdo, $userId, 'Password Change', 'Admin changed password');
+        }
     } else {
         $settings = $_POST['setting'] ?? [];
         $updated = 0;
@@ -71,68 +101,58 @@ $settingTypes = [
     'currency' => 'text',
     'max_guests_per_room' => 'number',
 ];
+include '../../admin/header.php';
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo PAGE_TITLE . ' - ' . SITE_NAME; ?></title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>assets/css/style.css">
-</head>
-<body class="bg-gray-100">
-<?php include '../../includes/sidebar.php'; ?>
-<?php include '../../includes/admin-topbar.php'; ?>
-<div class="ml-64 p-8">
+
+<div class="p-6">
     <div class="max-w-4xl mx-auto">
-        <div class="flex items-center justify-between mb-8">
-            <div>
-                <h1 class="text-3xl font-bold text-gray-900"><i class="fas fa-cog text-blue-600 mr-3"></i>System Settings</h1>
-                <p class="text-gray-500 mt-1">Manage your motel configuration</p>
-            </div>
-        </div>
-
-        <?php if ($message): ?>
-        <div class="mb-6 p-4 rounded-r shadow-sm border-l-4 text-sm font-medium <?php echo $messageType === 'success' ? 'bg-emerald-50 border-emerald-500 text-emerald-700' : 'bg-rose-50 border-rose-500 text-rose-700'; ?>">
-            <i class="fas <?php echo $messageType === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?> mr-2"></i>
-            <?php echo $message; ?>
-        </div>
-        <?php endif; ?>
-
-        <form method="POST">
-            <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <?php foreach ($settings as $setting): 
-                    $key = $setting['setting_key'];
-                    $label = $settingLabels[$key] ?? ucwords(str_replace('_', ' ', $key));
-                    $icon = $settingIcons[$key] ?? 'fa-cog';
-                    $type = $settingTypes[$key] ?? 'text';
-                    $isTextarea = in_array($key, ['site_address']);
-                ?>
-                <div class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-                    <label for="setting_<?php echo $key; ?>" class="flex items-center space-x-2 text-sm font-semibold text-gray-700 mb-3">
-                        <i class="fas <?php echo $icon; ?> text-blue-500"></i>
-                        <span><?php echo $label; ?></span>
-                    </label>
-                    <?php if ($isTextarea): ?>
-                    <textarea name="setting[<?php echo $key; ?>]" id="setting_<?php echo $key; ?>" rows="2" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm"><?php echo sanitize($setting['setting_value']); ?></textarea>
-                    <?php else: ?>
-                    <input type="<?php echo $type; ?>" name="setting[<?php echo $key; ?>]" id="setting_<?php echo $key; ?>" value="<?php echo sanitize($setting['setting_value']); ?>" class="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-sm" <?php echo $type === 'number' ? 'step="any"' : ''; ?>>
-                    <?php endif; ?>
-                    <p class="text-xs text-gray-400 mt-1">setting_key: <?php echo $key; ?></p>
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-slate-800"><i class="fas fa-cog text-amber-600 mr-2"></i>System Settings</h1>
+                    <p class="text-slate-500 text-sm">Manage your motel configuration</p>
                 </div>
-                <?php endforeach; ?>
             </div>
 
-            <div class="mt-8 flex items-center justify-end space-x-4">
-                <button type="reset" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition font-semibold text-sm"><i class="fas fa-undo mr-2"></i>Reset</button>
-                <button type="submit" class="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold text-sm"><i class="fas fa-save mr-2"></i>Save Settings</button>
+            <?php if ($message): ?>
+            <div class="mb-6 p-4 rounded-r shadow-sm border-l-4 text-sm font-medium <?php echo $messageType === 'success' ? 'bg-emerald-50 border-emerald-500 text-emerald-700' : 'bg-rose-50 border-rose-500 text-rose-700'; ?>">
+                <i class="fas <?php echo $messageType === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'; ?> mr-2"></i>
+                <?php echo $message; ?>
             </div>
-        </form>
+            <?php endif; ?>
+
+            <!-- System Configuration -->
+            <form method="POST">
+                <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <?php foreach ($settings as $setting): 
+                        $key = $setting['setting_key'];
+                        $label = $settingLabels[$key] ?? ucwords(str_replace('_', ' ', $key));
+                        $icon = $settingIcons[$key] ?? 'fa-cog';
+                        $type = $settingTypes[$key] ?? 'text';
+                        $isTextarea = in_array($key, ['site_address']);
+                    ?>
+                    <div class="bg-white rounded-xl shadow-sm p-5 hover:shadow-md transition">
+                        <label for="setting_<?php echo $key; ?>" class="flex items-center space-x-2 text-sm font-semibold text-slate-700 mb-3">
+                            <i class="fas <?php echo $icon; ?> text-amber-500"></i>
+                            <span><?php echo $label; ?></span>
+                        </label>
+                        <?php if ($isTextarea): ?>
+                        <textarea name="setting[<?php echo $key; ?>]" id="setting_<?php echo $key; ?>" rows="2" class="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none text-sm bg-slate-50"><?php echo sanitize($setting['setting_value']); ?></textarea>
+                        <?php else: ?>
+                        <input type="<?php echo $type; ?>" name="setting[<?php echo $key; ?>]" id="setting_<?php echo $key; ?>" value="<?php echo sanitize($setting['setting_value']); ?>" class="w-full px-4 py-2.5 border border-slate-200 rounded-lg focus:ring-2 focus:ring-amber-400 focus:border-amber-400 outline-none text-sm bg-slate-50" <?php echo $type === 'number' ? 'step="any"' : ''; ?>>
+                        <?php endif; ?>
+                        <p class="text-xs text-slate-400 mt-1">Key: <?php echo $key; ?></p>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="mt-6 flex items-center justify-end space-x-4">
+                    <button type="reset" class="px-6 py-2.5 border border-slate-300 rounded-lg text-slate-600 hover:bg-slate-50 transition font-semibold text-sm"><i class="fas fa-undo mr-2"></i>Reset</button>
+                    <button type="submit" class="px-6 py-2.5 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition font-semibold text-sm"><i class="fas fa-save mr-2"></i>Save Settings</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-</body>
-</html>
+
+<?php include '../../includes/admin-footer.php'; ?>

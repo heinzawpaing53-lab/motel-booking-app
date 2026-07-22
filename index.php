@@ -1,6 +1,11 @@
 <?php
 define('PAGE_TITLE', 'Home');
 require_once 'config/db.php';
+
+if (isLoggedIn() && isAdmin()) {
+    redirect('admin/dashboard.php');
+}
+
 $stmt = $pdo->query("SELECT r.*, rt.type_name, rt.price_per_night, rt.bed_type, rt.room_size, f.floor_name,
     (SELECT image_path FROM room_images WHERE room_id = r.room_id LIMIT 1) AS image
     FROM rooms r JOIN room_types rt ON r.type_id = rt.type_id JOIN floors f ON r.floor_id = f.floor_id

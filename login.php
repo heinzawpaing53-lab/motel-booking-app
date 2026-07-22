@@ -2,7 +2,10 @@
 define('PAGE_TITLE', 'Login');
 require_once 'config/db.php';
 
-if (isLoggedIn()) { redirect('index.php'); }
+if (isLoggedIn()) {
+    if (isAdmin()) { redirect('admin/dashboard.php'); }
+    redirect('index.php');
+}
 
 $error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

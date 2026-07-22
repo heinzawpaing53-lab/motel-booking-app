@@ -1,13 +1,22 @@
 <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
+<?php $isAccountPage = in_array($currentPage, ['profile.php', 'settings.php', 'booking-history.php', 'booking-details.php']); ?>
 <nav style="background-color: #2C1810 !important; position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(122,85,52,0.2);">
     <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12">
         <div class="relative flex items-center justify-between" style="height: 56px;">
             <div class="flex items-center">
-                <a href="<?php echo SITE_URL; ?>index.php" class="flex items-center space-x-2.5">
-                    <i class="fas fa-hotel text-luxury-400 text-xl"></i>
-                    <span class="font-serif text-lg font-semibold text-luxury-100 tracking-wide">Luxury Motel</span>
-                </a>
+                <?php if ($isAccountPage): ?>
+                    <a href="<?php echo SITE_URL; ?>index.php" class="inline-flex items-center gap-2 text-sm font-medium text-amber-100 hover:text-amber-400 transition-colors">
+                        <i class="fas fa-arrow-left text-xs"></i>
+                        <span>Back to Home</span>
+                    </a>
+                <?php else: ?>
+                    <a href="<?php echo SITE_URL; ?>index.php" class="flex items-center space-x-2.5">
+                        <i class="fas fa-hotel text-luxury-400 text-xl"></i>
+                        <span class="font-serif text-lg font-semibold text-luxury-100 tracking-wide">Luxury Motel</span>
+                    </a>
+                <?php endif; ?>
             </div>
+            <?php if (!$isAccountPage): ?>
             <div class="hidden md:flex absolute left-1/2 items-center" style="transform: translateX(-50%); gap: 2.5rem;">
                 <?php
                 $navLinks = [
@@ -25,6 +34,11 @@
                     </a>
                 <?php endforeach; ?>
             </div>
+            <?php else: ?>
+            <div class="hidden md:flex items-center">
+                <span class="text-sm font-semibold text-luxury-100 tracking-wide"><?php echo defined('PAGE_TITLE') ? PAGE_TITLE : 'Account'; ?></span>
+            </div>
+            <?php endif; ?>
             <div class="hidden md:flex items-center" style="gap: 1.25rem;">
                 <?php if (isLoggedIn()): ?>
                     <div class="relative group">
@@ -35,14 +49,11 @@
                         </button>
                         <div class="absolute right-0 w-52 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 overflow-hidden" style="margin-top: 8px; background-color: #3B2418; border: 1px solid rgba(122,85,52,0.3); border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.4);">
                             <a href="<?php echo SITE_URL; ?>profile.php" class="block px-5 py-2.5 text-sm text-luxury-200 hover:text-luxury-400 transition-colors" style="background: transparent;"><i class="fas fa-user mr-2 text-xs"></i>My Profile</a>
-                            <a href="<?php echo SITE_URL; ?>booking-history.php" class="block px-5 py-2.5 text-sm text-luxury-200 hover:text-luxury-400 transition-colors"><i class="fas fa-calendar-check mr-2 text-xs"></i>My Bookings</a>
-                            <a href="<?php echo SITE_URL; ?>profile.php" class="block px-5 py-2.5 text-sm text-luxury-200 hover:text-luxury-400 transition-colors"><i class="fas fa-cog mr-2 text-xs"></i>Settings</a>
+                            <a href="<?php echo SITE_URL; ?>settings.php" class="block px-5 py-2.5 text-sm text-luxury-200 hover:text-luxury-400 transition-colors"><i class="fas fa-cog mr-2 text-xs"></i>Settings</a>
                             <?php if (isAdmin()): ?>
                                 <hr style="margin: 4px 0; border-color: rgba(122,85,52,0.3);">
                                 <a href="<?php echo SITE_URL; ?>admin/dashboard.php" class="block px-5 py-2.5 text-sm text-luxury-200 hover:text-luxury-400 transition-colors"><i class="fas fa-tachometer-alt mr-2 text-xs"></i>Admin Panel</a>
                             <?php endif; ?>
-                            <hr style="margin: 4px 0; border-color: rgba(122,85,52,0.3);">
-                            <a href="<?php echo SITE_URL; ?>logout.php" class="block px-5 py-2.5 text-sm text-error transition-colors"><i class="fas fa-sign-out-alt mr-2 text-xs"></i>Logout</a>
                         </div>
                     </div>
                 <?php else: ?>
@@ -66,24 +77,28 @@
         </div>
     </div>
     <div id="mobile-menu" class="hidden md:hidden" style="background-color: #2C1810; border-top: 1px solid rgba(122,85,52,0.2);">
-        <?php
-        $mobileLinks = [
-            'index.php' => 'Home',
-            'rooms.php' => 'Rooms',
-            'about.php' => 'About',
-            'contact.php' => 'Contact Us',
-        ];
-        foreach ($mobileLinks as $file => $label): ?>
-            <a href="<?php echo SITE_URL; ?><?php echo $file; ?>" class="block px-6 py-3 text-sm <?php echo $currentPage === $file ? 'text-luxury-400 font-semibold' : 'text-luxury-300'; ?> hover:text-luxury-100 transition-colors" style="background: transparent;"><?php echo $label; ?></a>
-        <?php endforeach; ?>
+        <?php if ($isAccountPage): ?>
+            <a href="<?php echo SITE_URL; ?>index.php" class="flex items-center gap-2 px-6 py-3 text-sm text-amber-100 hover:text-amber-400 transition-colors">
+                <i class="fas fa-arrow-left text-xs"></i>Back to Home
+            </a>
+        <?php else: ?>
+            <?php
+            $mobileLinks = [
+                'index.php' => 'Home',
+                'rooms.php' => 'Rooms',
+                'about.php' => 'About',
+                'contact.php' => 'Contact Us',
+            ];
+            foreach ($mobileLinks as $file => $label): ?>
+                <a href="<?php echo SITE_URL; ?><?php echo $file; ?>" class="block px-6 py-3 text-sm <?php echo $currentPage === $file ? 'text-luxury-400 font-semibold' : 'text-luxury-300'; ?> hover:text-luxury-100 transition-colors" style="background: transparent;"><?php echo $label; ?></a>
+            <?php endforeach; ?>
+        <?php endif; ?>
         <?php if (isLoggedIn()): ?>
-            <a href="<?php echo SITE_URL; ?>profile.php" class="block px-6 py-3 text-sm text-luxury-300 hover:text-luxury-100 transition-colors">Profile</a>
-            <a href="<?php echo SITE_URL; ?>booking-history.php" class="block px-6 py-3 text-sm text-luxury-300 hover:text-luxury-100 transition-colors">My Bookings</a>
-            <a href="<?php echo SITE_URL; ?>profile.php" class="block px-6 py-3 text-sm text-luxury-300 hover:text-luxury-100 transition-colors"><i class="fas fa-cog mr-2"></i>Settings</a>
+            <a href="<?php echo SITE_URL; ?>profile.php" class="block px-6 py-3 text-sm text-luxury-300 hover:text-luxury-100 transition-colors">My Profile</a>
+            <a href="<?php echo SITE_URL; ?>settings.php" class="block px-6 py-3 text-sm text-luxury-300 hover:text-luxury-100 transition-colors"><i class="fas fa-cog mr-2"></i>Settings</a>
             <?php if (isAdmin()): ?>
                 <a href="<?php echo SITE_URL; ?>admin/dashboard.php" class="block px-6 py-3 text-sm text-luxury-300 hover:text-luxury-100 transition-colors">Admin Panel</a>
             <?php endif; ?>
-            <a href="<?php echo SITE_URL; ?>logout.php" class="block px-6 py-3 text-sm text-error transition-colors">Logout</a>
         <?php else: ?>
             <a href="<?php echo SITE_URL; ?>login.php" class="block px-6 py-3 text-sm <?php echo $currentPage === 'login.php' ? 'text-luxury-400 font-semibold' : 'text-luxury-300'; ?> hover:text-luxury-100 transition-colors">Login</a>
             <a href="<?php echo SITE_URL; ?>register.php" class="block px-6 py-3 text-sm <?php echo $currentPage === 'register.php' ? 'text-luxury-400 font-semibold' : 'text-luxury-300'; ?> hover:text-luxury-100 transition-colors">Register</a>

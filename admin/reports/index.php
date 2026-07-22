@@ -89,28 +89,29 @@ if (isset($_GET['export']) && isset($_GET['tab'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>assets/css/style.css">
 </head>
-<body class="bg-gray-100">
+<body class="admin-layout font-[Inter] flex h-screen w-screen overflow-hidden bg-slate-100">
 <?php include '../../includes/sidebar.php'; ?>
+<div class="flex-1 flex flex-col h-full overflow-hidden">
 <?php include '../../includes/admin-topbar.php'; ?>
-<div class="ml-64 p-8">
+<main class="flex-1 overflow-y-auto bg-slate-50">
+<div class="p-6">
     <div class="max-w-7xl mx-auto">
         <div class="flex items-center justify-between mb-8">
             <div>
-                <h1 class="text-3xl font-bold text-gray-900"><i class="fas fa-chart-bar text-blue-600 mr-3"></i>Reports</h1>
-                <p class="text-gray-500 mt-1">View and analyze booking data</p>
+                <h1 class="text-3xl font-bold text-gray-900"><i class="fas fa-chart-bar text-amber-600 mr-3"></i>Reports</h1>
+                <p class="text-stone-500 mt-1">View and analyze booking data</p>
             </div>
         </div>
 
-        <!-- Tabs -->
-        <div class="mb-8 border-b border-gray-200">
-            <nav class="flex space-x-6 overflow-x-auto">
-                <a href="?tab=daily" class="pb-3 px-1 text-sm font-semibold border-b-2 transition whitespace-nowrap <?php echo $tab === 'daily' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'; ?>"><i class="fas fa-calendar-day mr-2"></i>Daily</a>
-                <a href="?tab=monthly" class="pb-3 px-1 text-sm font-semibold border-b-2 transition whitespace-nowrap <?php echo $tab === 'monthly' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'; ?>"><i class="fas fa-calendar-alt mr-2"></i>Monthly</a>
-                <a href="?tab=yearly" class="pb-3 px-1 text-sm font-semibold border-b-2 transition whitespace-nowrap <?php echo $tab === 'yearly' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'; ?>"><i class="fas fa-calendar mr-2"></i>Yearly</a>
-                <a href="?tab=revenue" class="pb-3 px-1 text-sm font-semibold border-b-2 transition whitespace-nowrap <?php echo $tab === 'revenue' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'; ?>"><i class="fas fa-dollar-sign mr-2"></i>Revenue</a>
-                <a href="?tab=occupancy" class="pb-3 px-1 text-sm font-semibold border-b-2 transition whitespace-nowrap <?php echo $tab === 'occupancy' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'; ?>"><i class="fas fa-bed mr-2"></i>Occupancy</a>
-                <a href="?tab=customers" class="pb-3 px-1 text-sm font-semibold border-b-2 transition whitespace-nowrap <?php echo $tab === 'customers' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'; ?>"><i class="fas fa-users mr-2"></i>Customers</a>
-                <a href="?tab=export" class="pb-3 px-1 text-sm font-semibold border-b-2 transition whitespace-nowrap <?php echo $tab === 'export' ? 'border-blue-600 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'; ?>"><i class="fas fa-download mr-2"></i>Export</a>
+        <!-- Floating Pill Tab Navigation -->
+        <div class="mb-8">
+            <nav class="bg-stone-900/90 backdrop-blur-md p-1.5 rounded-2xl inline-flex items-center gap-2 border border-stone-800 shadow-lg">
+                <a href="?tab=daily" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm transition-all <?php echo $tab === 'daily' ? 'bg-amber-600 text-white font-semibold shadow-md' : 'text-stone-400 hover:text-stone-200 hover:bg-stone-800/50'; ?>"><i class="fas fa-calendar-day"></i>Daily</a>
+                <a href="?tab=monthly" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm transition-all <?php echo $tab === 'monthly' ? 'bg-amber-600 text-white font-semibold shadow-md' : 'text-stone-400 hover:text-stone-200 hover:bg-stone-800/50'; ?>"><i class="fas fa-calendar-alt"></i>Monthly</a>
+                <a href="?tab=yearly" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm transition-all <?php echo $tab === 'yearly' ? 'bg-amber-600 text-white font-semibold shadow-md' : 'text-stone-400 hover:text-stone-200 hover:bg-stone-800/50'; ?>"><i class="fas fa-calendar"></i>Yearly</a>
+                <a href="?tab=revenue" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm transition-all <?php echo $tab === 'revenue' ? 'bg-amber-600 text-white font-semibold shadow-md' : 'text-stone-400 hover:text-stone-200 hover:bg-stone-800/50'; ?>"><i class="fas fa-dollar-sign"></i>Revenue</a>
+                <a href="?tab=occupancy" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm transition-all <?php echo $tab === 'occupancy' ? 'bg-amber-600 text-white font-semibold shadow-md' : 'text-stone-400 hover:text-stone-200 hover:bg-stone-800/50'; ?>"><i class="fas fa-bed"></i>Occupancy</a>
+                <a href="?tab=customers" class="inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm transition-all <?php echo $tab === 'customers' ? 'bg-amber-600 text-white font-semibold shadow-md' : 'text-stone-400 hover:text-stone-200 hover:bg-stone-800/50'; ?>"><i class="fas fa-users"></i>Customers</a>
             </nav>
         </div>
 
@@ -123,76 +124,81 @@ $dailyBookings = $stmt->fetchAll();
 $dailyTotal = 0;
 foreach ($dailyBookings as $b) { $dailyTotal += $b['total_price']; }
 ?>
-<div class="bg-white rounded-xl shadow-sm p-6 mb-6">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-        <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-calendar-day text-blue-600 mr-2"></i>Daily Booking Report</h2>
-        <form method="GET" class="flex items-center gap-3">
-            <input type="hidden" name="tab" value="daily">
-            <label class="text-sm text-gray-600 font-medium">Select Date:</label>
-            <input type="date" name="date" value="<?php echo $dailyDate; ?>" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition"><i class="fas fa-search mr-1"></i>View</button>
-        </form>
+<div class="mb-6">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
+        <h2 class="text-xl font-bold text-stone-800"><i class="fas fa-calendar-day text-amber-600 mr-2"></i>Daily Booking Report</h2>
     </div>
+    <form method="GET" class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-wrap items-center justify-between gap-4 mb-6">
+        <input type="hidden" name="tab" value="daily">
+        <div class="flex items-center gap-3">
+            <label class="text-sm text-stone-600 font-medium">Select Date:</label>
+            <input type="date" name="date" value="<?php echo $dailyDate; ?>" class="border border-stone-300 rounded-xl px-3.5 py-2 text-sm text-stone-800 bg-stone-50 focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 outline-none transition-all">
+            <button type="submit" class="bg-amber-700 hover:bg-amber-800 text-white font-medium px-5 py-2 rounded-xl text-sm transition-all shadow-sm"><i class="fas fa-search mr-1"></i>View</button>
+        </div>
+        <button type="button" onclick="var i=document.createElement('input');i.name='export';i.value='1';i.type='hidden';this.form.appendChild(i);this.form.submit();" class="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-4 py-2 rounded-xl text-sm transition-all shadow-sm cursor-pointer"><i class="fas fa-file-csv"></i>Export CSV</button>
+    </form>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div class="bg-blue-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Total Bookings</p>
-            <p class="text-3xl font-bold text-blue-600"><?php echo count($dailyBookings); ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Total Bookings</p>
+            <p class="text-3xl font-bold text-amber-700"><?php echo count($dailyBookings); ?></p>
         </div>
-        <div class="bg-green-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Total Revenue</p>
-            <p class="text-3xl font-bold text-green-600"><?php echo formatCurrency($dailyTotal); ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Total Revenue</p>
+            <p class="text-3xl font-bold text-emerald-700"><?php echo formatCurrency($dailyTotal); ?></p>
         </div>
-        <div class="bg-purple-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Guests Today</p>
-            <p class="text-3xl font-bold text-purple-600"><?php echo array_sum(array_column($dailyBookings, 'total_guests')); ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Guests Today</p>
+            <p class="text-3xl font-bold text-stone-800"><?php echo array_sum(array_column($dailyBookings, 'total_guests')); ?></p>
         </div>
     </div>
 
     <?php if ($dailyBookings): ?>
-    <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-            <thead>
-                <tr class="border-b-2 border-gray-200 text-gray-500 text-xs uppercase tracking-wider">
-                    <th class="text-left py-3 px-2">ID</th>
-                    <th class="text-left py-3 px-2">Guest</th>
-                    <th class="text-left py-3 px-2">Room</th>
-                    <th class="text-left py-3 px-2">Type</th>
-                    <th class="text-left py-3 px-2">Check In</th>
-                    <th class="text-left py-3 px-2">Check Out</th>
-                    <th class="text-center py-3 px-2">Guests</th>
-                    <th class="text-right py-3 px-2">Total</th>
-                    <th class="text-center py-3 px-2">Status</th>
-                    <th class="text-center py-3 px-2">Payment</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($dailyBookings as $b): ?>
-                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
-                    <td class="py-3 px-2 font-semibold">#<?php echo $b['reservation_id']; ?></td>
-                    <td class="py-3 px-2"><?php echo sanitize($b['first_name'] . ' ' . $b['last_name']); ?></td>
-                    <td class="py-3 px-2"><?php echo sanitize($b['room_number']); ?></td>
-                    <td class="py-3 px-2"><?php echo sanitize($b['type_name']); ?></td>
-                    <td class="py-3 px-2"><?php echo formatDate($b['check_in_date']); ?></td>
-                    <td class="py-3 px-2"><?php echo formatDate($b['check_out_date']); ?></td>
-                    <td class="py-3 px-2 text-center"><?php echo $b['total_guests']; ?></td>
-                    <td class="py-3 px-2 text-right font-semibold"><?php echo formatCurrency($b['total_price']); ?></td>
-                    <td class="py-3 px-2 text-center"><span class="badge-status badge-<?php echo badgeClass($b['booking_status']); ?>"><?php echo $b['booking_status']; ?></span></td>
-                    <td class="py-3 px-2 text-center"><span class="badge-status badge-<?php echo badgeClass($b['payment_status']); ?>"><?php echo $b['payment_status']; ?></span></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr class="bg-gray-50 font-bold">
-                    <td colspan="7" class="py-3 px-2 text-right">Total:</td>
-                    <td class="py-3 px-2 text-right"><?php echo formatCurrency($dailyTotal); ?></td>
-                    <td colspan="2"></td>
-                </tr>
-            </tfoot>
-        </table>
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-stone-100/80 border-b border-stone-200 text-stone-600 text-xs font-semibold uppercase tracking-wider px-4">
+                        <th class="text-left py-3.5 px-4">ID</th>
+                        <th class="text-left py-3.5 px-4">Guest</th>
+                        <th class="text-left py-3.5 px-4">Room</th>
+                        <th class="text-left py-3.5 px-4">Type</th>
+                        <th class="text-left py-3.5 px-4">Check In</th>
+                        <th class="text-left py-3.5 px-4">Check Out</th>
+                        <th class="text-center py-3.5 px-4">Guests</th>
+                        <th class="text-right py-3.5 px-4">Total</th>
+                        <th class="text-center py-3.5 px-4">Status</th>
+                        <th class="text-center py-3.5 px-4">Payment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($dailyBookings as $b): ?>
+                    <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
+                        <td class="py-3 px-4 font-semibold text-stone-800">#<?php echo $b['reservation_id']; ?></td>
+                        <td class="py-3 px-4 text-stone-700"><?php echo sanitize($b['first_name'] . ' ' . $b['last_name']); ?></td>
+                        <td class="py-3 px-4 text-stone-700"><?php echo sanitize($b['room_number']); ?></td>
+                        <td class="py-3 px-4 text-stone-700"><?php echo sanitize($b['type_name']); ?></td>
+                        <td class="py-3 px-4 text-stone-600"><?php echo formatDate($b['check_in_date']); ?></td>
+                        <td class="py-3 px-4 text-stone-600"><?php echo formatDate($b['check_out_date']); ?></td>
+                        <td class="py-3 px-4 text-center text-stone-700"><?php echo $b['total_guests']; ?></td>
+                        <td class="py-3 px-4 text-right font-semibold text-stone-800"><?php echo formatCurrency($b['total_price']); ?></td>
+                        <td class="py-3 px-4 text-center"><span class="badge-status badge-<?php echo badgeClass($b['booking_status']); ?>"><?php echo $b['booking_status']; ?></span></td>
+                        <td class="py-3 px-4 text-center"><span class="badge-status badge-<?php echo badgeClass($b['payment_status']); ?>"><?php echo $b['payment_status']; ?></span></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr class="bg-stone-50 font-bold border-t border-stone-200">
+                        <td colspan="7" class="py-3 px-4 text-right text-stone-600">Total:</td>
+                        <td class="py-3 px-4 text-right text-stone-800"><?php echo formatCurrency($dailyTotal); ?></td>
+                        <td colspan="2"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
     <?php else: ?>
-    <div class="text-center py-12 text-gray-400">
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm text-center py-12 text-stone-400">
         <i class="fas fa-calendar-day text-5xl mb-4"></i>
         <p class="text-lg font-medium">No bookings found for this date.</p>
     </div>
@@ -216,82 +222,87 @@ foreach ($monthlyBookings as $b) {
     }
 }
 ?>
-<div class="bg-white rounded-xl shadow-sm p-6 mb-6">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-        <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-calendar-alt text-blue-600 mr-2"></i>Monthly Booking Report</h2>
-        <form method="GET" class="flex items-center gap-3">
-            <input type="hidden" name="tab" value="monthly">
-            <select name="month" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+<div class="mb-6">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
+        <h2 class="text-xl font-bold text-stone-800"><i class="fas fa-calendar-alt text-amber-600 mr-2"></i>Monthly Booking Report</h2>
+    </div>
+    <form method="GET" class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-wrap items-center justify-between gap-4 mb-6">
+        <input type="hidden" name="tab" value="monthly">
+        <div class="flex items-center gap-3">
+            <select name="month" class="border border-stone-300 rounded-xl px-3.5 py-2 text-sm text-stone-800 bg-stone-50 focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 outline-none transition-all">
                 <?php foreach ($months as $val => $label): ?>
                 <option value="<?php echo $val; ?>" <?php echo $month === $val ? 'selected' : ''; ?>><?php echo $label; ?></option>
                 <?php endforeach; ?>
             </select>
-            <select name="year" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+            <select name="year" class="border border-stone-300 rounded-xl px-3.5 py-2 text-sm text-stone-800 bg-stone-50 focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 outline-none transition-all">
                 <?php for ($y = date('Y'); $y >= date('Y') - 5; $y--): ?>
                 <option value="<?php echo $y; ?>" <?php echo (int)$year === $y ? 'selected' : ''; ?>><?php echo $y; ?></option>
                 <?php endfor; ?>
             </select>
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition"><i class="fas fa-search mr-1"></i>View</button>
-        </form>
-    </div>
+            <button type="submit" class="bg-amber-700 hover:bg-amber-800 text-white font-medium px-5 py-2 rounded-xl text-sm transition-all shadow-sm"><i class="fas fa-search mr-1"></i>View</button>
+        </div>
+        <button type="button" onclick="var i=document.createElement('input');i.name='export';i.value='1';i.type='hidden';this.form.appendChild(i);this.form.submit();" class="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-4 py-2 rounded-xl text-sm transition-all shadow-sm cursor-pointer"><i class="fas fa-file-csv"></i>Export CSV</button>
+    </form>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div class="bg-blue-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Total Bookings (Active)</p>
-            <p class="text-3xl font-bold text-blue-600"><?php echo $monthlyCount; ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Total Bookings (Active)</p>
+            <p class="text-3xl font-bold text-amber-700"><?php echo $monthlyCount; ?></p>
         </div>
-        <div class="bg-green-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Total Revenue</p>
-            <p class="text-3xl font-bold text-green-600"><?php echo formatCurrency($monthlyTotal); ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Total Revenue</p>
+            <p class="text-3xl font-bold text-emerald-700"><?php echo formatCurrency($monthlyTotal); ?></p>
         </div>
-        <div class="bg-purple-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Avg Booking Value</p>
-            <p class="text-3xl font-bold text-purple-600"><?php echo $monthlyCount > 0 ? formatCurrency($monthlyTotal / $monthlyCount) : formatCurrency(0); ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Avg Booking Value</p>
+            <p class="text-3xl font-bold text-stone-800"><?php echo $monthlyCount > 0 ? formatCurrency($monthlyTotal / $monthlyCount) : formatCurrency(0); ?></p>
         </div>
     </div>
 
     <?php if ($monthlyBookings): ?>
-    <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-            <thead>
-                <tr class="border-b-2 border-gray-200 text-gray-500 text-xs uppercase tracking-wider">
-                    <th class="text-left py-3 px-2">ID</th>
-                    <th class="text-left py-3 px-2">Guest</th>
-                    <th class="text-left py-3 px-2">Room</th>
-                    <th class="text-left py-3 px-2">Type</th>
-                    <th class="text-left py-3 px-2">Check In</th>
-                    <th class="text-left py-3 px-2">Check Out</th>
-                    <th class="text-center py-3 px-2">Guests</th>
-                    <th class="text-right py-3 px-2">Total</th>
-                    <th class="text-center py-3 px-2">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($monthlyBookings as $b): ?>
-                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
-                    <td class="py-3 px-2 font-semibold">#<?php echo $b['reservation_id']; ?></td>
-                    <td class="py-3 px-2"><?php echo sanitize($b['first_name'] . ' ' . $b['last_name']); ?></td>
-                    <td class="py-3 px-2"><?php echo sanitize($b['room_number']); ?></td>
-                    <td class="py-3 px-2"><?php echo sanitize($b['type_name']); ?></td>
-                    <td class="py-3 px-2"><?php echo formatDate($b['check_in_date']); ?></td>
-                    <td class="py-3 px-2"><?php echo formatDate($b['check_out_date']); ?></td>
-                    <td class="py-3 px-2 text-center"><?php echo $b['total_guests']; ?></td>
-                    <td class="py-3 px-2 text-right font-semibold"><?php echo formatCurrency($b['total_price']); ?></td>
-                    <td class="py-3 px-2 text-center"><span class="badge-status badge-<?php echo badgeClass($b['booking_status']); ?>"><?php echo $b['booking_status']; ?></span></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr class="bg-gray-50 font-bold">
-                    <td colspan="7" class="py-3 px-2 text-right">Total (Active):</td>
-                    <td class="py-3 px-2 text-right"><?php echo formatCurrency($monthlyTotal); ?></td>
-                    <td></td>
-                </tr>
-            </tfoot>
-        </table>
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-stone-100/80 border-b border-stone-200 text-stone-600 text-xs font-semibold uppercase tracking-wider px-4">
+                        <th class="text-left py-3.5 px-4">ID</th>
+                        <th class="text-left py-3.5 px-4">Guest</th>
+                        <th class="text-left py-3.5 px-4">Room</th>
+                        <th class="text-left py-3.5 px-4">Type</th>
+                        <th class="text-left py-3.5 px-4">Check In</th>
+                        <th class="text-left py-3.5 px-4">Check Out</th>
+                        <th class="text-center py-3.5 px-4">Guests</th>
+                        <th class="text-right py-3.5 px-4">Total</th>
+                        <th class="text-center py-3.5 px-4">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($monthlyBookings as $b): ?>
+                    <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
+                        <td class="py-3 px-4 font-semibold text-stone-800">#<?php echo $b['reservation_id']; ?></td>
+                        <td class="py-3 px-4 text-stone-700"><?php echo sanitize($b['first_name'] . ' ' . $b['last_name']); ?></td>
+                        <td class="py-3 px-4 text-stone-700"><?php echo sanitize($b['room_number']); ?></td>
+                        <td class="py-3 px-4 text-stone-700"><?php echo sanitize($b['type_name']); ?></td>
+                        <td class="py-3 px-4 text-stone-600"><?php echo formatDate($b['check_in_date']); ?></td>
+                        <td class="py-3 px-4 text-stone-600"><?php echo formatDate($b['check_out_date']); ?></td>
+                        <td class="py-3 px-4 text-center text-stone-700"><?php echo $b['total_guests']; ?></td>
+                        <td class="py-3 px-4 text-right font-semibold text-stone-800"><?php echo formatCurrency($b['total_price']); ?></td>
+                        <td class="py-3 px-4 text-center"><span class="badge-status badge-<?php echo badgeClass($b['booking_status']); ?>"><?php echo $b['booking_status']; ?></span></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr class="bg-stone-50 font-bold border-t border-stone-200">
+                        <td colspan="7" class="py-3 px-4 text-right text-stone-600">Total (Active):</td>
+                        <td class="py-3 px-4 text-right text-stone-800"><?php echo formatCurrency($monthlyTotal); ?></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
     <?php else: ?>
-    <div class="text-center py-12 text-gray-400">
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm text-center py-12 text-stone-400">
         <i class="fas fa-calendar-alt text-5xl mb-4"></i>
         <p class="text-lg font-medium">No bookings found for this month.</p>
     </div>
@@ -310,91 +321,96 @@ $yearlyBookings = array_sum(array_column($yearlyData, 'total_bookings'));
 $yearlyGuests = array_sum(array_column($yearlyData, 'unique_guests'));
 $maxRevenue = $yearlyData ? max(array_column($yearlyData, 'total_revenue')) : 0;
 ?>
-<div class="bg-white rounded-xl shadow-sm p-6 mb-6">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-        <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-calendar text-blue-600 mr-2"></i>Yearly Report - <?php echo $yearlyYear; ?></h2>
-        <form method="GET" class="flex items-center gap-3">
-            <input type="hidden" name="tab" value="yearly">
-            <select name="year" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+<div class="mb-6">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
+        <h2 class="text-xl font-bold text-stone-800"><i class="fas fa-calendar text-amber-600 mr-2"></i>Yearly Report - <?php echo $yearlyYear; ?></h2>
+    </div>
+    <form method="GET" class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-wrap items-center justify-between gap-4 mb-6">
+        <input type="hidden" name="tab" value="yearly">
+        <div class="flex items-center gap-3">
+            <select name="year" class="border border-stone-300 rounded-xl px-3.5 py-2 text-sm text-stone-800 bg-stone-50 focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 outline-none transition-all">
                 <?php for ($y = date('Y'); $y >= date('Y') - 5; $y--): ?>
                 <option value="<?php echo $y; ?>" <?php echo $yearlyYear === $y ? 'selected' : ''; ?>><?php echo $y; ?></option>
                 <?php endfor; ?>
             </select>
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition"><i class="fas fa-search mr-1"></i>View</button>
-        </form>
-    </div>
+            <button type="submit" class="bg-amber-700 hover:bg-amber-800 text-white font-medium px-5 py-2 rounded-xl text-sm transition-all shadow-sm"><i class="fas fa-search mr-1"></i>View</button>
+        </div>
+        <button type="button" onclick="var i=document.createElement('input');i.name='export';i.value='1';i.type='hidden';this.form.appendChild(i);this.form.submit();" class="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-4 py-2 rounded-xl text-sm transition-all shadow-sm cursor-pointer"><i class="fas fa-file-csv"></i>Export CSV</button>
+    </form>
 
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
-        <div class="bg-blue-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Total Bookings</p>
-            <p class="text-3xl font-bold text-blue-600"><?php echo $yearlyBookings; ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Total Bookings</p>
+            <p class="text-3xl font-bold text-amber-700"><?php echo $yearlyBookings; ?></p>
         </div>
-        <div class="bg-green-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Total Revenue</p>
-            <p class="text-3xl font-bold text-green-600"><?php echo formatCurrency($yearlyRevenue); ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Total Revenue</p>
+            <p class="text-3xl font-bold text-emerald-700"><?php echo formatCurrency($yearlyRevenue); ?></p>
         </div>
-        <div class="bg-purple-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Unique Guests</p>
-            <p class="text-3xl font-bold text-purple-600"><?php echo $yearlyGuests; ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Unique Guests</p>
+            <p class="text-3xl font-bold text-stone-800"><?php echo $yearlyGuests; ?></p>
         </div>
-        <div class="bg-orange-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Avg Monthly Revenue</p>
-            <p class="text-3xl font-bold text-orange-600"><?php echo count($yearlyData) > 0 ? formatCurrency($yearlyRevenue / count($yearlyData)) : formatCurrency(0); ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Avg Monthly Revenue</p>
+            <p class="text-3xl font-bold text-stone-800"><?php echo count($yearlyData) > 0 ? formatCurrency($yearlyRevenue / count($yearlyData)) : formatCurrency(0); ?></p>
         </div>
     </div>
 
     <?php if ($yearlyData): ?>
     <div class="space-y-4 mb-6">
-        <?php foreach ($yearlyData as $yd): 
+        <?php foreach ($yearlyData as $yd):
             $barPct = $maxRevenue > 0 ? ($yd['total_revenue'] / $maxRevenue) * 100 : 0;
         ?>
         <div>
             <div class="flex items-center justify-between text-sm mb-1">
-                <span class="font-semibold text-gray-700"><?php echo date('F', strtotime($yd['month'] . '-01')); ?></span>
-                <span class="text-gray-500"><?php echo $yd['total_bookings']; ?> bookings - <?php echo formatCurrency($yd['total_revenue']); ?></span>
+                <span class="font-semibold text-stone-700"><?php echo date('F', strtotime($yd['month'] . '-01')); ?></span>
+                <span class="text-stone-500"><?php echo $yd['total_bookings']; ?> bookings &mdash; <?php echo formatCurrency($yd['total_revenue']); ?></span>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-3">
-                <div class="bg-blue-600 h-3 rounded-full transition-all" style="width: <?php echo $barPct; ?>%"></div>
+            <div class="w-full bg-stone-200 rounded-full h-3">
+                <div class="bg-amber-500 h-3 rounded-full transition-all" style="width: <?php echo $barPct; ?>%"></div>
             </div>
         </div>
         <?php endforeach; ?>
     </div>
 
-    <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-            <thead>
-                <tr class="border-b-2 border-gray-200 text-gray-500 text-xs uppercase tracking-wider">
-                    <th class="text-left py-3 px-2">Month</th>
-                    <th class="text-right py-3 px-2">Bookings</th>
-                    <th class="text-right py-3 px-2">Revenue</th>
-                    <th class="text-right py-3 px-2">Avg Value</th>
-                    <th class="text-right py-3 px-2">Unique Guests</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($yearlyData as $yd): ?>
-                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
-                    <td class="py-3 px-2 font-semibold"><?php echo date('F Y', strtotime($yd['month'] . '-01')); ?></td>
-                    <td class="py-3 px-2 text-right"><?php echo $yd['total_bookings']; ?></td>
-                    <td class="py-3 px-2 text-right font-semibold text-green-600"><?php echo formatCurrency($yd['total_revenue']); ?></td>
-                    <td class="py-3 px-2 text-right"><?php echo formatCurrency($yd['avg_value']); ?></td>
-                    <td class="py-3 px-2 text-right"><?php echo $yd['unique_guests']; ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr class="bg-gray-50 font-bold">
-                    <td class="py-3 px-2">Total</td>
-                    <td class="py-3 px-2 text-right"><?php echo $yearlyBookings; ?></td>
-                    <td class="py-3 px-2 text-right text-green-600"><?php echo formatCurrency($yearlyRevenue); ?></td>
-                    <td class="py-3 px-2 text-right"><?php echo $yearlyBookings > 0 ? formatCurrency($yearlyRevenue / $yearlyBookings) : formatCurrency(0); ?></td>
-                    <td class="py-3 px-2 text-right"><?php echo $yearlyGuests; ?></td>
-                </tr>
-            </tfoot>
-        </table>
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-stone-100/80 border-b border-stone-200 text-stone-600 text-xs font-semibold uppercase tracking-wider px-4">
+                        <th class="text-left py-3.5 px-4">Month</th>
+                        <th class="text-right py-3.5 px-4">Bookings</th>
+                        <th class="text-right py-3.5 px-4">Revenue</th>
+                        <th class="text-right py-3.5 px-4">Avg Value</th>
+                        <th class="text-right py-3.5 px-4">Unique Guests</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($yearlyData as $yd): ?>
+                    <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
+                        <td class="py-3 px-4 font-semibold text-stone-800"><?php echo date('F Y', strtotime($yd['month'] . '-01')); ?></td>
+                        <td class="py-3 px-4 text-right text-stone-700"><?php echo $yd['total_bookings']; ?></td>
+                        <td class="py-3 px-4 text-right font-semibold text-emerald-700"><?php echo formatCurrency($yd['total_revenue']); ?></td>
+                        <td class="py-3 px-4 text-right text-stone-700"><?php echo formatCurrency($yd['avg_value']); ?></td>
+                        <td class="py-3 px-4 text-right text-stone-700"><?php echo $yd['unique_guests']; ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr class="bg-stone-50 font-bold border-t border-stone-200">
+                        <td class="py-3 px-4 text-stone-600">Total</td>
+                        <td class="py-3 px-4 text-right text-stone-800"><?php echo $yearlyBookings; ?></td>
+                        <td class="py-3 px-4 text-right text-emerald-700"><?php echo formatCurrency($yearlyRevenue); ?></td>
+                        <td class="py-3 px-4 text-right text-stone-800"><?php echo $yearlyBookings > 0 ? formatCurrency($yearlyRevenue / $yearlyBookings) : formatCurrency(0); ?></td>
+                        <td class="py-3 px-4 text-right text-stone-800"><?php echo $yearlyGuests; ?></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
     <?php else: ?>
-    <div class="text-center py-12 text-gray-400">
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm text-center py-12 text-stone-400">
         <i class="fas fa-calendar text-5xl mb-4"></i>
         <p class="text-lg font-medium">No data found for <?php echo $yearlyYear; ?>.</p>
     </div>
@@ -416,93 +432,98 @@ $totalRefunded = array_sum(array_column($revenueData, 'refunded'));
 $totalActive = array_sum(array_column($revenueData, 'active_bookings'));
 $maxRev = $revenueData ? max(array_column($revenueData, 'revenue')) : 0;
 ?>
-<div class="bg-white rounded-xl shadow-sm p-6 mb-6">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-        <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-dollar-sign text-blue-600 mr-2"></i>Revenue Report</h2>
-        <form method="GET" class="flex items-center gap-3">
-            <input type="hidden" name="tab" value="revenue">
-            <label class="text-sm text-gray-600 font-medium">From:</label>
-            <input type="date" name="start_date" value="<?php echo $startDate; ?>" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-            <label class="text-sm text-gray-600 font-medium">To:</label>
-            <input type="date" name="end_date" value="<?php echo $endDate; ?>" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition"><i class="fas fa-search mr-1"></i>View</button>
-        </form>
+<div class="mb-6">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
+        <h2 class="text-xl font-bold text-stone-800"><i class="fas fa-dollar-sign text-amber-600 mr-2"></i>Revenue Report</h2>
     </div>
+    <form method="GET" class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-wrap items-center justify-between gap-4 mb-6">
+        <input type="hidden" name="tab" value="revenue">
+        <div class="flex items-center gap-3">
+            <label class="text-sm text-stone-600 font-medium">From:</label>
+            <input type="date" name="start_date" value="<?php echo $startDate; ?>" class="border border-stone-300 rounded-xl px-3.5 py-2 text-sm text-stone-800 bg-stone-50 focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 outline-none transition-all">
+            <label class="text-sm text-stone-600 font-medium">To:</label>
+            <input type="date" name="end_date" value="<?php echo $endDate; ?>" class="border border-stone-300 rounded-xl px-3.5 py-2 text-sm text-stone-800 bg-stone-50 focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 outline-none transition-all">
+            <button type="submit" class="bg-amber-700 hover:bg-amber-800 text-white font-medium px-5 py-2 rounded-xl text-sm transition-all shadow-sm"><i class="fas fa-search mr-1"></i>View</button>
+        </div>
+        <button type="button" onclick="var i=document.createElement('input');i.name='export';i.value='1';i.type='hidden';this.form.appendChild(i);this.form.submit();" class="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-4 py-2 rounded-xl text-sm transition-all shadow-sm cursor-pointer"><i class="fas fa-file-csv"></i>Export CSV</button>
+    </form>
 
     <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-6">
-        <div class="bg-green-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Total Revenue</p>
-            <p class="text-2xl font-bold text-green-600"><?php echo formatCurrency($totalRevenue); ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Total Revenue</p>
+            <p class="text-2xl font-bold text-emerald-700"><?php echo formatCurrency($totalRevenue); ?></p>
         </div>
-        <div class="bg-blue-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Paid</p>
-            <p class="text-2xl font-bold text-blue-600"><?php echo formatCurrency($totalPaid); ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Paid</p>
+            <p class="text-2xl font-bold text-amber-700"><?php echo formatCurrency($totalPaid); ?></p>
         </div>
-        <div class="bg-yellow-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Unpaid</p>
-            <p class="text-2xl font-bold text-yellow-600"><?php echo formatCurrency($totalUnpaid); ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Unpaid</p>
+            <p class="text-2xl font-bold text-stone-800"><?php echo formatCurrency($totalUnpaid); ?></p>
         </div>
-        <div class="bg-red-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Refunded</p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Refunded</p>
             <p class="text-2xl font-bold text-red-600"><?php echo formatCurrency($totalRefunded); ?></p>
         </div>
     </div>
 
     <?php if ($revenueData): ?>
     <div class="space-y-3 mb-6">
-        <?php foreach ($revenueData as $rd): 
+        <?php foreach ($revenueData as $rd):
             $barPct = $maxRev > 0 ? ($rd['revenue'] / $maxRev) * 100 : 0;
         ?>
         <div>
             <div class="flex items-center justify-between text-sm mb-1">
-                <span class="font-semibold text-gray-700"><?php echo formatDate($rd['date']); ?></span>
-                <span class="text-gray-500"><?php echo $rd['active_bookings']; ?> bookings - <?php echo formatCurrency($rd['revenue']); ?></span>
+                <span class="font-semibold text-stone-700"><?php echo formatDate($rd['date']); ?></span>
+                <span class="text-stone-500"><?php echo $rd['active_bookings']; ?> bookings &mdash; <?php echo formatCurrency($rd['revenue']); ?></span>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-2.5">
-                <div class="bg-green-500 h-2.5 rounded-full transition-all" style="width: <?php echo $barPct; ?>%"></div>
+            <div class="w-full bg-stone-200 rounded-full h-2.5">
+                <div class="bg-emerald-500 h-2.5 rounded-full transition-all" style="width: <?php echo $barPct; ?>%"></div>
             </div>
         </div>
         <?php endforeach; ?>
     </div>
 
-    <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-            <thead>
-                <tr class="border-b-2 border-gray-200 text-gray-500 text-xs uppercase tracking-wider">
-                    <th class="text-left py-3 px-2">Date</th>
-                    <th class="text-right py-3 px-2">Active Bookings</th>
-                    <th class="text-right py-3 px-2">Revenue</th>
-                    <th class="text-right py-3 px-2">Paid</th>
-                    <th class="text-right py-3 px-2">Pending</th>
-                    <th class="text-right py-3 px-2">Refunded</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($revenueData as $rd): ?>
-                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
-                    <td class="py-3 px-2 font-semibold"><?php echo formatDate($rd['date']); ?></td>
-                    <td class="py-3 px-2 text-right"><?php echo $rd['active_bookings']; ?></td>
-                    <td class="py-3 px-2 text-right font-semibold text-green-600"><?php echo formatCurrency($rd['revenue']); ?></td>
-                    <td class="py-3 px-2 text-right text-blue-600"><?php echo formatCurrency($rd['paid']); ?></td>
-                    <td class="py-3 px-2 text-right text-yellow-600"><?php echo formatCurrency($rd['unpaid']); ?></td>
-                    <td class="py-3 px-2 text-right text-red-600"><?php echo formatCurrency($rd['refunded']); ?></td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr class="bg-gray-50 font-bold">
-                    <td class="py-3 px-2">Total</td>
-                    <td class="py-3 px-2 text-right"><?php echo $totalActive; ?></td>
-                    <td class="py-3 px-2 text-right text-green-600"><?php echo formatCurrency($totalRevenue); ?></td>
-                    <td class="py-3 px-2 text-right text-blue-600"><?php echo formatCurrency($totalPaid); ?></td>
-                    <td class="py-3 px-2 text-right text-yellow-600"><?php echo formatCurrency($totalUnpaid); ?></td>
-                    <td class="py-3 px-2 text-right text-red-600"><?php echo formatCurrency($totalRefunded); ?></td>
-                </tr>
-            </tfoot>
-        </table>
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-stone-100/80 border-b border-stone-200 text-stone-600 text-xs font-semibold uppercase tracking-wider px-4">
+                        <th class="text-left py-3.5 px-4">Date</th>
+                        <th class="text-right py-3.5 px-4">Active Bookings</th>
+                        <th class="text-right py-3.5 px-4">Revenue</th>
+                        <th class="text-right py-3.5 px-4">Paid</th>
+                        <th class="text-right py-3.5 px-4">Pending</th>
+                        <th class="text-right py-3.5 px-4">Refunded</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($revenueData as $rd): ?>
+                    <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
+                        <td class="py-3 px-4 font-semibold text-stone-800"><?php echo formatDate($rd['date']); ?></td>
+                        <td class="py-3 px-4 text-right text-stone-700"><?php echo $rd['active_bookings']; ?></td>
+                        <td class="py-3 px-4 text-right font-semibold text-emerald-700"><?php echo formatCurrency($rd['revenue']); ?></td>
+                        <td class="py-3 px-4 text-right text-amber-700"><?php echo formatCurrency($rd['paid']); ?></td>
+                        <td class="py-3 px-4 text-right text-stone-600"><?php echo formatCurrency($rd['unpaid']); ?></td>
+                        <td class="py-3 px-4 text-right text-red-600"><?php echo formatCurrency($rd['refunded']); ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr class="bg-stone-50 font-bold border-t border-stone-200">
+                        <td class="py-3 px-4 text-stone-600">Total</td>
+                        <td class="py-3 px-4 text-right text-stone-800"><?php echo $totalActive; ?></td>
+                        <td class="py-3 px-4 text-right text-emerald-700"><?php echo formatCurrency($totalRevenue); ?></td>
+                        <td class="py-3 px-4 text-right text-amber-700"><?php echo formatCurrency($totalPaid); ?></td>
+                        <td class="py-3 px-4 text-right text-stone-600"><?php echo formatCurrency($totalUnpaid); ?></td>
+                        <td class="py-3 px-4 text-right text-red-600"><?php echo formatCurrency($totalRefunded); ?></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
     <?php else: ?>
-    <div class="text-center py-12 text-gray-400">
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm text-center py-12 text-stone-400">
         <i class="fas fa-chart-line text-5xl mb-4"></i>
         <p class="text-lg font-medium">No revenue data for the selected period.</p>
     </div>
@@ -523,91 +544,96 @@ $stmtOcc->execute([$occDate, $occDate]);
 $totalOccupied = $stmtOcc->fetchColumn();
 $overallPct = $stmtTotal > 0 ? round(($totalOccupied / $stmtTotal) * 100, 1) : 0;
 ?>
-<div class="bg-white rounded-xl shadow-sm p-6 mb-6">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-        <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-bed text-blue-600 mr-2"></i>Occupancy Report</h2>
-        <form method="GET" class="flex items-center gap-3">
-            <input type="hidden" name="tab" value="occupancy">
-            <label class="text-sm text-gray-600 font-medium">Date:</label>
-            <input type="date" name="occ_date" value="<?php echo $occDate; ?>" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition"><i class="fas fa-search mr-1"></i>View</button>
-        </form>
+<div class="mb-6">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
+        <h2 class="text-xl font-bold text-stone-800"><i class="fas fa-bed text-amber-600 mr-2"></i>Occupancy Report</h2>
     </div>
+    <form method="GET" class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-wrap items-center justify-between gap-4 mb-6">
+        <input type="hidden" name="tab" value="occupancy">
+        <div class="flex items-center gap-3">
+            <label class="text-sm text-stone-600 font-medium">Date:</label>
+            <input type="date" name="occ_date" value="<?php echo $occDate; ?>" class="border border-stone-300 rounded-xl px-3.5 py-2 text-sm text-stone-800 bg-stone-50 focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 outline-none transition-all">
+            <button type="submit" class="bg-amber-700 hover:bg-amber-800 text-white font-medium px-5 py-2 rounded-xl text-sm transition-all shadow-sm"><i class="fas fa-search mr-1"></i>View</button>
+        </div>
+        <button type="button" onclick="var i=document.createElement('input');i.name='export';i.value='1';i.type='hidden';this.form.appendChild(i);this.form.submit();" class="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-4 py-2 rounded-xl text-sm transition-all shadow-sm cursor-pointer"><i class="fas fa-file-csv"></i>Export CSV</button>
+    </form>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div class="bg-blue-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Total Rooms</p>
-            <p class="text-3xl font-bold text-blue-600"><?php echo $stmtTotal; ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Total Rooms</p>
+            <p class="text-3xl font-bold text-amber-700"><?php echo $stmtTotal; ?></p>
         </div>
-        <div class="bg-green-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Occupied</p>
-            <p class="text-3xl font-bold text-green-600"><?php echo $totalOccupied; ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Occupied</p>
+            <p class="text-3xl font-bold text-emerald-700"><?php echo $totalOccupied; ?></p>
         </div>
-        <div class="bg-purple-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Occupancy Rate</p>
-            <p class="text-3xl font-bold text-purple-600"><?php echo $overallPct; ?>%</p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Occupancy Rate</p>
+            <p class="text-3xl font-bold text-stone-800"><?php echo $overallPct; ?>%</p>
         </div>
     </div>
 
     <?php if ($overallPct > 0): ?>
     <div class="mb-6">
         <div class="flex items-center justify-between text-sm mb-1">
-            <span class="font-semibold text-gray-700">Overall Occupancy</span>
-            <span class="text-gray-500"><?php echo $totalOccupied; ?> / <?php echo $stmtTotal; ?> rooms (<?php echo $overallPct; ?>%)</span>
+            <span class="font-semibold text-stone-700">Overall Occupancy</span>
+            <span class="text-stone-500"><?php echo $totalOccupied; ?> / <?php echo $stmtTotal; ?> rooms (<?php echo $overallPct; ?>%)</span>
         </div>
-        <div class="w-full bg-gray-200 rounded-full h-4">
-            <div class="bg-gradient-to-r from-green-400 via-yellow-400 to-red-500 h-4 rounded-full transition-all" style="width: <?php echo min($overallPct, 100); ?>%"></div>
+        <div class="w-full bg-stone-200 rounded-full h-4">
+            <div class="bg-gradient-to-r from-emerald-400 via-amber-400 to-red-500 h-4 rounded-full transition-all" style="width: <?php echo min($overallPct, 100); ?>%"></div>
         </div>
     </div>
     <?php endif; ?>
 
     <?php if ($occData): ?>
-    <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-            <thead>
-                <tr class="border-b-2 border-gray-200 text-gray-500 text-xs uppercase tracking-wider">
-                    <th class="text-left py-3 px-2">Room Type</th>
-                    <th class="text-right py-3 px-2">Total Rooms</th>
-                    <th class="text-right py-3 px-2">Occupied</th>
-                    <th class="text-right py-3 px-2">Available</th>
-                    <th class="text-right py-3 px-2">Occupancy %</th>
-                    <th class="py-3 px-2">Visual</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($occData as $od): 
-                    $avail = $od['total_rooms'] - $od['occupied_rooms'];
-                    $pct = $od['total_rooms'] > 0 ? round(($od['occupied_rooms'] / $od['total_rooms']) * 100, 1) : 0;
-                    $barColor = $pct > 75 ? 'bg-red-500' : ($pct > 50 ? 'bg-yellow-500' : 'bg-green-500');
-                ?>
-                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
-                    <td class="py-3 px-2 font-semibold"><?php echo sanitize($od['type_name']); ?></td>
-                    <td class="py-3 px-2 text-right"><?php echo $od['total_rooms']; ?></td>
-                    <td class="py-3 px-2 text-right text-green-600 font-semibold"><?php echo $od['occupied_rooms']; ?></td>
-                    <td class="py-3 px-2 text-right"><?php echo $avail; ?></td>
-                    <td class="py-3 px-2 text-right font-semibold"><?php echo $pct; ?>%</td>
-                    <td class="py-3 px-2">
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="<?php echo $barColor; ?> h-2.5 rounded-full" style="width: <?php echo min($pct, 100); ?>%"></div>
-                        </div>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr class="bg-gray-50 font-bold">
-                    <td class="py-3 px-2">Total</td>
-                    <td class="py-3 px-2 text-right"><?php echo $stmtTotal; ?></td>
-                    <td class="py-3 px-2 text-right text-green-600"><?php echo $totalOccupied; ?></td>
-                    <td class="py-3 px-2 text-right"><?php echo $stmtTotal - $totalOccupied; ?></td>
-                    <td class="py-3 px-2 text-right"><?php echo $overallPct; ?>%</td>
-                    <td class="py-3 px-2"></td>
-                </tr>
-            </tfoot>
-        </table>
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-stone-100/80 border-b border-stone-200 text-stone-600 text-xs font-semibold uppercase tracking-wider px-4">
+                        <th class="text-left py-3.5 px-4">Room Type</th>
+                        <th class="text-right py-3.5 px-4">Total Rooms</th>
+                        <th class="text-right py-3.5 px-4">Occupied</th>
+                        <th class="text-right py-3.5 px-4">Available</th>
+                        <th class="text-right py-3.5 px-4">Occupancy %</th>
+                        <th class="py-3.5 px-4">Visual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($occData as $od):
+                        $avail = $od['total_rooms'] - $od['occupied_rooms'];
+                        $pct = $od['total_rooms'] > 0 ? round(($od['occupied_rooms'] / $od['total_rooms']) * 100, 1) : 0;
+                        $barColor = $pct > 75 ? 'bg-red-500' : ($pct > 50 ? 'bg-amber-500' : 'bg-emerald-500');
+                    ?>
+                    <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
+                        <td class="py-3 px-4 font-semibold text-stone-800"><?php echo sanitize($od['type_name']); ?></td>
+                        <td class="py-3 px-4 text-right text-stone-700"><?php echo $od['total_rooms']; ?></td>
+                        <td class="py-3 px-4 text-right text-emerald-700 font-semibold"><?php echo $od['occupied_rooms']; ?></td>
+                        <td class="py-3 px-4 text-right text-stone-700"><?php echo $avail; ?></td>
+                        <td class="py-3 px-4 text-right font-semibold text-stone-800"><?php echo $pct; ?>%</td>
+                        <td class="py-3 px-4">
+                            <div class="w-full bg-stone-200 rounded-full h-2.5">
+                                <div class="<?php echo $barColor; ?> h-2.5 rounded-full" style="width: <?php echo min($pct, 100); ?>%"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr class="bg-stone-50 font-bold border-t border-stone-200">
+                        <td class="py-3 px-4 text-stone-600">Total</td>
+                        <td class="py-3 px-4 text-right text-stone-800"><?php echo $stmtTotal; ?></td>
+                        <td class="py-3 px-4 text-right text-emerald-700"><?php echo $totalOccupied; ?></td>
+                        <td class="py-3 px-4 text-right text-stone-800"><?php echo $stmtTotal - $totalOccupied; ?></td>
+                        <td class="py-3 px-4 text-right text-stone-800"><?php echo $overallPct; ?>%</td>
+                        <td class="py-3 px-4"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
     <?php else: ?>
-    <div class="text-center py-12 text-gray-400">
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm text-center py-12 text-stone-400">
         <i class="fas fa-bed text-5xl mb-4"></i>
         <p class="text-lg font-medium">No room data available.</p>
     </div>
@@ -627,87 +653,92 @@ $maxCust = $custData ? max(array_column($custData, 'total')) : 0;
 $stmtTotalUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
 $stmtActiveUsers = $pdo->query("SELECT COUNT(*) FROM users WHERE status = 'Active'")->fetchColumn();
 ?>
-<div class="bg-white rounded-xl shadow-sm p-6 mb-6">
-    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
-        <h2 class="text-xl font-bold text-gray-800"><i class="fas fa-users text-blue-600 mr-2"></i>Customer Registration Report</h2>
-        <form method="GET" class="flex items-center gap-3">
-            <input type="hidden" name="tab" value="customers">
-            <select name="year" class="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+<div class="mb-6">
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-4">
+        <h2 class="text-xl font-bold text-stone-800"><i class="fas fa-users text-amber-600 mr-2"></i>Customer Registration Report</h2>
+    </div>
+    <form method="GET" class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex flex-wrap items-center justify-between gap-4 mb-6">
+        <input type="hidden" name="tab" value="customers">
+        <div class="flex items-center gap-3">
+            <select name="year" class="border border-stone-300 rounded-xl px-3.5 py-2 text-sm text-stone-800 bg-stone-50 focus:bg-white focus:ring-2 focus:ring-amber-500/20 focus:border-amber-600 outline-none transition-all">
                 <?php for ($y = date('Y'); $y >= date('Y') - 5; $y--): ?>
                 <option value="<?php echo $y; ?>" <?php echo $custYear === $y ? 'selected' : ''; ?>><?php echo $y; ?></option>
                 <?php endfor; ?>
             </select>
-            <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 transition"><i class="fas fa-search mr-1"></i>View</button>
-        </form>
-    </div>
+            <button type="submit" class="bg-amber-700 hover:bg-amber-800 text-white font-medium px-5 py-2 rounded-xl text-sm transition-all shadow-sm"><i class="fas fa-search mr-1"></i>View</button>
+        </div>
+        <button type="button" onclick="var i=document.createElement('input');i.name='export';i.value='1';i.type='hidden';this.form.appendChild(i);this.form.submit();" class="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-medium px-4 py-2 rounded-xl text-sm transition-all shadow-sm cursor-pointer"><i class="fas fa-file-csv"></i>Export CSV</button>
+    </form>
 
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-        <div class="bg-blue-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Total Customers</p>
-            <p class="text-3xl font-bold text-blue-600"><?php echo $stmtTotalUsers; ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Total Customers</p>
+            <p class="text-3xl font-bold text-amber-700"><?php echo $stmtTotalUsers; ?></p>
         </div>
-        <div class="bg-green-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">Active Customers</p>
-            <p class="text-3xl font-bold text-green-600"><?php echo $stmtActiveUsers; ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">Active Customers</p>
+            <p class="text-3xl font-bold text-emerald-700"><?php echo $stmtActiveUsers; ?></p>
         </div>
-        <div class="bg-purple-50 rounded-lg p-4 text-center">
-            <p class="text-sm text-gray-500 font-medium">New in <?php echo $custYear; ?></p>
-            <p class="text-3xl font-bold text-purple-600"><?php echo $totalRegistrations; ?></p>
+        <div class="bg-white border border-stone-200/80 rounded-2xl p-5 shadow-sm hover:shadow-md transition-all">
+            <p class="text-xs font-medium text-stone-500 uppercase tracking-wider mb-1">New in <?php echo $custYear; ?></p>
+            <p class="text-3xl font-bold text-stone-800"><?php echo $totalRegistrations; ?></p>
         </div>
     </div>
 
     <?php if ($custData): ?>
     <div class="space-y-3 mb-6">
-        <?php foreach ($custData as $cd): 
+        <?php foreach ($custData as $cd):
             $barPct = $maxCust > 0 ? ($cd['total'] / $maxCust) * 100 : 0;
         ?>
         <div>
             <div class="flex items-center justify-between text-sm mb-1">
-                <span class="font-semibold text-gray-700"><?php echo date('F Y', strtotime($cd['month'] . '-01')); ?></span>
-                <span class="text-gray-500"><?php echo $cd['total']; ?> new registrations</span>
+                <span class="font-semibold text-stone-700"><?php echo date('F Y', strtotime($cd['month'] . '-01')); ?></span>
+                <span class="text-stone-500"><?php echo $cd['total']; ?> new registrations</span>
             </div>
-            <div class="w-full bg-gray-200 rounded-full h-3">
-                <div class="bg-blue-500 h-3 rounded-full transition-all" style="width: <?php echo $barPct; ?>%"></div>
+            <div class="w-full bg-stone-200 rounded-full h-3">
+                <div class="bg-amber-500 h-3 rounded-full transition-all" style="width: <?php echo $barPct; ?>%"></div>
             </div>
         </div>
         <?php endforeach; ?>
     </div>
 
-    <div class="overflow-x-auto">
-        <table class="w-full text-sm">
-            <thead>
-                <tr class="border-b-2 border-gray-200 text-gray-500 text-xs uppercase tracking-wider">
-                    <th class="text-left py-3 px-2">Month</th>
-                    <th class="text-right py-3 px-2">New Registrations</th>
-                    <th class="py-3 px-2">Visual</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($custData as $cd): 
-                    $barPct = $maxCust > 0 ? ($cd['total'] / $maxCust) * 100 : 0;
-                ?>
-                <tr class="border-b border-gray-100 hover:bg-gray-50 transition">
-                    <td class="py-3 px-2 font-semibold"><?php echo date('F Y', strtotime($cd['month'] . '-01')); ?></td>
-                    <td class="py-3 px-2 text-right"><?php echo $cd['total']; ?></td>
-                    <td class="py-3 px-2">
-                        <div class="w-full bg-gray-200 rounded-full h-2.5">
-                            <div class="bg-blue-500 h-2.5 rounded-full" style="width: <?php echo $barPct; ?>%"></div>
-                        </div>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-            <tfoot>
-                <tr class="bg-gray-50 font-bold">
-                    <td class="py-3 px-2">Total</td>
-                    <td class="py-3 px-2 text-right"><?php echo $totalRegistrations; ?></td>
-                    <td class="py-3 px-2"></td>
-                </tr>
-            </tfoot>
-        </table>
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="bg-stone-100/80 border-b border-stone-200 text-stone-600 text-xs font-semibold uppercase tracking-wider px-4">
+                        <th class="text-left py-3.5 px-4">Month</th>
+                        <th class="text-right py-3.5 px-4">New Registrations</th>
+                        <th class="py-3.5 px-4">Visual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($custData as $cd):
+                        $barPct = $maxCust > 0 ? ($cd['total'] / $maxCust) * 100 : 0;
+                    ?>
+                    <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
+                        <td class="py-3 px-4 font-semibold text-stone-800"><?php echo date('F Y', strtotime($cd['month'] . '-01')); ?></td>
+                        <td class="py-3 px-4 text-right text-stone-700"><?php echo $cd['total']; ?></td>
+                        <td class="py-3 px-4">
+                            <div class="w-full bg-stone-200 rounded-full h-2.5">
+                                <div class="bg-amber-500 h-2.5 rounded-full" style="width: <?php echo $barPct; ?>%"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+                <tfoot>
+                    <tr class="bg-stone-50 font-bold border-t border-stone-200">
+                        <td class="py-3 px-4 text-stone-600">Total</td>
+                        <td class="py-3 px-4 text-right text-stone-800"><?php echo $totalRegistrations; ?></td>
+                        <td class="py-3 px-4"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
     <?php else: ?>
-    <div class="text-center py-12 text-gray-400">
+    <div class="bg-white border border-stone-200/80 rounded-2xl shadow-sm text-center py-12 text-stone-400">
         <i class="fas fa-users text-5xl mb-4"></i>
         <p class="text-lg font-medium">No registration data for <?php echo $custYear; ?>.</p>
     </div>
@@ -715,107 +746,5 @@ $stmtActiveUsers = $pdo->query("SELECT COUNT(*) FROM users WHERE status = 'Activ
 </div>
 <?php endif; ?>
 
-<?php if ($tab === 'export'): ?>
-<div class="bg-white rounded-xl shadow-sm p-6 mb-6">
-    <h2 class="text-xl font-bold text-gray-800 mb-6"><i class="fas fa-download text-blue-600 mr-2"></i>Export Reports</h2>
-    <p class="text-gray-500 mb-6">Download report data as CSV files for further analysis.</p>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
-            <i class="fas fa-calendar-day text-blue-500 text-3xl mb-3"></i>
-            <h3 class="font-bold text-gray-800 mb-2">Daily Report</h3>
-            <p class="text-sm text-gray-500 mb-4">Export bookings for a specific date.</p>
-            <form method="GET" class="space-y-2">
-                <input type="hidden" name="tab" value="daily">
-                <input type="hidden" name="export" value="1">
-                <input type="date" name="date" value="<?php echo date('Y-m-d'); ?>" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
-                <button type="submit" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 transition"><i class="fas fa-file-csv mr-1"></i>Export CSV</button>
-            </form>
-        </div>
-
-        <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
-            <i class="fas fa-calendar-alt text-purple-500 text-3xl mb-3"></i>
-            <h3 class="font-bold text-gray-800 mb-2">Monthly Report</h3>
-            <p class="text-sm text-gray-500 mb-4">Export bookings for a specific month.</p>
-            <form method="GET" class="space-y-2">
-                <input type="hidden" name="tab" value="monthly">
-                <input type="hidden" name="export" value="1">
-                <select name="month" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
-                    <?php foreach ($months as $val => $label): ?>
-                    <option value="<?php echo $val; ?>" <?php echo date('m') === $val ? 'selected' : ''; ?>><?php echo $label; ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <select name="year" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
-                    <?php for ($y = date('Y'); $y >= date('Y') - 5; $y--): ?>
-                    <option value="<?php echo $y; ?>" <?php echo (int)date('Y') === $y ? 'selected' : ''; ?>><?php echo $y; ?></option>
-                    <?php endfor; ?>
-                </select>
-                <button type="submit" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 transition"><i class="fas fa-file-csv mr-1"></i>Export CSV</button>
-            </form>
-        </div>
-
-        <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
-            <i class="fas fa-calendar text-orange-500 text-3xl mb-3"></i>
-            <h3 class="font-bold text-gray-800 mb-2">Yearly Report</h3>
-            <p class="text-sm text-gray-500 mb-4">Export yearly stats by month.</p>
-            <form method="GET" class="space-y-2">
-                <input type="hidden" name="tab" value="yearly">
-                <input type="hidden" name="export" value="1">
-                <select name="year" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
-                    <?php for ($y = date('Y'); $y >= date('Y') - 5; $y--): ?>
-                    <option value="<?php echo $y; ?>" <?php echo (int)date('Y') === $y ? 'selected' : ''; ?>><?php echo $y; ?></option>
-                    <?php endfor; ?>
-                </select>
-                <button type="submit" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 transition"><i class="fas fa-file-csv mr-1"></i>Export CSV</button>
-            </form>
-        </div>
-
-        <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
-            <i class="fas fa-dollar-sign text-green-500 text-3xl mb-3"></i>
-            <h3 class="font-bold text-gray-800 mb-2">Revenue Report</h3>
-            <p class="text-sm text-gray-500 mb-4">Export revenue data with date range.</p>
-            <form method="GET" class="space-y-2">
-                <input type="hidden" name="tab" value="revenue">
-                <input type="hidden" name="export" value="1">
-                <input type="date" name="start_date" value="<?php echo date('Y-m-01'); ?>" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
-                <input type="date" name="end_date" value="<?php echo date('Y-m-t'); ?>" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
-                <button type="submit" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 transition"><i class="fas fa-file-csv mr-1"></i>Export CSV</button>
-            </form>
-        </div>
-
-        <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
-            <i class="fas fa-bed text-red-500 text-3xl mb-3"></i>
-            <h3 class="font-bold text-gray-800 mb-2">Occupancy Report</h3>
-            <p class="text-sm text-gray-500 mb-4">Export occupancy data for a date.</p>
-            <form method="GET" class="space-y-2">
-                <input type="hidden" name="tab" value="occupancy">
-                <input type="hidden" name="export" value="1">
-                <input type="date" name="occ_date" value="<?php echo date('Y-m-d'); ?>" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
-                <button type="submit" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 transition"><i class="fas fa-file-csv mr-1"></i>Export CSV</button>
-            </form>
-        </div>
-
-        <div class="border border-gray-200 rounded-xl p-6 hover:shadow-md transition">
-            <i class="fas fa-users text-indigo-500 text-3xl mb-3"></i>
-            <h3 class="font-bold text-gray-800 mb-2">Customers Report</h3>
-            <p class="text-sm text-gray-500 mb-4">Export customer registrations.</p>
-            <form method="GET" class="space-y-2">
-                <input type="hidden" name="tab" value="customers">
-                <input type="hidden" name="export" value="1">
-                <select name="year" class="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm">
-                    <?php for ($y = date('Y'); $y >= date('Y') - 5; $y--): ?>
-                    <option value="<?php echo $y; ?>" <?php echo (int)date('Y') === $y ? 'selected' : ''; ?>><?php echo $y; ?></option>
-                    <?php endfor; ?>
-                </select>
-                <button type="submit" class="w-full px-4 py-2 bg-green-600 text-white rounded-lg text-sm font-semibold hover:bg-green-700 transition"><i class="fas fa-file-csv mr-1"></i>Export CSV</button>
-            </form>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
-
-    </div>
-</div>
-</body>
-</html>
 <?php logActivity($pdo, $userId, 'Viewed Reports', 'Viewed tab: ' . $tab); ?>
+<?php include '../../includes/admin-footer.php'; ?>

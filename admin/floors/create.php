@@ -31,8 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 
-<div class="ml-64 min-h-screen">
-    <div class="p-6">
+<div class="p-6">
         <div class="flex items-center justify-between mb-6">
             <div>
                 <h1 class="text-2xl font-bold text-gray-800">Add Floor</h1>
@@ -71,6 +70,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
         </div>
     </div>
-</div>
-</body>
-</html>
+<?php include '../../includes/admin-footer.php'; ?>

@@ -13,8 +13,7 @@ if (isset($_SESSION['success'])) { $messages['success'] = $_SESSION['success']; 
 if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset($_SESSION['error']); }
 ?>
 
-<div class="ml-64 min-h-screen">
-    <div class="p-6">
+<div class="p-6">
         <?php if (isset($messages['success'])): ?>
         <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $messages['success']; ?></div>
         <?php endif; ?>
@@ -26,22 +25,22 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
             <a href="create.php" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition text-sm"><i class="fas fa-plus mr-2"></i>Add Room Type</a>
         </div>
 
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+        <div class="bg-white border border-stone-200 rounded-2xl overflow-hidden shadow-sm">
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead>
-                        <tr class="bg-gray-50 text-left text-gray-500 border-b">
-                            <th class="p-4 font-semibold">Name</th>
-                            <th class="p-4 font-semibold">Price/Night</th>
-                            <th class="p-4 font-semibold">Max Capacity</th>
-                            <th class="p-4 font-semibold">Bed Type</th>
-                            <th class="p-4 font-semibold">Room Size</th>
-                            <th class="p-4 font-semibold">Actions</th>
+                        <tr class="bg-[#2A1810] text-amber-100 border-b-2 border-amber-500/30 shadow-sm">
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Name</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-right">Price/Night</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Max Capacity</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Bed Type</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Room Size</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-right pr-6">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php foreach ($roomTypes as $type): ?>
-                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                        <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
                             <td class="p-4 font-medium"><?php echo sanitize($type['type_name']); ?></td>
                             <td class="p-4"><?php echo formatCurrency($type['price_per_night']); ?></td>
                             <td class="p-4"><?php echo $type['max_capacity']; ?></td>
@@ -63,5 +62,4 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
             </div>
         </div>
     </div>
-</div>
 <?php include '../../includes/admin-footer.php'; ?>

@@ -16,11 +16,12 @@ define('PAGE_TITLE', 'Customers');
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>assets/css/style.css">
 </head>
-<body class="font-[Inter] bg-gray-50">
+<body class="admin-layout font-[Inter] flex h-screen w-screen overflow-hidden bg-slate-100">
 <?php include '../../includes/sidebar.php'; ?>
+<div class="flex-1 flex flex-col h-full overflow-hidden">
 <?php include '../../includes/admin-topbar.php'; ?>
-
-<div class="ml-64 p-8">
+<main class="flex-1 overflow-y-auto bg-slate-50">
+<div class="p-6">
     <?php if (isset($messages['success'])): ?>
     <div class="bg-emerald-50 border-l-4 border-emerald-500 text-emerald-700 p-4 rounded-r shadow-sm font-medium mb-6"><?php echo $messages['success']; ?></div>
     <?php endif; ?>
@@ -35,18 +36,17 @@ define('PAGE_TITLE', 'Customers');
         <a href="create.php" class="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold"><i class="fas fa-plus mr-2"></i>Add Customer</a>
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm">
+    <div class="w-full overflow-x-auto rounded-2xl border border-stone-200/80 bg-white shadow-sm">
+        <table class="w-full text-left border-collapse min-w-[800px]">
                 <thead>
-                    <tr class="text-left text-gray-500 border-b bg-gray-50">
-                        <th class="p-4 font-semibold">#</th>
-                        <th class="p-4 font-semibold">Name</th>
-                        <th class="p-4 font-semibold">Email</th>
-                        <th class="p-4 font-semibold">Phone</th>
-                        <th class="p-4 font-semibold">Status</th>
-                        <th class="p-4 font-semibold">Registered</th>
-                        <th class="p-4 font-semibold">Actions</th>
+                    <tr class="bg-[#2A1810] text-amber-100 border-b-2 border-amber-500/30">
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center">#</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[160px]">Name</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[200px]">Email</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Phone</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[120px]">Status</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Registered</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6 min-w-[240px]">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,22 +61,30 @@ define('PAGE_TITLE', 'Customers');
 
                     foreach ($users as $i => $u):
                     ?>
-                    <tr class="border-b border-gray-100 hover:bg-gray-50">
-                        <td class="p-4 text-gray-500"><?php echo $i + 1; ?></td>
-                        <td class="p-4">
+                    <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
+                        <td class="px-4 py-4 text-center text-gray-500 whitespace-nowrap"><?php echo $i + 1; ?></td>
+                        <td class="px-4 py-4 whitespace-nowrap">
                             <div class="font-semibold text-gray-800"><?php echo sanitize($u['first_name'] . ' ' . $u['last_name']); ?></div>
                         </td>
-                        <td class="p-4"><?php echo sanitize($u['email']); ?></td>
-                        <td class="p-4"><?php echo sanitize($u['phone'] ?? 'N/A'); ?></td>
-                        <td class="p-4">
-                            <span class="badge-status badge-<?php echo badgeClass($u['status']); ?>"><?php echo $u['status']; ?></span>
+                        <td class="px-4 py-4 whitespace-nowrap"><?php echo sanitize($u['email']); ?></td>
+                        <td class="px-4 py-4 whitespace-nowrap"><?php echo sanitize($u['phone'] ?? 'N/A'); ?></td>
+                        <td class="px-4 py-4 text-center whitespace-nowrap">
+                            <span class="whitespace-nowrap inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide <?php
+                                echo match($u['status']) {
+                                    'Active' => 'bg-emerald-100 text-emerald-800 border border-emerald-200',
+                                    'Inactive' => 'bg-slate-100 text-slate-700 border border-slate-200',
+                                    'Suspended' => 'bg-rose-100 text-rose-800 border border-rose-200',
+                                    'Banned' => 'bg-rose-100 text-rose-800 border border-rose-200',
+                                    default => 'bg-amber-100 text-amber-800 border border-amber-200',
+                                };
+                            ?>"><?php echo $u['status']; ?></span>
                         </td>
-                        <td class="p-4"><?php echo formatDate($u['created_at']); ?></td>
-                        <td class="p-4">
-                            <div class="flex items-center space-x-2">
-                                <a href="view.php?id=<?php echo $u['user_id']; ?>" class="px-3 py-1.5 bg-blue-100 text-blue-700 rounded-lg hover:bg-blue-200 transition text-xs font-semibold"><i class="fas fa-eye mr-1"></i>View</a>
-                                <a href="edit.php?id=<?php echo $u['user_id']; ?>" class="px-3 py-1.5 bg-yellow-100 text-yellow-700 rounded-lg hover:bg-yellow-200 transition text-xs font-semibold"><i class="fas fa-edit mr-1"></i>Edit</a>
-                                <a href="delete.php?id=<?php echo $u['user_id']; ?>" class="px-3 py-1.5 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition text-xs font-semibold" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Customer','Delete this customer? This cannot be undone.','error',function(){location.href=_t.href;})"><i class="fas fa-trash mr-1"></i>Delete</a>
+                        <td class="px-4 py-4 whitespace-nowrap"><?php echo formatDate($u['created_at']); ?></td>
+                        <td class="px-4 py-4 text-right pr-6 whitespace-nowrap">
+                            <div class="inline-flex items-center justify-end gap-2">
+                                <a href="view.php?id=<?php echo $u['user_id']; ?>" class="w-[72px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300/60 transition-all shadow-sm shrink-0"><i class="fas fa-eye"></i>View</a>
+                                <a href="edit.php?id=<?php echo $u['user_id']; ?>" class="w-[68px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-all shadow-sm shrink-0"><i class="fas fa-edit"></i>Edit</a>
+                                <a href="delete.php?id=<?php echo $u['user_id']; ?>" class="w-[80px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-all shadow-sm shrink-0" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Customer','Delete this customer? This cannot be undone.','error',function(){location.href=_t.href;})"><i class="fas fa-trash"></i>Delete</a>
                             </div>
                         </td>
                     </tr>
@@ -86,7 +94,6 @@ define('PAGE_TITLE', 'Customers');
                     <?php endif; ?>
                 </tbody>
             </table>
-        </div>
     </div>
 </div>
 

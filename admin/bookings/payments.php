@@ -76,11 +76,12 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>assets/css/style.css">
 </head>
-<body class="font-[Inter] bg-gray-50">
+<body class="admin-layout font-[Inter] flex h-screen w-screen overflow-hidden bg-slate-100">
 <?php include '../../includes/sidebar.php'; ?>
+<div class="flex-1 flex flex-col h-full overflow-hidden">
 <?php include '../../includes/admin-topbar.php'; ?>
-
-<div class="ml-64 p-8">
+<main class="flex-1 overflow-y-auto bg-slate-50">
+<div class="p-6">
     <div class="flex items-center justify-between mb-6">
         <div>
             <h1 class="text-2xl font-bold text-gray-800"><i class="fas fa-credit-card text-blue-600 mr-2"></i>Payments</h1>
@@ -131,33 +132,34 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
         </div>
     </div>
 
-    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm">
+    <div class="w-full overflow-x-auto rounded-2xl border border-stone-200/80 bg-white shadow-sm">
+            <table class="w-full text-left border-collapse min-w-[900px]">
                 <thead>
-                    <tr class="text-left text-gray-500 border-b bg-gray-50">
-                        <th class="p-4 font-semibold">Invoice #</th>
-                        <th class="p-4 font-semibold">Customer</th>
-                        <th class="p-4 font-semibold">Room</th>
-                        <th class="p-4 font-semibold">Amount</th>
-                        <th class="p-4 font-semibold">Method</th>
-                        <th class="p-4 font-semibold">Status</th>
-                        <th class="p-4 font-semibold">Date</th>
+                    <tr class="bg-[#2A1810] text-amber-100 border-b-2 border-amber-500/30">
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[140px]">Invoice #</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[160px]">Customer</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[120px]">Room</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6">Amount</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Method</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[120px]">Status</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($payments as $p): ?>
-                    <tr class="border-b border-gray-100 hover:bg-gray-50">
-                        <td class="p-4 font-mono font-semibold text-blue-700"><?php echo sanitize($p['invoice_number']); ?></td>
-                        <td class="p-4">
+                    <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
+                        <td class="px-4 py-4 font-mono font-semibold text-blue-700 whitespace-nowrap"><?php echo sanitize($p['invoice_number']); ?></td>
+                        <td class="px-4 py-4 whitespace-nowrap">
                             <div class="font-semibold text-gray-800"><?php echo sanitize($p['first_name'] . ' ' . $p['last_name']); ?></div>
                             <div class="text-gray-400 text-xs"><?php echo sanitize($p['email']); ?></div>
                         </td>
-                        <td class="p-4"><?php echo sanitize($p['room_name'] ?: $p['room_number']); ?></td>
-                        <td class="p-4 font-semibold text-gray-800"><?php echo formatCurrency($p['amount_paid']); ?></td>
-                        <td class="p-4"><?php echo sanitize($p['payment_method']); ?></td>
-                        <td class="p-4"><span class="badge-status badge-approved"><?php echo $p['payment_status']; ?></span></td>
-                        <td class="p-4 text-gray-500"><?php echo formatDate($p['paid_at']); ?></td>
+                        <td class="px-4 py-4 whitespace-nowrap"><?php echo sanitize($p['room_name'] ?: $p['room_number']); ?></td>
+                        <td class="px-4 py-4 text-sm font-semibold text-stone-900 text-right pr-6 whitespace-nowrap"><?php echo formatCurrency($p['amount_paid']); ?></td>
+                        <td class="px-4 py-4 whitespace-nowrap"><?php echo sanitize($p['payment_method']); ?></td>
+                        <td class="px-4 py-4 text-center whitespace-nowrap">
+                            <span class="whitespace-nowrap inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-emerald-100 text-emerald-800 border border-emerald-200"><?php echo $p['payment_status']; ?></span>
+                        </td>
+                        <td class="px-4 py-4 text-gray-500 whitespace-nowrap"><?php echo formatDate($p['paid_at']); ?></td>
                     </tr>
                     <?php endforeach; ?>
                     <?php if (empty($payments)): ?>
@@ -165,7 +167,6 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
                     <?php endif; ?>
                 </tbody>
             </table>
-        </div>
     </div>
     <?php endif; ?>
 
@@ -208,52 +209,52 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
     </div>
 
     <?php if (!empty($pending_payments_list)): ?>
-    <div class="bg-white rounded-xl shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="w-full text-sm">
+    <div class="w-full overflow-x-auto rounded-2xl border border-stone-200/80 bg-white shadow-sm">
+            <table class="w-full text-left border-collapse min-w-[1100px]">
                 <thead>
-                    <tr class="text-left text-gray-500 border-b bg-gray-50">
-                        <th class="p-4 font-semibold">Reservation</th>
-                        <th class="p-4 font-semibold">Customer</th>
-                        <th class="p-4 font-semibold">Room</th>
-                        <th class="p-4 font-semibold">Check In</th>
-                        <th class="p-4 font-semibold">Check Out</th>
-                        <th class="p-4 font-semibold">Amount</th>
-                        <th class="p-4 font-semibold">Status</th>
-                        <th class="p-4 font-semibold">Action</th>
+                    <tr class="bg-[#2A1810] text-amber-100 border-b-2 border-amber-500/30">
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[100px]">Reservation</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[160px]">Customer</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[120px]">Room</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Check In</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Check Out</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6">Amount</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[140px]">Status</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6 min-w-[280px]">Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($pending_payments_list as $u): ?>
-                    <tr class="border-b border-gray-100 hover:bg-gray-50">
-                        <td class="p-4 font-semibold">#<?php echo $u['reservation_id']; ?></td>
-                        <td class="p-4">
+                    <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
+                        <td class="px-4 py-4 text-center font-semibold whitespace-nowrap">#<?php echo $u['reservation_id']; ?></td>
+                        <td class="px-4 py-4 whitespace-nowrap">
                             <div class="font-semibold text-gray-800"><?php echo sanitize($u['first_name'] . ' ' . $u['last_name']); ?></div>
                             <div class="text-gray-400 text-xs"><?php echo sanitize($u['email']); ?></div>
                         </td>
-                        <td class="p-4"><?php echo sanitize($u['room_name'] ?: $u['room_number']); ?></td>
-                        <td class="p-4"><?php echo formatDate($u['check_in_date']); ?></td>
-                        <td class="p-4"><?php echo formatDate($u['check_out_date']); ?></td>
-                        <td class="p-4 font-semibold text-gray-800"><?php echo formatCurrency($u['total_price']); ?></td>
-                        <td class="p-4"><span class="badge-status badge-pending">Unpaid</span></td>
-                        <td class="p-4">
-                            <form action="../process_action.php" method="POST" class="flex items-center gap-2">
+                        <td class="px-4 py-4 whitespace-nowrap"><?php echo sanitize($u['room_name'] ?: $u['room_number']); ?></td>
+                        <td class="px-4 py-4 whitespace-nowrap"><?php echo formatDate($u['check_in_date']); ?></td>
+                        <td class="px-4 py-4 whitespace-nowrap"><?php echo formatDate($u['check_out_date']); ?></td>
+                        <td class="px-4 py-4 text-sm font-semibold text-stone-900 text-right pr-6 whitespace-nowrap"><?php echo formatCurrency($u['total_price']); ?></td>
+                        <td class="px-4 py-4 text-center whitespace-nowrap">
+                            <span class="whitespace-nowrap inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-800 border border-amber-200">Pending Payment</span>
+                        </td>
+                        <td class="px-4 py-4 text-right pr-6 whitespace-nowrap">
+                            <form action="../process_action.php" method="POST" class="inline-flex items-center justify-end gap-2">
                                 <input type="hidden" name="reservation_id" value="<?php echo $u['reservation_id']; ?>">
-                                <select name="payment_method" class="text-xs rounded border border-gray-300 py-1 px-2 bg-white focus:ring-2 focus:ring-blue-500 outline-none">
+                                <select name="payment_method" class="h-8 text-xs rounded-lg border border-stone-200 px-2 bg-white focus:ring-2 focus:ring-blue-500 outline-none">
                                     <option value="Cash">Cash</option>
                                     <option value="Credit Card">Credit Card</option>
                                     <option value="Debit Card">Debit Card</option>
                                     <option value="Bank Transfer">Bank Transfer</option>
                                     <option value="PayPal">PayPal</option>
                                 </select>
-                                <button type="submit" name="action" value="mark_paid" class="px-3 py-1.5 bg-green-100 text-green-700 rounded-lg hover:bg-green-200 transition text-xs font-semibold whitespace-nowrap"><i class="fas fa-check mr-1"></i>Mark as Paid</button>
+                                <button type="submit" name="action" value="mark_paid" class="h-8 w-[120px] inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 transition-all shadow-sm shrink-0"><i class="fas fa-check"></i>Mark as Paid</button>
                             </form>
                         </td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
     </div>
     <?php else: ?>
     <div class="bg-white rounded-xl shadow-sm p-12 text-center">

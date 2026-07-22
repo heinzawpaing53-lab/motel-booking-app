@@ -1,3 +1,5 @@
+</main>
+</div>
 <div id="systemModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm transition-all duration-300">
     <div id="systemModalContent" class="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 p-6 transform transition-all duration-300 scale-95 opacity-0">
         <div class="text-center">

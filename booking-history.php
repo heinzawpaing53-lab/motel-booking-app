@@ -33,92 +33,41 @@ include 'includes/header.php';
         transform: translateY(-2px);
         box-shadow: 0 8px 20px rgba(200,169,106,0.3) !important;
     }
-
-    /* --- Premium Modal Overlay Styles --- */
-    .luxury-modal-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(6px);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-
-    .luxury-modal {
-        background-color: #2b1f1d;
-        border: 1px solid #d4af37;
-        border-radius: 12px;
-        padding: 30px;
-        max-width: 500px;
-        width: 90%;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        transform: scale(0.9);
-        transition: transform 0.3s ease;
-    }
-
-    .luxury-modal.show {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    .modal-title {
-        font-size: 1.5rem;
-        font-family: serif;
-        color: #d4af37;
-        margin-bottom: 15px;
-    }
-
-    .modal-message {
-        color: #f5ece1;
-        font-size: 1.05rem;
-        line-height: 1.6;
-        margin-bottom: 25px;
-    }
-
-    .btn-modal-close {
-        background-color: #d4af37;
-        color: #1a110f;
-        border: none;
-        padding: 10px 30px;
-        font-weight: bold;
-        border-radius: 6px;
-        cursor: pointer;
-        text-transform: uppercase;
-        transition: background-color 0.2s ease;
-    }
-
-    .btn-modal-close:hover {
-        background-color: #bfa032;
-    }
-
-    /* --- Compact Booking Card Grid --- */
-    .booking-card-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    @media (max-width: 768px) {
-        .booking-card-grid {
-            grid-template-columns: 1fr;
-        }
-    }
 </style>
 
-<section class="py-16 bg-luxury-50 min-h-screen">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between mb-10">
+<!-- Custom Confirm Modal (reusable) -->
+<div id="confirmModal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-50 hidden items-center justify-center p-4">
+    <div class="bg-[#1C120C] border border-amber-500/20 shadow-2xl rounded-3xl p-8 max-w-md w-full text-center relative overflow-hidden transform transition-all duration-300 scale-95 opacity-0" id="confirmModalCard">
+        <div id="confirmModalIcon" class="w-14 h-14 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center mx-auto mb-5 shadow-inner">
+            <i class="fas fa-exclamation-triangle text-amber-400 text-xl"></i>
+        </div>
+        <h3 id="confirmModalTitle" class="text-2xl font-serif text-amber-50 tracking-wide mb-2">Are you sure?</h3>
+        <p id="confirmModalMessage" class="text-sm text-stone-300 leading-relaxed max-w-xs mx-auto mb-8">This action cannot be undone.</p>
+        <div class="grid grid-cols-2 gap-3 w-full">
+            <button id="confirmModalCancel" onclick="closeConfirmModal()" class="w-full py-3 px-4 rounded-xl text-sm font-medium text-stone-300 bg-stone-800/80 hover:bg-stone-700/80 border border-stone-700/50 transition-all duration-200">Cancel</button>
+            <button id="confirmModalAction" class="w-full py-3 px-4 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-red-800 to-rose-700 hover:from-red-700 hover:to-rose-600 shadow-lg shadow-red-950/50 border border-red-500/30 transition-all duration-200">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<!-- Success / Alert Modal (reusable) -->
+<div id="alertModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-[#2A1810] border border-amber-500/20 rounded-2xl p-6 max-w-sm w-full shadow-2xl text-center transform transition-all duration-300 scale-95 opacity-0" id="alertModalCard">
+        <div id="alertModalIcon" class="inline-flex items-center justify-center p-3 rounded-full mb-4 bg-emerald-500/20">
+            <i id="alertModalIconEl" class="fas fa-check text-emerald-400 text-xl"></i>
+        </div>
+        <h3 id="alertModalTitle" class="text-lg font-bold text-white mb-2">Success</h3>
+        <p id="alertModalMessage" class="text-stone-300 text-sm mb-6">Action completed.</p>
+        <button onclick="closeAlertModal()" class="px-6 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-medium transition-colors text-sm">Got It</button>
+    </div>
+</div>
+
+<section class="bg-stone-50 min-h-screen pb-12">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div class="flex items-center justify-between mb-8">
             <div>
-                <h3 class="font-[Playfair_Display] text-4xl">My Bookings</h3>
-                <p class="text-gray-500">Manage your reservations</p>
+                <h3 class="text-2xl font-bold text-stone-900">My Bookings</h3>
+                <p class="text-gray-500 text-sm">Manage your reservations</p>
             </div>
             <a href="rooms.php" class="btn-primary"><i class="fas fa-plus mr-2"></i>Book New Room</a>
         </div>
@@ -137,36 +86,6 @@ include 'includes/header.php';
             unset($_SESSION['booking_success']);
         }
         ?>
-
-        <?php if ($modalAlertMsg): ?>
-        <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var modalHtml = '<div class="luxury-modal-overlay" id="luxuryModal">'
-                + '<div class="luxury-modal">'
-                + '<h3 class="modal-title"><?php echo addslashes($modalAlertTitle); ?></h3>'
-                + '<p class="modal-message"><?php echo addslashes($modalAlertMsg); ?></p>'
-                + '<button class="btn-modal-close" onclick="closeLuxuryModal()">Got It</button>'
-                + '</div></div>';
-            document.body.insertAdjacentHTML('beforeend', modalHtml);
-            setTimeout(function() {
-                var overlay = document.getElementById('luxuryModal');
-                if (overlay) {
-                    overlay.style.opacity = '1';
-                    overlay.querySelector('.luxury-modal').classList.add('show');
-                }
-            }, 100);
-        });
-
-        function closeLuxuryModal() {
-            var overlay = document.getElementById('luxuryModal');
-            if (overlay) {
-                overlay.style.opacity = '0';
-                overlay.querySelector('.luxury-modal').classList.remove('show');
-                setTimeout(function() { overlay.remove(); }, 300);
-            }
-        }
-        </script>
-        <?php endif; ?>
 
         <?php if (empty($bookings)): ?>
         <div class="text-center py-16 bg-white rounded-xl">
@@ -204,17 +123,17 @@ include 'includes/header.php';
                             <span class="<?php echo $bc; ?> text-xs font-medium px-2.5 py-0.5 rounded-full inline-flex items-center ml-2"><?php echo $label; ?></span>
                         </p>
                     </div>
-                    <div class="text-right">
-                        <a href="booking-details.php?id=<?php echo $b['reservation_id']; ?>" class="text-amber-500 hover:underline text-sm block mb-1"><i class="fas fa-eye"></i> View</a>
+                    <div class="text-right relative z-10">
+                        <a href="booking-details.php?id=<?php echo $b['reservation_id']; ?>" class="text-amber-500 hover:text-amber-600 hover:underline text-sm block mb-1 relative z-10"><i class="fas fa-eye"></i> View</a>
                         <?php if ($b['booking_status'] == 'Pending'): ?>
-                        <a href="?cancel=<?php echo $b['reservation_id']; ?>" class="text-red-600 hover:underline text-sm" onclick="var _t=this;event.preventDefault();showSystemModal('Cancel Booking','Cancel this booking?','info',function(){location.href=_t.href;})"><i class="fas fa-times"></i> Cancel</a>
+                        <a href="?cancel=<?php echo $b['reservation_id']; ?>" data-cancel="1" class="text-red-600 hover:text-red-700 hover:underline text-sm relative z-10 js-confirm-action" onclick="event.preventDefault(); window._confirmUrl=this.href; showConfirmModal({title:'Cancel Booking',message:'Are you sure you want to cancel this booking? This action cannot be undone.',icon:'fa-times',iconBg:'bg-amber-500/10',iconBorder:'border border-amber-500/20',iconColor:'text-amber-400',btnText:'Yes, Cancel',action:function(){window.location.href=window._confirmUrl;}});"><i class="fas fa-times"></i> Cancel</a>
                         <?php endif; ?>
                         <?php if (in_array($b['booking_status'], ['Checked Out', 'Rejected'])): ?>
-                        <form method="post" action="process_customer_action.php" class="inline-block">
+                        <form method="post" action="process_customer_action.php" class="inline-block relative z-10">
                             <input type="hidden" name="action" value="delete_history">
                             <input type="hidden" name="reservation_id" value="<?php echo $b['reservation_id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo generateCsrfToken(); ?>">
-                            <button type="submit" class="text-red-600 hover:underline text-sm" onclick="var _f=this.form;event.preventDefault();showSystemModal('Remove from View','Hide this booking from your history? It will remain in our records.','warning',function(){_f.submit();})"><i class="fas fa-trash-alt"></i> Delete History</button>
+                            <button type="button" class="text-red-600 hover:text-red-700 hover:underline text-sm relative z-10 js-confirm-action" onclick="event.preventDefault(); window._confirmForm=this.closest('form'); showConfirmModal({title:'Delete History',message:'Are you sure you want to delete this booking history? It will remain in our records but be hidden from your view.',icon:'fa-trash-alt',iconBg:'bg-rose-500/10',iconBorder:'border border-rose-500/20',iconColor:'text-rose-400',btnText:'Yes, Delete',action:function(){window._confirmForm.submit();}});"><i class="fas fa-trash-alt"></i> Delete History</button>
                         </form>
                         <?php endif; ?>
                     </div>
@@ -226,4 +145,101 @@ include 'includes/header.php';
     </div>
 </section>
 
-<?php include 'includes/footer.php'; ?>
+<script>
+// --- Custom Confirm Modal ---
+var confirmCallback = null;
+
+function showConfirmModal(opts) {
+    var modal = document.getElementById('confirmModal');
+    var card = document.getElementById('confirmModalCard');
+    var iconEl = document.getElementById('confirmModalIcon');
+    var titleEl = document.getElementById('confirmModalTitle');
+    var msgEl = document.getElementById('confirmModalMessage');
+    var actionBtn = document.getElementById('confirmModalAction');
+
+    iconEl.className = 'w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner ' + (opts.iconBg || 'bg-amber-500/10') + ' ' + (opts.iconBorder || 'border border-amber-500/20');
+    iconEl.innerHTML = '<i class="fas ' + (opts.icon || 'fa-exclamation-triangle') + ' ' + (opts.iconColor || 'text-amber-400') + ' text-xl"></i>';
+    titleEl.textContent = opts.title || 'Are you sure?';
+    msgEl.textContent = opts.message || 'This action cannot be undone.';
+    actionBtn.textContent = opts.btnText || 'Confirm';
+    actionBtn.className = 'w-full py-3 px-4 rounded-xl text-sm font-semibold text-white transition-all duration-200 ' + (opts.btnClass || 'bg-gradient-to-r from-red-800 to-rose-700 hover:from-red-700 hover:to-rose-600 shadow-lg shadow-red-950/50 border border-red-500/30');
+    confirmCallback = opts.action || null;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(function() {
+        card.style.transform = 'scale(1)';
+        card.style.opacity = '1';
+    }, 10);
+}
+
+function closeConfirmModal() {
+    var modal = document.getElementById('confirmModal');
+    var card = document.getElementById('confirmModalCard');
+    card.style.transform = 'scale(0.95)';
+    card.style.opacity = '0';
+    setTimeout(function() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        confirmCallback = null;
+    }, 200);
+}
+
+document.getElementById('confirmModalAction').addEventListener('click', function() {
+    if (confirmCallback) confirmCallback();
+    closeConfirmModal();
+});
+
+document.getElementById('confirmModal').addEventListener('click', function(e) {
+    if (e.target === this) closeConfirmModal();
+});
+
+// --- Custom Alert Modal ---
+function showAlertModal(opts) {
+    var modal = document.getElementById('alertModal');
+    var card = document.getElementById('alertModalCard');
+    var iconBg = document.getElementById('alertModalIcon');
+    var iconEl = document.getElementById('alertModalIconEl');
+    var titleEl = document.getElementById('alertModalTitle');
+    var msgEl = document.getElementById('alertModalMessage');
+
+    var isSuccess = opts.type === 'success';
+    iconBg.className = 'inline-flex items-center justify-center p-3 rounded-full mb-4 ' + (isSuccess ? 'bg-emerald-500/20' : 'bg-red-500/20');
+    iconEl.className = 'fas ' + (isSuccess ? 'fa-check text-emerald-400' : 'fa-exclamation-triangle text-red-400') + ' text-xl';
+    titleEl.textContent = opts.title || 'Notice';
+    msgEl.textContent = opts.message || '';
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(function() {
+        card.style.transform = 'scale(1)';
+        card.style.opacity = '1';
+    }, 10);
+}
+
+function closeAlertModal() {
+    var modal = document.getElementById('alertModal');
+    var card = document.getElementById('alertModalCard');
+    card.style.transform = 'scale(0.95)';
+    card.style.opacity = '0';
+    setTimeout(function() {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+    }, 200);
+}
+
+document.getElementById('alertModal').addEventListener('click', function(e) {
+    if (e.target === this) closeAlertModal();
+});
+
+// Show success modal on page load if PHP session had a message
+<?php if ($modalAlertMsg): ?>
+document.addEventListener("DOMContentLoaded", function() {
+    showAlertModal({type:'success',title:'<?php echo addslashes($modalAlertTitle); ?>',message:'<?php echo addslashes($modalAlertMsg); ?>'});
+});
+<?php endif; ?>
+</script>
+
+<script src="<?php echo SITE_URL; ?>assets/js/main.js"></script>
+</body>
+</html>

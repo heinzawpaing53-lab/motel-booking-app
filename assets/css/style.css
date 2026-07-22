@@ -31,9 +31,13 @@
 }
 
 body {
-    background-color: #2C1810 !important;
+    background-color: #2C1810;
     margin: 0;
     padding: 0;
+}
+body.admin-layout {
+    background-color: #f1f5f9 !important;
+    overflow: hidden;
 }
 nav {
     background-color: #2C1810 !important;
@@ -42,6 +46,9 @@ nav {
     border-radius: 0 !important;
     overflow: visible !important;
     clip-path: none !important;
+}
+body.admin-layout nav {
+    background-color: transparent !important;
 }
 nav > * {
     backdrop-filter: none !important;

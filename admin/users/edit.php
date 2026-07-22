@@ -62,11 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo SITE_URL; ?>assets/css/style.css">
 </head>
-<body class="font-[Inter] bg-gray-50">
+<body class="admin-layout font-[Inter] flex h-screen w-screen overflow-hidden bg-slate-100">
 <?php include '../../includes/sidebar.php'; ?>
+<div class="flex-1 flex flex-col h-full overflow-hidden">
 <?php include '../../includes/admin-topbar.php'; ?>
-
-<div class="ml-64 p-8">
+<main class="flex-1 overflow-y-auto bg-slate-50">
+<div class="p-6">
     <div class="flex items-center justify-between mb-6">
         <div>
             <a href="index.php" class="text-blue-600 hover:text-blue-800 text-sm"><i class="fas fa-arrow-left mr-1"></i>Back to Customers</a>

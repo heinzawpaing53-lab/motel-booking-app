@@ -1,4 +1,8 @@
 <?php
+ini_set('session.cookie_lifetime', 0);
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_strict_mode', 1);
+ini_set('session.gc_maxlifetime', 0);
 session_start();
 
 $host = 'localhost';
@@ -78,4 +82,16 @@ function badgeClass($status) {
 
 function oldInput($key, $default = '') {
     return isset($_POST[$key]) ? sanitize($_POST[$key]) : $default;
+}
+
+if (isLoggedIn()) {
+    $stmt = $pdo->prepare("SELECT status FROM users WHERE user_id = ?");
+    $stmt->execute([$_SESSION['user_id']]);
+    $row = $stmt->fetch();
+    if (!$row || $row['status'] !== 'Active') {
+        session_unset();
+        session_destroy();
+        header("Location: " . SITE_URL . "login.php");
+        exit();
+    }
 }
