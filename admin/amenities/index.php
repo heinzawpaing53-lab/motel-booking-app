@@ -52,7 +52,7 @@ if ($activeTab === 'amenities') {
                         <tr class="bg-[#2A1810] text-amber-100 border-b-2 border-amber-500/30 shadow-sm">
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Icon</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Amenity Name</th>
-                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-right pr-6">Actions</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-center min-w-[200px]">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,10 +60,10 @@ if ($activeTab === 'amenities') {
                         <tr class="hover:bg-amber-50/30 transition-colors border-b border-stone-100 last:border-none">
                             <td class="p-4"><i class="fas <?php echo sanitize($amenity['icon'] ?? 'fa-tag'); ?> text-blue-600 text-lg w-8"></i></td>
                             <td class="p-4 font-medium"><?php echo sanitize($amenity['amenity_name']); ?></td>
-                            <td class="p-4">
-                                <div class="flex items-center space-x-2">
-                                    <a href="edit.php?id=<?php echo $amenity['amenity_id']; ?>" class="text-blue-600 hover:text-blue-800 bg-blue-50 px-3 py-1.5 rounded-lg text-xs font-medium"><i class="fas fa-edit mr-1"></i>Edit</a>
-                                    <a href="delete.php?id=<?php echo $amenity['amenity_id']; ?>" class="text-red-600 hover:text-red-800 bg-red-50 px-3 py-1.5 rounded-lg text-xs font-medium" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Amenity','Are you sure you want to delete this amenity?','error',function(){location.href=_t.href;})"><i class="fas fa-trash mr-1"></i>Delete</a>
+                            <td class="px-4 py-4 text-center whitespace-nowrap">
+                                <div class="inline-flex items-center justify-center gap-2">
+                                    <a href="edit.php?id=<?php echo $amenity['amenity_id']; ?>" class="w-[68px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-all shadow-sm shrink-0"><i class="fas fa-edit"></i>Edit</a>
+                                    <a href="delete.php?id=<?php echo $amenity['amenity_id']; ?>" class="w-[80px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-all shadow-sm shrink-0" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Amenity','Are you sure you want to delete this amenity?','error',function(){location.href=_t.href;})"><i class="fas fa-trash"></i>Delete</a>
                                 </div>
                             </td>
                         </tr>
@@ -91,7 +91,7 @@ if ($activeTab === 'amenities') {
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Request Name</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Description</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Status</th>
-                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-right pr-6">Actions</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-center min-w-[200px]">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -101,12 +101,12 @@ if ($activeTab === 'amenities') {
                             <td class="p-4 font-semibold text-gray-800"><?php echo sanitize($r['request_name']); ?></td>
                             <td class="p-4 text-gray-600 max-w-xs truncate"><?php echo sanitize($r['description'] ?? 'N/A'); ?></td>
                             <td class="p-4">
-                                <span class="badge-status <?php echo $r['active'] ? 'badge-approved' : 'badge-cancelled'; ?>"><?php echo $r['active'] ? 'Active' : 'Inactive'; ?></span>
+                                <span class="whitespace-nowrap inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide <?php echo $r['active'] ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' : 'bg-slate-100 text-slate-700 border border-slate-200'; ?>"><?php echo $r['active'] ? 'Active' : 'Inactive'; ?></span>
                             </td>
-                            <td class="p-4">
-                                <div class="flex items-center space-x-2">
-                                    <a href="../requests/edit.php?id=<?php echo $r['request_id']; ?>" class="text-blue-600 hover:text-blue-800 bg-blue-50 px-3 py-1.5 rounded-lg text-xs font-medium"><i class="fas fa-edit mr-1"></i>Edit</a>
-                                    <a href="../requests/delete.php?id=<?php echo $r['request_id']; ?>" class="text-red-600 hover:text-red-800 bg-red-50 px-3 py-1.5 rounded-lg text-xs font-medium" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Request','Delete this special request?','error',function(){location.href=_t.href;})"><i class="fas fa-trash mr-1"></i>Delete</a>
+                            <td class="px-4 py-4 text-center whitespace-nowrap">
+                                <div class="inline-flex items-center justify-center gap-2">
+                                    <a href="../requests/edit.php?id=<?php echo $r['request_id']; ?>" class="w-[68px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-all shadow-sm shrink-0"><i class="fas fa-edit"></i>Edit</a>
+                                    <a href="../requests/delete.php?id=<?php echo $r['request_id']; ?>" class="w-[80px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-all shadow-sm shrink-0" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Request','Delete this special request?','error',function(){location.href=_t.href;})"><i class="fas fa-trash"></i>Delete</a>
                                 </div>
                             </td>
                         </tr>

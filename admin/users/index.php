@@ -46,7 +46,7 @@ define('PAGE_TITLE', 'Customers');
                         <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Phone</th>
                         <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[120px]">Status</th>
                         <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Registered</th>
-                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6 min-w-[240px]">Actions</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[240px]">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,8 +80,8 @@ define('PAGE_TITLE', 'Customers');
                             ?>"><?php echo $u['status']; ?></span>
                         </td>
                         <td class="px-4 py-4 whitespace-nowrap"><?php echo formatDate($u['created_at']); ?></td>
-                        <td class="px-4 py-4 text-right pr-6 whitespace-nowrap">
-                            <div class="inline-flex items-center justify-end gap-2">
+                        <td class="px-4 py-4 text-center whitespace-nowrap">
+                            <div class="inline-flex items-center justify-center gap-2">
                                 <a href="view.php?id=<?php echo $u['user_id']; ?>" class="w-[72px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300/60 transition-all shadow-sm shrink-0"><i class="fas fa-eye"></i>View</a>
                                 <a href="edit.php?id=<?php echo $u['user_id']; ?>" class="w-[68px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-all shadow-sm shrink-0"><i class="fas fa-edit"></i>Edit</a>
                                 <a href="delete.php?id=<?php echo $u['user_id']; ?>" class="w-[80px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-all shadow-sm shrink-0" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Customer','Delete this customer? This cannot be undone.','error',function(){location.href=_t.href;})"><i class="fas fa-trash"></i>Delete</a>

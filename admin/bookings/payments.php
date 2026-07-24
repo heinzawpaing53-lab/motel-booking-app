@@ -136,13 +136,13 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
             <table class="w-full text-left border-collapse min-w-[900px]">
                 <thead>
                     <tr class="bg-[#2A1810] text-amber-100 border-b-2 border-amber-500/30">
-                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[140px]">Invoice #</th>
+                        <th class="px-14 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[140px]">Invoice </th>
                         <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[160px]">Customer</th>
-                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[120px]">Room</th>
+                        <th class="px-12 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[120px]">Room</th>
                         <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6">Amount</th>
                         <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Method</th>
                         <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[120px]">Status</th>
-                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Date</th>
+                        <th class="px-10 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -220,7 +220,7 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
                         <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Check Out</th>
                         <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6">Amount</th>
                         <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[140px]">Status</th>
-                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6 min-w-[280px]">Action</th>
+                        <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[280px]">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -238,8 +238,8 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
                         <td class="px-4 py-4 text-center whitespace-nowrap">
                             <span class="whitespace-nowrap inline-flex items-center justify-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-amber-100 text-amber-800 border border-amber-200">Pending Payment</span>
                         </td>
-                        <td class="px-4 py-4 text-right pr-6 whitespace-nowrap">
-                            <form action="../process_action.php" method="POST" class="inline-flex items-center justify-end gap-2">
+                        <td class="px-4 py-4 text-center whitespace-nowrap">
+                            <form action="../process_action.php" method="POST" class="inline-flex items-center justify-center gap-2">
                                 <input type="hidden" name="reservation_id" value="<?php echo $u['reservation_id']; ?>">
                                 <select name="payment_method" class="h-8 text-xs rounded-lg border border-stone-200 px-2 bg-white focus:ring-2 focus:ring-blue-500 outline-none">
                                     <option value="Cash">Cash</option>

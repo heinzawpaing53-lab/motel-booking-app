@@ -65,13 +65,13 @@ if ($activeTab === 'rooms') {
                 <table class="w-full text-left border-collapse min-w-[900px]">
                     <thead>
                         <tr class="bg-[#2A1810] text-amber-100 border-b-2 border-amber-500/30">
-                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center">Room #</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center">Room </th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[120px]">Room Name</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Type</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Floor</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[120px]">Status</th>
-                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6">Price/Night</th>
-                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6 min-w-[200px]">Actions</th>
+                            <th class="px-14 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6">Price/Night</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[200px]">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,8 +93,8 @@ if ($activeTab === 'rooms') {
                                 ?>"><?php echo $room['status']; ?></span>
                             </td>
                             <td class="px-4 py-4 text-sm font-semibold text-stone-900 text-right pr-6 whitespace-nowrap"><?php echo formatCurrency($room['price_per_night']); ?></td>
-                            <td class="px-4 py-4 text-right pr-6 whitespace-nowrap">
-                                <div class="inline-flex items-center justify-end gap-2">
+                            <td class="px-4 py-4 text-center whitespace-nowrap">
+                                <div class="inline-flex items-center justify-center gap-2">
                                     <a href="edit.php?id=<?php echo $room['room_id']; ?>" class="w-[68px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-all shadow-sm shrink-0"><i class="fas fa-edit"></i>Edit</a>
                                     <a href="delete.php?id=<?php echo $room['room_id']; ?>" class="w-[80px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-all shadow-sm shrink-0" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Room','Are you sure you want to delete this room?','error',function(){location.href=_t.href;})"><i class="fas fa-trash"></i>Delete</a>
                                 </div>
@@ -123,7 +123,7 @@ if ($activeTab === 'rooms') {
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center">Max Capacity</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Bed Type</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Room Size</th>
-                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6 min-w-[200px]">Actions</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[200px]">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -134,8 +134,8 @@ if ($activeTab === 'rooms') {
                             <td class="px-4 py-4 text-center whitespace-nowrap"><?php echo $type['max_capacity']; ?></td>
                             <td class="px-4 py-4 whitespace-nowrap"><?php echo sanitize($type['bed_type']); ?></td>
                             <td class="px-4 py-4 whitespace-nowrap"><?php echo sanitize($type['room_size']); ?></td>
-                            <td class="px-4 py-4 text-right pr-6 whitespace-nowrap">
-                                <div class="inline-flex items-center justify-end gap-2">
+                            <td class="px-4 py-4 text-center whitespace-nowrap">
+                                <div class="inline-flex items-center justify-center gap-2">
                                     <a href="../room-types/edit.php?id=<?php echo $type['type_id']; ?>" class="w-[68px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-all shadow-sm shrink-0"><i class="fas fa-edit"></i>Edit</a>
                                     <a href="../room-types/delete.php?id=<?php echo $type['type_id']; ?>" class="w-[80px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-all shadow-sm shrink-0" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Room Type','Are you sure you want to delete this room type?','error',function(){location.href=_t.href;})"><i class="fas fa-trash"></i>Delete</a>
                                 </div>
@@ -162,7 +162,7 @@ if ($activeTab === 'rooms') {
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left min-w-[120px]">Floor Name</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-left">Description</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6">Sort Order</th>
-                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-right pr-6 min-w-[200px]">Actions</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 whitespace-nowrap text-center min-w-[200px]">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -171,8 +171,8 @@ if ($activeTab === 'rooms') {
                             <td class="px-4 py-4 font-medium whitespace-nowrap"><?php echo sanitize($floor['floor_name']); ?></td>
                             <td class="px-4 py-4 text-gray-500 whitespace-nowrap"><?php echo sanitize($floor['description']); ?></td>
                             <td class="px-4 py-4 text-right pr-6 whitespace-nowrap"><?php echo $floor['sort_order']; ?></td>
-                            <td class="px-4 py-4 text-right pr-6 whitespace-nowrap">
-                                <div class="inline-flex items-center justify-end gap-2">
+                            <td class="px-4 py-4 text-center whitespace-nowrap">
+                                <div class="inline-flex items-center justify-center gap-2">
                                     <a href="../floors/edit.php?id=<?php echo $floor['floor_id']; ?>" class="w-[68px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-all shadow-sm shrink-0"><i class="fas fa-edit"></i>Edit</a>
                                     <a href="../floors/delete.php?id=<?php echo $floor['floor_id']; ?>" class="w-[80px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-all shadow-sm shrink-0" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Floor','Are you sure you want to delete this floor?','error',function(){location.href=_t.href;})"><i class="fas fa-trash"></i>Delete</a>
                                 </div>

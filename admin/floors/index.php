@@ -33,7 +33,7 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Floor Name</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-left">Description</th>
                             <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-right">Sort Order</th>
-                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-right pr-6">Actions</th>
+                            <th class="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-amber-50/90 text-center min-w-[200px]">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,10 +42,10 @@ if (isset($_SESSION['error'])) { $messages['error'] = $_SESSION['error']; unset(
                             <td class="p-4 font-medium"><?php echo sanitize($floor['floor_name']); ?></td>
                             <td class="p-4 text-gray-500"><?php echo sanitize($floor['description']); ?></td>
                             <td class="p-4"><?php echo $floor['sort_order']; ?></td>
-                            <td class="p-4">
-                                <div class="flex items-center space-x-2">
-                                    <a href="edit.php?id=<?php echo $floor['floor_id']; ?>" class="text-blue-600 hover:text-blue-800 bg-blue-50 px-3 py-1.5 rounded-lg text-xs font-medium"><i class="fas fa-edit mr-1"></i>Edit</a>
-                                    <a href="delete.php?id=<?php echo $floor['floor_id']; ?>" class="text-red-600 hover:text-red-800 bg-red-50 px-3 py-1.5 rounded-lg text-xs font-medium" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Floor','Are you sure you want to delete this floor?','error',function(){location.href=_t.href;})"><i class="fas fa-trash mr-1"></i>Delete</a>
+                            <td class="px-4 py-4 text-center whitespace-nowrap">
+                                <div class="inline-flex items-center justify-center gap-2">
+                                    <a href="edit.php?id=<?php echo $floor['floor_id']; ?>" class="w-[68px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition-all shadow-sm shrink-0"><i class="fas fa-edit"></i>Edit</a>
+                                    <a href="delete.php?id=<?php echo $floor['floor_id']; ?>" class="w-[80px] h-8 inline-flex items-center justify-center gap-1.5 text-xs font-semibold rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 transition-all shadow-sm shrink-0" onclick="var _t=this;event.preventDefault();showSystemModal('Delete Floor','Are you sure you want to delete this floor?','error',function(){location.href=_t.href;})"><i class="fas fa-trash"></i>Delete</a>
                                 </div>
                             </td>
                         </tr>
